@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header class="header-container">
+        <nav class="nav-container">
+            <div>
+                <img src="images/Vector.svg" alt="meteor shower logo" class="logo">
+            </div>
+            <div class="nav-sub-container">
+                <h2 class="home-text">Home</h2>
+                <div class="search-container">
+                    <input type="text" placeholder="Search" class="search-input">
+                    <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                </div>
+                <div><img src="images/material-symbols_settings-outline.svg" alt="settings icon" class="settings-icon"></div>
+            </div>
+        </nav>
+    </header>
+    <main id="modalContainer" class="modal">
+        <div class="modal-content">
+            <div class="card">
+                <h1 class="heading">Welcome to Meteor Shower site!</h1>
+                <p class="content1">You can search for meteorite strikes area by two types of search buttons: Search & Advanced Search.</p>
+                <p class="content2">With Advanced search you can search these datas:</p>
+                <ul class="list">
+                    <li>Name</li>
+                    <li>Year of strike</li>
+                    <li>Meteorite composition (recclass)</li>
+                    <li>Mass range (e.g. low to high, inclusive)</li>
+                    <li>Location</li>
+                </ul>
+                <button class="close">Let's go!</button>  
+            </div>
+        </div>
+    </main>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
