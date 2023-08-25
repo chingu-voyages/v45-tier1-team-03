@@ -8,6 +8,8 @@
 body {
   font-family: "Roboto", sans-serif;
   background-image: url("assets/landing_page1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 header {
   display: flex;
@@ -95,11 +97,90 @@ main {
   font-size: 48px;
   font-weight: 700;
 }
+
+.result-container{
+  width: 100vw;
+}
+
+.result-container .table-container{
+  width: 80%;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 600px;
+  padding-top: 0.5rem;
+  border-radius: 20px;
+}
+
+.result-container .table-container h2{
+  text-transform: capitalize;
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+.result-container .table-container table{
+  display: block;
+  width: 80%;
+  margin: auto;
+  height: 420px;
+  overflow: scroll;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  border-collapse: collapse;
+}
+
+.result-container .table-container table tr{
+  width: 100%;
+}
+
+
+.result-container .table-container table tr th{
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: gray;
+  position: sticky;
+  width: 300px;
+  top: 0;
+  padding: 0.5em;
+}
+
+.result-container .table-container table tbody tr td{
+  width: 300px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.1);
+} 
+
+.result-container .table-container .pagination{
+  width: 35%;
+  margin: 1.5em auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.result-container .table-container .pagination button{
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.result-container .table-container .pagination button:hover{
+  background-color: gray;
+  color: #fff;
+  border: solid 1px #fff;
+}
+
+.result-container .table-container .pagination button.active{
+  background-color: gray;
+  color: #fff;
+  border: solid 1px #fff;
+}
+
 footer {
   color: #fff;
-  position: fixed;
+  /* position: fixed;
   bottom: 5px;
-  left: 5px;
+  left: 5px; */
   width: 100%;
 }
 .footer-container {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/5d7bb29ba5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" />
 
     <title>Meteor Shower</title>
@@ -37,8 +38,28 @@
         <a href="#">
             <img src="assets/arrow_right.svg" alt="arrow-right">
         </a>
-    </main>
-    <footer>
+
+        
+      </main>
+      <section id="resultSection" class="result-container">
+        <div class="table-container">
+          <h2>meteorite landings table</h2>
+          <table>
+            <tr class="table-headings-container">
+              <th>name</th>
+              <th>mass</th>
+              <th>year</th>
+              <th>recclass</th>
+              <th>reclong</th>
+              <th>reclat</th>
+            </tr>
+
+            <tbody id="detailDataDisplay"></tbody>
+          </table>
+          <div id="pagination" class="pagination"></div>
+        </div>
+      </section>
+      <footer>
         <div class="footer-container">
             Chingu Voyage Tier 1 Team 3 2023 
             <a href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master" target="blank">
