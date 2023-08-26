@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&display=swap");
+
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  background-image: url("assets/landing_page1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/******** Header ********/
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+}
+.logo {
+  padding-left: 10px;
+  margin-top: 20px;
+}
+
+/******** Search-container ********/
+.search-container {
+  position: relative;
+}
+.search-container input {
+  width: 349px;
+  height: 37px;
+  border: 1px solid #c8c8c8;
+  border-radius: 10px;
+  background-color: #c8c8c8;
+}
+.search-container input::placeholder {
+  position: absolute;
+  left: 45%;
+}
+.search-container img {
+  position: absolute;
+  left: 35%;
+  top: 25%;
+}
+.search-container input:focus {
+  outline: none;
+}
+.dropdownSettings {
+  border: none;
+  background-color: transparent;
+}
+#settingsIcon {
+  background-color: transparent;
+}
+
+/******** Main ********/
+main {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 50px 20px;
+}
+.container {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1031px;
+  margin: auto;
+  gap: 40px;
+}
+.container h1 {
+  font-size: 78px;
+  font-weight: 700;
+  text-align: center;
+}
+.container p {
+  font-size: 30px;
+  text-align: center;
+}
+.container button {
+  width: 449px;
+  height: auto;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: #fff;
+  background-color: #010d17;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+/******** Results: Detail data display ********/
+.result-container{
+  width: 100vw;
+}
+
+.result-container .table-container{
+  width: 80%;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 600px;
+  padding-top: 0.5rem;
+  border-radius: 20px;
+}
+
+.result-container .table-container h2{
+  text-transform: capitalize;
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+.result-container .table-container table{
+  display: block;
+  width: 80%;
+  margin: auto;
+  height: 420px;
+  overflow: scroll;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  border-collapse: collapse;
+}
+
+.result-container .table-container table tr{
+  width: 100%;
+}
+
+
+.result-container .table-container table tr th{
+  text-transform: capitalize;
+  font-weight: bold;
+  background-color: gray;
+  position: sticky;
+  width: 300px;
+  top: 0;
+  padding: 0.5em;
+}
+
+.result-container .table-container table tbody tr td{
+  width: 300px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.1);
+} 
+
+.result-container .table-container .pagination{
+  width: 35%;
+  margin: 1.5em auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.result-container .table-container .pagination button{
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.result-container .table-container .pagination button:hover{
+  background-color: gray;
+  color: #fff;
+  border: solid 1px #fff;
+}
+
+.result-container .table-container .pagination button.active{
+  background-color: gray;
+  color: #fff;
+  border: solid 1px #fff;
+}
+
+.fa-sort-up, .fa-sort-down {
+  cursor: pointer;
+}
+.fa-sort-up:hover, .fa-sort-down:hover {
+  opacity: 0.5;
+}
+
+/******** Footer ********/
+footer {
+  color: #fff;
+  /* position: fixed;
+  bottom: 5px;
+  left: 5px; */
+  width: 100%;
+}
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 400;
+  gap: 20px;
+}
+.footer-container a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/******** Misc ********/
+.hidden {
+  display: none;
+}

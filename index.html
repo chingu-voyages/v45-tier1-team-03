@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/5d7bb29ba5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Meteor Shower</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="assets/vector.svg" alt="logo" />
+      </div>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <div class="search-container">
+          <img id="searchIcon" src="assets/search.svg" alt="search-icon" />
+          <input id="searchInput" type="text" placeholder="Search by keyword" />
+          <button id="clearButton">x</button>
+          <button id="searchButton">Search</button>
+        </div>
+        <a href="#"><i class="fa fa-cog"></i></a>
+        <button class="dropdownSettings"><img id="settingsIcon" src="assets/settings.svg" alt="settings-icon" /></button>
+      </nav>
+    </header>
+    <main>
+        <a href="#">
+            <img src="assets/arrow_left.svg" alt="arrow-left">
+        </a>
+        <div class="container">
+            <h1>Explore the world of Meteorite Strikes</h1>
+            <p>"Meteorites remind us of the dynamic beauty and constant change in the universe." - Neil deGrasse Tyson</p>
+            <button>Display all results</button>
+        </div>
+        <a href="#">
+            <img src="assets/arrow_right.svg" alt="arrow-right">
+        </a>
+
+        
+      </main>
+      <section id="resultSection" class="result-container">
+        <div class="table-container">
+          <h2>meteorite landings table</h2>
+          <table>
+            <tr class="table-headings-container">
+              <th>name <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+              <th>mass <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+              <th>year <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+              <th>recclass <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+              <th>reclong <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+              <th>reclat <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+            </tr>
+
+            <tbody id="detailDataDisplay"></tbody>
+          </table>
+          <div id="pagination" class="pagination"></div>
+        </div>
+      </section>
+      <footer>
+        <div class="footer-container">
+            Chingu Voyage Tier 1 Team 3 2023 
+            <a href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master" target="blank">
+                Github
+            </a>
+            <a href="https://data.nasa.gov/resource/gh4g-9sfh.json" target="blank">NASA</a>
+        </div>
+        
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
