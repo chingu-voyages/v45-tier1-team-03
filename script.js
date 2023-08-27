@@ -45,20 +45,12 @@ fetch("https://data.nasa.gov/resource/gh4g-9sfh.json")
 clearButton.addEventListener("click", (e) => {
   e.preventDefault();
   searchInput.value = "";
-  searchIcon.classList.remove("hidden");
 });
 
 // Function to filter results
 function getResults() {
   // Store the search text from the input field and convert to lowercase
   searchText = searchInput.value.toLowerCase().trim();
-
-  // Check if the input is empty
-  if (searchText !== "") {
-    searchIcon.classList.add("hidden");
-  } else {
-    searchIcon.classList.remove("hidden");
-  }
 
   // Convert searchText to a number (mass must be a number for precise comparison)
   const searchNumber = parseFloat(searchText);
@@ -212,10 +204,12 @@ function paginationBtn(page, items) {
 
 function changeBackgroundImage() {
   const newBackgroundImage = `url('${imagePaths[currentImageIndex]}')`;
-  document.body.style.transition = "background-image 0.5s ease";
+  document.body.style.transition = "background-image 0.5s ease, opacity 0.5s ease";
   document.body.style.backgroundImage = newBackgroundImage;
+  document.body.style.opacity = 0.8;
   setTimeout(() => {
     document.body.style.transition = "none";
+    document.body.style.opacity = 1;
   }, 500);
 }
 
