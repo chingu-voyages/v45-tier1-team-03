@@ -100,11 +100,9 @@ searchButton.addEventListener("click", (e) => {
   if (filteredResults.length === 0 || searchText === "") {
     displayList(meteorData, table, rows, currentPage);
     setupPagination(meteorData, pageEl, rows);
-    histogramYears(meteorData);
   } else {
     displayList(filteredResults, table, rows, currentPage);
     setupPagination(filteredResults, pageEl, rows);
-    histogramYears(filteredResults);
   }
 });
 
@@ -116,13 +114,9 @@ searchInput.addEventListener("keyup", (e) => {
     if (filteredResults.length === 0 || searchText === "") {
       displayList(meteorData, table, rows, currentPage);
       setupPagination(meteorData, pageEl, rows);
-      histogramYears(meteorData);
-      histogramReclass(meteorData);
     } else {
       displayList(filteredResults, table, rows, currentPage);
       setupPagination(filteredResults, pageEl, rows);
-      histogramYears(filteredResults);
-      histogramReclass(filteredResults);
     }
   }
 });
