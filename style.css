@@ -23,13 +23,20 @@ header {
 nav {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 25px;
   align-items: center;
 }
-nav a {
+.nav-links a {
   text-decoration: none;
   color: #fff;
   font-size: 20px;
+  display: inline-block;
+  padding: 10px;
+  transition: transform 0.3s ease, font-size 0.3s ease;
+}
+.nav-links a:hover {
+  transform: scale(1.1);
+  font-size: 25px;
 }
 .logo {
   padding-left: 10px;
@@ -39,6 +46,8 @@ nav a {
 /******** Search-container ********/
 .search-container {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .search-container input {
   width: 349px;
@@ -49,12 +58,7 @@ nav a {
 }
 .search-container input::placeholder {
   position: absolute;
-  left: 45%;
-}
-.search-container img {
-  position: absolute;
   left: 35%;
-  top: 25%;
 }
 .search-container input:focus {
   outline: none;
@@ -69,31 +73,44 @@ nav a {
 #clearButton {
   border: none;
   position: absolute;
-  right: 60px;
-  top: 10px;
+  right: 15%;
+  top: 30%;
   color: #818181;
   background-color: transparent;
+}
+#searchButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+#searchButton img {
+  padding: 10px;
 }
 
 /******** Main ********/
 main {
-  margin: 20px;
-  padding: 60px 20px;
+  margin: 60px 20px;
+  padding: 80px 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .main-wrapper {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  margin-top: 50px;
 }
 .container {
   color: #fff;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   width: 1031px;
   margin: auto;
   gap: 40px;
-  margin-top: 40px;
+  /* margin-top: 70px; */
 }
 .container h1 {
   font-size: 78px;
@@ -106,7 +123,16 @@ main {
   font-weight: 300;
   text-align: center;
 }
-
+.arrow-left,
+.arrow-right {
+  transition: transform 0.3s ease;
+}
+.arrow-left:hover {
+  transform: translateX(-10px);
+}
+.arrow-right:hover {
+  transform: translateX(10px);
+}
 /******** Results: Detail data display ********/
 .result-container{
   width: 100vw;
