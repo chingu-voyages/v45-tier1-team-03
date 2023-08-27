@@ -10,6 +10,7 @@ const sortArrowUp = document.querySelectorAll(".fa-sort-up");
 const sortArrowDown = document.querySelectorAll(".fa-sort-down");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
+const mainWrapper = document.querySelector(".main-wrapper");
 
 // Array of image paths
 const imagePaths = [
@@ -151,7 +152,7 @@ Array.from(sortArrowDown).forEach((el, i) => {
 
 // Function to display first page items in a table
 function displayList(items, wrapper, rowsPerPage, page) {
-  document.querySelector("main").classList.add("hidden"); // hide main section
+  mainWrapper.classList.add("hidden"); // hide main section
   resultSection.classList.remove("hidden"); // make table visible
 
   wrapper.innerHTML = "";
