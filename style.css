@@ -66,6 +66,14 @@ nav a {
 #settingsIcon {
   background-color: transparent;
 }
+#clearButton {
+  border: none;
+  position: absolute;
+  right: 60px;
+  top: 10px;
+  color: #818181;
+  background-color: transparent;
+}
 
 /******** Main ********/
 main {
@@ -98,17 +106,6 @@ main {
   font-weight: 300;
   text-align: center;
 }
-/* .container button {
-  width: 449px;
-  height: auto;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  padding: 12px 24px;
-  color: #fff;
-  background-color: #010d17;
-  font-size: 48px;
-  font-weight: 700;
-} */
 
 /******** Results: Detail data display ********/
 .result-container{
