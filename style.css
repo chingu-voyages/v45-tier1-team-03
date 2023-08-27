@@ -69,6 +69,7 @@ nav {
 }
 #settingsIcon {
   background-color: transparent;
+  cursor: pointer;
 }
 #clearButton {
   border: none;
