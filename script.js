@@ -9,7 +9,7 @@ const nextPrevContainer = document.getElementById('nextPrevContainer');
 const sortArrowUp = document.querySelectorAll(".fa-sort-up");
 const sortArrowDown = document.querySelectorAll(".fa-sort-down");
 
-//First page of detail display data and number of rows per page
+// First page of detail display data and number of rows per page
 let currentPage = 1;
 let rows = 100;
 
@@ -17,7 +17,7 @@ let rows = 100;
 let meteorData = [];
 let filteredResults= [];
 
-let searchText // variable to store inout search terms
+let searchText // Variable to store input search terms
 
 
 // Fetch data and store it in the meteorData array
@@ -56,8 +56,8 @@ function getResults() {
     const name = meteor.name.toLowerCase();
     const mass = meteor.mass ? meteor.mass.toString() : "";
     const year = meteor.year ? meteor.year.toString() : "";
-    const reclong = meteor.reclong ? meteor.reclong.toString() : "";
-    const reclat = meteor.reclat ? meteor.reclat.toString() : "";
+    // const reclong = meteor.reclong ? meteor.reclong.toString() : "";
+    // const reclat = meteor.reclat ? meteor.reclat.toString() : "";
 
     // Check if mass matches exactly (converted to float for precision)
     const massMatches = mass === searchNumber;
@@ -67,8 +67,8 @@ function getResults() {
       name.includes(searchText) ||
       mass.includes(searchText) ||
       year.includes(searchText) ||
-      reclong === searchText ||
-      reclat === searchText ||
+      // reclong === searchText ||
+      // reclat === searchText ||
       massMatches
     );
   });
@@ -89,9 +89,11 @@ searchButton.addEventListener("click", (e) => {
   if (filteredResults.length === 0 || searchText === "") {
     displayList(meteorData, table, rows, currentPage);
     setupPagination(meteorData, pageEl, rows);
+    histogramYears(meteorData);
   } else {
     displayList(filteredResults, table, rows, currentPage);
     setupPagination(filteredResults, pageEl, rows);
+    histogramYears(filteredResults);
   }
 })
 
@@ -103,16 +105,20 @@ searchInput.addEventListener("keyup", (e) => {
     if (filteredResults.length === 0 || searchText === "") {
       displayList(meteorData, table, rows, currentPage);
       setupPagination(meteorData, pageEl, rows);
+      histogramYears(meteorData);
+      histogramReclass(meteorData);
     } else {
       displayList(filteredResults, table, rows, currentPage);
       setupPagination(filteredResults, pageEl, rows);
+      histogramYears(filteredResults);
+      histogramReclass(filteredResults);
     }
   }
 })
 
 // Sort table results in ascending order
 Array.from(sortArrowUp).forEach((el, i) => {
-  const parameters = ["name", "mass", "year", "recclass", "reclong", "reclat"];
+  const parameters = ["name", "mass", "year", "recclass"];
   el.addEventListener("click", () => {
     const parameter = parameters[i];
     const sortedResults = filteredResults.slice().sort((a, b) => {
@@ -126,7 +132,7 @@ Array.from(sortArrowUp).forEach((el, i) => {
 
 // Sort table results in descending order
 Array.from(sortArrowDown).forEach((el, i) => {
-  const parameters = ["name", "mass", "year", "recclass", "reclong", "reclat"];
+  const parameters = ["name", "mass", "year", "recclass"];
   el.addEventListener("click", () => {
     const parameter = parameters[i];
     const sortedResults = filteredResults.slice().sort((a, b) => {
@@ -138,8 +144,11 @@ Array.from(sortArrowDown).forEach((el, i) => {
   })
 })
 
-//function to display first page items in a table
+// Function to display first page items in a table
 function displayList (items, wrapper, rowsPerPage, page){
+  document.querySelector("main").classList.add("hidden"); // hide main section
+  resultSection.classList.remove("hidden"); // make table visible
+
   wrapper.innerHTML = "";
   page--;
 
@@ -157,14 +166,12 @@ function displayList (items, wrapper, rowsPerPage, page){
     <td>${item.mass || "-"}</td>
     <td>${item.year ? item.year.substring(0,4) : "-"}</td>
     <td>${item.recclass || "-"}</td>
-    <td>${item.reclong || "-"}</td>
-    <td>${item.reclat || "-"}</td>
     `;
     wrapper.appendChild(itemEl);
   }
 }
 
-//function to create pages
+// Function to create pages
 function setupPagination(items, wrapper, rowsPerPage){
   wrapper.innerHTML = "";
   
@@ -174,7 +181,7 @@ function setupPagination(items, wrapper, rowsPerPage){
   }
 }
 
-//function to create page buttons
+// Function to create page buttons
 function paginationBtn(page, items){
   let btn = document.createElement('button');
   btn.innerText = page;

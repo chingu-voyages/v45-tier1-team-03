@@ -27,49 +27,50 @@
         <button class="dropdownSettings"><img id="settingsIcon" src="assets/settings.svg" alt="settings-icon" /></button>
       </nav>
     </header>
+
     <main>
-        <a href="#">
-            <img src="assets/arrow_left.svg" alt="arrow-left">
-        </a>
-        <div class="container">
-            <h1>Explore the world of Meteorite Strikes</h1>
-            <p>"Meteorites remind us of the dynamic beauty and constant change in the universe." - Neil deGrasse Tyson</p>
-            <button>Display all results</button>
-        </div>
-        <a href="#">
-            <img src="assets/arrow_right.svg" alt="arrow-right">
-        </a>
+      <a href="#">
+        <img src="assets/arrow_left.svg" alt="arrow-left">
+      </a>
+      <div class="container">
+        <h1>Explore the world of Meteorite Strikes</h1>
+        <p>"Meteorites remind us of the dynamic beauty and constant change in the universe." - Neil deGrasse Tyson</p>
+        <button>Display all results</button>
+      </div>
+      <a href="#">
+        <img src="assets/arrow_right.svg" alt="arrow-right">
+      </a>
+    </main>
 
-        
-      </main>
-      <section id="resultSection" class="result-container">
-        <div class="table-container">
-          <h2>meteorite landings table</h2>
-          <table>
-            <tr class="table-headings-container">
-              <th>name <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
-              <th>mass <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
-              <th>year <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
-              <th>recclass <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
-              <th>reclong <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
-              <th>reclat <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
-            </tr>
+    <section id="resultSection" class="result-container hidden">
+      <div class="table-container">
+        <h2>meteorite landings table</h2>
+        <table>
+          <tr class="table-headings-container">
+            <th>name <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+            <th>mass <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+            <th>year <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+            <th>recclass <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+            <!-- <th>reclong <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+            <th>reclat <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th> -->
+          </tr>
+          <tbody id="detailDataDisplay"></tbody>
+        </table>
+        <div id="pagination" class="pagination"></div>
+      </div>
+    </section>
 
-            <tbody id="detailDataDisplay"></tbody>
-          </table>
-          <div id="pagination" class="pagination"></div>
-        </div>
-      </section>
-      <footer>
-        <div class="footer-container">
-            Chingu Voyage Tier 1 Team 3 2023 
-            <a href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master" target="blank">
-                Github
-            </a>
-            <a href="https://data.nasa.gov/resource/gh4g-9sfh.json" target="blank">NASA</a>
-        </div>
-        
+    <footer>
+      <div class="footer-container">
+          Chingu Voyage Tier 1 Team 3 2023 
+          <a href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master" target="blank">
+              Github
+          </a>
+          <a href="https://data.nasa.gov/resource/gh4g-9sfh.json" target="blank">NASA</a>
+      </div>  
     </footer>
+    
     <script src="script.js"></script>
+    
   </body>
 </html>
