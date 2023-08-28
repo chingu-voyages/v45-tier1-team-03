@@ -5,45 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <header class="header-container">
-        <nav class="nav-container">
-            <div>
-                <img src="images/Vector.svg" alt="meteor shower logo" class="logo">
-            </div>
-            <div class="nav-sub-container">
-                <h2 class="home-text">Home</h2>
-                <div class="search-container">
-                    <input type="text" placeholder="Search" class="search-input">
-                    <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                </div>
-                <div><img src="images/material-symbols_settings-outline.svg" alt="settings icon" class="settings-icon"></div>
-            </div>
-        </nav>
-    </header>
+    <video id="videoBackground" autoplay loop muted>
+        <source src="image-video-files/MS2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     <main id="modalContainer" class="modal">
         <div class="modal-content">
-            <div class="card">
-                <h1 class="heading">Welcome to Meteor Shower site!</h1>
-                <p class="content1">You can search for meteorite strikes area by two types of search buttons: Search & Advanced Search.</p>
-                <p class="content2">With Advanced search you can search these datas:</p>
-                <ul class="list">
-                    <li>Name</li>
-                    <li>Year of strike</li>
-                    <li>Meteorite composition (recclass)</li>
-                    <li>Mass range (e.g. low to high, inclusive)</li>
-                    <li>Location</li>
-                </ul>
+            <div class="card scrolling-text">
+                    <h1 class="heading">Welcome to the Meteor Shower Page!</h1>
+                    <p>Meteor Shower Page is a cool App about meteorite strikes. In the Meteor Shower Page you feel excited about space and our planet. Our Page will help you understand meteorites better and share ideas with others around the world. Meteor Shower Page will let curious people explore space stuff and history. With fun features, you can learn about meteorites and how they hit Earth. We used easy  Search tools to help you look at the data, see cool charts, and know where the meteorites hit.  </p>
+                    <h2 class="sub-heading">Toolbar Search</h2>
+                    <p>You can search what you have in your mind in the meteorite strikes area.</p>
+                    <p>Type here in search box and we will show you all data that we have in our DataBase related to your typed content: you can Search: Date, Number, Words</p>
+                    <div class="image-container"><img src="image-video-files/toolsearch.jpg" alt="Toolbar Search Image"></div>
+                    <h2 class="sub-heading">Advanced Search</h2>
+                    <p> In Meteor Shower search component you are able to filter your search by selecting fields in the search component.</p>
+                    <ul>
+                        <li>Fields for data are:
+                            <ul>
+                                <li>Name</li>
+                                <li>Year of strike</li>
+                                <li>Meteorite composition (recclass)</li>
+                                <li>Mass range (e.g. low to high, inclusive)</li>
+                                <li>Location</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="image-container"><img src="image-video-files/advancedSearch.jpg" alt="Advanced Search Image"></div>
+                    
+                    <h2 class="sub-heading">More Options</h2>
+                    <p>You have the ability to save your frequently used search criteria, so that you can easily reselect them from a dropdown without having to manually enter them each time.</p>
+                    <p>You also have the ability to see the result of your search in rows and on a map.</p>
+                    <p>You have the ability to sort the data displayed in ascending or descending sequence. So that you can see the data more clearly.</p>
+                    <p>You have the access to definitions of the data contained in each column of the table</p>
+                    <p>So that you can understand quickly the meaning of the info without searching on other sites.</p>
+                    <p>You have the ability to see other results displaying if there is not any result according to your input, or find similar results. The results should be like: Total number of strikes, Average mass, Histogram showing, number of strikes by year, Histogram showing number of strikes by meteorite composition (recclass).</p>
                 <button class="close">Let's go!</button>  
             </div>
         </div>
     </main>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
     <script src="script.js"></script>
 </body>
 </html>
