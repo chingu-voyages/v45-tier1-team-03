@@ -143,7 +143,7 @@ main {
   width: 80%;
   margin: auto;
   background-color: rgba(255, 255, 255, 0.5);
-  height: 600px;
+  height: 650px;
   padding-top: 0.5rem;
   border-radius: 20px;
 }
@@ -217,6 +217,30 @@ main {
 }
 .fa-sort-up:hover, .fa-sort-down:hover {
   opacity: 0.5;
+}
+
+.page-info-wrapper{
+  width: 80%;
+  margin: 1.5em auto;
+}
+
+.page-info-wrapper .next-prev-container button{
+  background: none;
+  border: none;
+  margin: 0 0.8em;
+  font-size: 1em;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.page-info-wrapper .next-prev-container button:hover{
+  opacity: 1;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.page-info-wrapper .next-prev-container button i{
+  margin: 0 0.1em;
 }
 
 /******** Footer ********/

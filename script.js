@@ -6,6 +6,7 @@ const searchIcon = document.getElementById("searchIcon");
 const table = document.getElementById("detailDataDisplay");
 const pageEl = document.getElementById("pagination");
 const nextPrevContainer = document.getElementById("nextPrevContainer");
+const paginationInfo = document.getElementById("Info")
 const sortArrowUp = document.querySelectorAll(".fa-sort-up");
 const sortArrowDown = document.querySelectorAll(".fa-sort-down");
 const arrowLeft = document.querySelector(".arrow-left");
@@ -34,15 +35,15 @@ let searchText; // Variable to store input search terms
 
 // Fetch data and store it in the meteorData array
 fetch("https://data.nasa.gov/resource/gh4g-9sfh.json")
-  .then((response) => response.json())
-  .then((data) => {
+.then((response) => response.json())
+.then((data) => {
     meteorData = data; // Store fetched data in the array
   })
   .catch((error) => {
     console.error("Error fetching data:", error);
   });
 
-clearButton.addEventListener("click", (e) => {
+  clearButton.addEventListener("click", (e) => {
   e.preventDefault();
   searchInput.value = "";
 });
@@ -51,10 +52,10 @@ clearButton.addEventListener("click", (e) => {
 function getResults() {
   // Store the search text from the input field and convert to lowercase
   searchText = searchInput.value.toLowerCase().trim();
-
+  
   // Convert searchText to a number (mass must be a number for precise comparison)
   const searchNumber = parseFloat(searchText);
-
+  
   // Filter meteor data based on search criteria
   filteredResults = meteorData.filter((meteor) => {
     const name = meteor.name.toLowerCase();
@@ -62,10 +63,10 @@ function getResults() {
     const year = meteor.year ? meteor.year.toString() : "";
     // const reclong = meteor.reclong ? meteor.reclong.toString() : "";
     // const reclat = meteor.reclat ? meteor.reclat.toString() : "";
-
+    
     // Check if mass matches exactly (converted to float for precision)
     const massMatches = mass === searchNumber;
-
+    
     // Compare search text with various criteria
     return (
       name.includes(searchText) ||
@@ -74,8 +75,8 @@ function getResults() {
       // reclong === searchText ||
       // reclat === searchText ||
       massMatches
-    );
-  });
+      );
+    });
 
   // If there are no filtered results or the input field is empty, show all results
   if (filteredResults.length === 0 || searchText === "") {
@@ -91,11 +92,15 @@ searchButton.addEventListener("click", (e) => {
   e.preventDefault();
   getResults();
   if (filteredResults.length === 0 || searchText === "") {
+    currentPage = 1;
     displayList(meteorData, table, rows, currentPage);
     setupPagination(meteorData, pageEl, rows);
+    nextPrevButtons(nextPrevContainer, meteorData);
   } else {
+    currentPage = 1;
     displayList(filteredResults, table, rows, currentPage);
     setupPagination(filteredResults, pageEl, rows);
+    nextPrevButtons(nextPrevContainer, filteredResults);
   }
 });
 
@@ -105,11 +110,15 @@ searchInput.addEventListener("keyup", (e) => {
     e.preventDefault();
     getResults();
     if (filteredResults.length === 0 || searchText === "") {
+      currentPage = 1;
       displayList(meteorData, table, rows, currentPage);
       setupPagination(meteorData, pageEl, rows);
+      nextPrevButtons(nextPrevContainer, meteorData)
     } else {
+      currentPage = 1;
       displayList(filteredResults, table, rows, currentPage);
       setupPagination(filteredResults, pageEl, rows);
+      nextPrevButtons(nextPrevContainer, filteredResults)
     }
   }
 });
@@ -146,16 +155,16 @@ Array.from(sortArrowDown).forEach((el, i) => {
 function displayList(items, wrapper, rowsPerPage, page) {
   mainWrapper.classList.add("hidden"); // hide main section
   resultSection.classList.remove("hidden"); // make table visible
-
+  
   wrapper.innerHTML = "";
   page--;
-
+  
   let start = rowsPerPage * page;
   let end = start + rowsPerPage;
   let paginatedItems = items.slice(start, end);
-
+  
   // console.log(paginatedItems);
-
+  
   for (let i = 0; i < paginatedItems.length; i++) {
     let item = paginatedItems[i];
     let itemEl = document.createElement("tr");
@@ -172,12 +181,48 @@ function displayList(items, wrapper, rowsPerPage, page) {
 // Function to create pages
 function setupPagination(items, wrapper, rowsPerPage) {
   wrapper.innerHTML = "";
-
+  
   let pageCount = Math.ceil(items.length / rowsPerPage);
   for (let i = 1; i < pageCount + 1; i++) {
     wrapper.appendChild(paginationBtn(i, items));
   }
 }
+
+
+
+//Function to create Next and Prev Buttons
+function nextPrevButtons(wrapper, items){
+  let prevBtn = document.createElement('button');
+  let nextBtn = document.createElement('button');
+  prevBtn.innerHTML = `<i class="fa fa-angle-left"></i><span>Prev</span>`;
+  nextBtn.innerHTML = `<span>Next</span><i class="fa fa-angle-right"></i>`;
+  wrapper.innerHTML = "";
+  wrapper.appendChild(prevBtn);
+  wrapper.appendChild(nextBtn);
+
+  prevBtn.addEventListener('click', () => {
+    currentPage--;
+    displayList(items, table, rows, currentPage);
+    setupPagination(items, pageEl, rows);
+    if(currentPage < 1){
+      currentPage = pageEl.childNodes.length;
+      displayList(items, table, rows, currentPage);
+      setupPagination(items, pageEl, rows);
+    }
+  })
+
+  nextBtn.addEventListener('click', () => {
+    currentPage++;
+    displayList(items, table, rows, currentPage);
+    setupPagination(items, pageEl, rows);
+    if(currentPage > pageEl.childNodes.length){
+      currentPage = 1;
+      displayList(items, table, rows, currentPage);
+      setupPagination(items, pageEl, rows);
+    }
+  })
+}
+
 
 // Function to create page buttons
 function paginationBtn(page, items) {
@@ -187,7 +232,7 @@ function paginationBtn(page, items) {
   if (currentPage == page) {
     btn.classList.add("active");
   }
-
+  
   btn.addEventListener("click", () => {
     currentPage = page;
     displayList(items, table, rows, currentPage);
