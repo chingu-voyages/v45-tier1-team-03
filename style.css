@@ -137,13 +137,15 @@ main {
 /******** Results: Detail data display ********/
 .result-container{
   width: 100vw;
+  display: flex;
+  flex-direction: row;
 }
 
 .result-container .table-container{
-  width: 80%;
+  width: 60%;
   margin: auto;
   background-color: rgba(255, 255, 255, 0.5);
-  height: 650px;
+  height: 550px;
   padding-top: 0.5rem;
   border-radius: 20px;
 }
@@ -151,12 +153,12 @@ main {
 .result-container .table-container h2{
   text-transform: capitalize;
   text-align: center;
-  margin: 1.5em 0;
+  margin: 0.5em 0;
 }
 
 .result-container .table-container table{
   display: block;
-  width: 80%;
+  width: 90%;
   margin: auto;
   height: 420px;
   overflow: scroll;
@@ -243,12 +245,35 @@ main {
   margin: 0 0.1em;
 }
 
+/******** Chart ********/
+.histogram {
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 1;
+  gap: 30px;
+}
+.chart {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  background-color: #22262F;
+}
+canvas {
+  min-width: 400px;
+  min-height: 200px;
+}
+.calculate {
+  color: #fff;
+}
+.calculate span {
+  display: list-item;
+  margin-left: 20px;
+}
+
 /******** Footer ********/
 footer {
   color: #fff;
-  /* position: fixed;
-  bottom: 5px;
-  left: 5px; */
   width: 100%;
 }
 .footer-container {

@@ -1,3 +1,6 @@
+import updateChart from "./chart.js";
+import getChart from "./chart.js";
+
 // Get references to the search input and search button
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
@@ -81,9 +84,11 @@ function getResults() {
   // If there are no filtered results or the input field is empty, show all results
   if (filteredResults.length === 0 || searchText === "") {
     console.log("No results found!", meteorData);
+    updateChart([]);
   } else {
     // Display the filtered results in the console
     console.log("Filtered Results:", filteredResults);
+    updateChart(filteredResults);
   }
 }
 
