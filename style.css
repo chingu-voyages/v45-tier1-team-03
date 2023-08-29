@@ -144,7 +144,6 @@ main {
 .result-container .table-container{
   width: 60%;
   margin: auto;
-  background-color: rgba(255, 255, 255, 0.5);
   height: 550px;
   padding-top: 0.5rem;
   border-radius: 20px;
@@ -154,17 +153,30 @@ main {
   text-transform: capitalize;
   text-align: center;
   margin: 0.5em 0;
+  color: #fff;
 }
 
 .result-container .table-container table{
   display: block;
-  width: 90%;
+  width: 100%;
   margin: auto;
-  height: 420px;
+  height: 90%;
   overflow: scroll;
   background-color: rgba(255, 255, 255, 0.7);
   position: relative;
   border-collapse: collapse;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.result-container .table-container table::-webkit-scrollbar{
+  width: 7px;
+  height: 0;
+}
+
+.result-container .table-container table::-webkit-scrollbar-thumb{
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 
 .result-container .table-container table tr{
@@ -174,17 +186,22 @@ main {
 .result-container .table-container table tr th{
   text-transform: capitalize;
   font-weight: bold;
-  background-color: gray;
+  background-color: #fff;
   position: sticky;
   width: 300px;
   top: 0;
   padding: 0.5em;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  text-align: left;
+  z-index: 10;
 }
 
 .result-container .table-container table tbody tr td{
   width: 300px;
-  text-align: center;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 2px solid rgba(255,255,255,0.5);
+  padding: 0.7em 0.5em;
+  opacity: 0.8;
+  font-size: 0.8em;
 } 
 
 .result-container .table-container .pagination{
@@ -195,23 +212,7 @@ main {
 }
 
 .result-container .table-container .pagination button{
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-}
-
-.result-container .table-container .pagination button:hover{
-  background-color: gray;
-  color: #fff;
-  border: solid 1px #fff;
-}
-
-.result-container .table-container .pagination button.active{
-  background-color: gray;
-  color: #fff;
-  border: solid 1px #fff;
+  display: none;
 }
 
 .fa-sort-up, .fa-sort-down {
@@ -222,8 +223,13 @@ main {
 }
 
 .page-info-wrapper{
-  width: 80%;
-  margin: 1.5em auto;
+  width: 100%;
+  padding: 1em;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .page-info-wrapper .next-prev-container button{
@@ -239,10 +245,15 @@ main {
   opacity: 1;
   transform: scale(1.1);
   transition: 0.3s;
+  color: blueviolet;
 }
 
 .page-info-wrapper .next-prev-container button i{
   margin: 0 0.1em;
+}
+
+.page-info-wrapper .pagination-info{
+  opacity: 0.8;
 }
 
 /******** Chart ********/
