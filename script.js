@@ -9,7 +9,7 @@ const searchIcon = document.getElementById("searchIcon");
 const table = document.getElementById("detailDataDisplay");
 const pageEl = document.getElementById("pagination");
 const nextPrevContainer = document.getElementById("nextPrevContainer");
-const paginationInfo = document.getElementById("Info")
+const paginationInfo = document.getElementById("paginationInfo")
 const sortArrowUp = document.querySelectorAll(".fa-sort-up");
 const sortArrowDown = document.querySelectorAll(".fa-sort-down");
 const arrowLeft = document.querySelector(".arrow-left");
@@ -109,12 +109,12 @@ searchButton.addEventListener("click", (e) => {
   getResults();
   if (filteredResults.length === 0 || searchText === "") {
     currentPage = 1;
-    displayList(meteorData, table, rows, currentPage);
+    displayList(meteorData, table, rows, currentPage, paginationInfo);
     setupPagination(meteorData, pageEl, rows);
     nextPrevButtons(nextPrevContainer, meteorData);
   } else {
     currentPage = 1;
-    displayList(filteredResults, table, rows, currentPage);
+    displayList(filteredResults, table, rows, currentPage, paginationInfo);
     setupPagination(filteredResults, pageEl, rows);
     nextPrevButtons(nextPrevContainer, filteredResults);
   }
@@ -127,12 +127,12 @@ searchInput.addEventListener("keyup", (e) => {
     getResults();
     if (filteredResults.length === 0 || searchText === "") {
       currentPage = 1;
-      displayList(meteorData, table, rows, currentPage);
+      displayList(meteorData, table, rows, currentPage, paginationInfo);
       setupPagination(meteorData, pageEl, rows);
       nextPrevButtons(nextPrevContainer, meteorData)
     } else {
       currentPage = 1;
-      displayList(filteredResults, table, rows, currentPage);
+      displayList(filteredResults, table, rows, currentPage, paginationInfo);
       setupPagination(filteredResults, pageEl, rows);
       nextPrevButtons(nextPrevContainer, filteredResults)
     }
@@ -149,7 +149,7 @@ Array.from(sortArrowUp).forEach((el, i) => {
       const bValue = b[parameter] || "";
       return aValue.localeCompare(bValue, undefined, { numeric: true });
     });
-    displayList(sortedResults, table, rows, currentPage);
+    displayList(sortedResults, table, rows, currentPage, paginationInfo);
   });
 });
 
@@ -163,12 +163,12 @@ Array.from(sortArrowDown).forEach((el, i) => {
       const bValue = b[parameter] || "";
       return bValue.localeCompare(aValue, undefined, { numeric: true });
     });
-    displayList(sortedResults, table, rows, currentPage);
+    displayList(sortedResults, table, rows, currentPage, paginationInfo);
   });
 });
 
 // Function to display first page items in a table
-function displayList(items, wrapper, rowsPerPage, page) {
+function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
   mainWrapper.classList.add("hidden"); // hide main section
   resultSection.classList.remove("hidden"); // make table visible
   
@@ -178,6 +178,8 @@ function displayList(items, wrapper, rowsPerPage, page) {
   let start = rowsPerPage * page;
   let end = start + rowsPerPage;
   let paginatedItems = items.slice(start, end);
+
+  pageInfowrapper.innerText = `Showing meteorite landings ${start+1} of ${end > items.length ? items.length : end} out of ${items.length}`;
   
   // console.log(paginatedItems);
   
@@ -218,22 +220,22 @@ function nextPrevButtons(wrapper, items){
 
   prevBtn.addEventListener('click', () => {
     currentPage--;
-    displayList(items, table, rows, currentPage);
+    displayList(items, table, rows, currentPage, paginationInfo);
     setupPagination(items, pageEl, rows);
     if(currentPage < 1){
       currentPage = pageEl.childNodes.length;
-      displayList(items, table, rows, currentPage);
+      displayList(items, table, rows, currentPage, paginationInfo);
       setupPagination(items, pageEl, rows);
     }
   })
 
   nextBtn.addEventListener('click', () => {
     currentPage++;
-    displayList(items, table, rows, currentPage);
+    displayList(items, table, rows, currentPage, paginationInfo);
     setupPagination(items, pageEl, rows);
     if(currentPage > pageEl.childNodes.length){
       currentPage = 1;
-      displayList(items, table, rows, currentPage);
+      displayList(items, table, rows, currentPage, paginationInfo);
       setupPagination(items, pageEl, rows);
     }
   })
@@ -260,6 +262,8 @@ function paginationBtn(page, items) {
 
   return btn;
 }
+
+
 
 // Change background image
 
