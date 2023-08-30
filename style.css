@@ -163,6 +163,24 @@ main {
   color: #fff;
 }
 
+.filters {
+  display: flex;
+  justify-content: end;
+  align-items: last baseline;
+  gap: 10px;
+  padding-bottom: 5px;
+}
+
+.filters button {
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.filters button:first-child {
+  background-color: rgba(75, 192, 192, 1);
+}
+
 .result-container .table-container table{
   display: block;
   width: 100%;
