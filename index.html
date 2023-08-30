@@ -68,6 +68,46 @@
         </div>
         <div id="pagination" class="pagination"></div>
       </div>
+      <!-- <div class="histogram">
+        <div class="calculate">
+          <span id="totalStrikes"></span>
+          <span id="averageStrikes"></span>
+        </div>
+        <div class="chart" id="yearHistogramContainer">
+            <canvas id="yearHistogram"></canvas>
+        </div>  
+      </div> -->
+    </section>
+    <section id="advanceSearch" class="hidden">
+      <p class="no-results hidden">No results match your search criteria. Please refine your search.</p>
+      <div class="filter-container">
+        <div class="filter-options">
+          <label for="nameFilter">
+            <input type="text" id="nameFilter" placeholder="Name">
+          </label>
+          <label for="recclassFilter">
+            <input type="text" id="recclassFilter" placeholder="Composition">
+          </label>
+          <label for="massFilter">
+            <input type="text" id="massMinFilter" placeholder="Min mass">
+            <input type="text" id="massMaxFilter" placeholder="Max mass">
+          </label>
+          <label for="yearFilter">
+            <input type="text" id="yearMinFilter" placeholder="Min year">
+            <input type="text" id="yearMaxFilter" placeholder="Max year">
+          </label>
+        </div>
+        <!-- <div class="filter-search"> -->
+          <!-- <div class="prev-results">
+            <h3>Previous search results:</h3>
+          </div> -->
+        <div class="filter-btn">
+          <button id="filterButton">Apply</button>
+          <button id="saveButton">Save</button>
+          <button id="clearAllButton">Clear</button>
+        </div>
+        <!-- </div> -->
+      </div>
       <div class="histogram">
         <div class="calculate">
           <span id="totalStrikes"></span>
@@ -75,44 +115,7 @@
         </div>
         <div class="chart" id="yearHistogramContainer">
             <canvas id="yearHistogram"></canvas>
-          </div>
-          <div class="chart" id="compositionHistogramContainer">
-            <canvas id="compositionHistogram"></canvas>
-          </div>    
-    </section>
-    <section id="advanceSearch" class="hidden">
-      <p class="no-results hidden">No results match your search criteria. Please refine your search.</p>
-      <div class="filter-container">
-        <div class="filter-options">
-          <h3>Filter data by:</h3>
-          <label for="nameFilter">Name:
-            <input type="text" id="nameFilter">
-          </label>
-          <label for="idFilter">ID:
-            <input type="text" id="idFilter">
-          </label>
-          <label for="recclassFilter">Recclass:
-            <input type="text" id="recclassFilter">
-          </label>
-          <label for="massFilter">Mass (g):
-            <input type="text" id="massMinFilter">
-            <input type="text" id="massMaxFilter">
-          </label>
-          <label for="yearFilter">Year of strike:
-            <input type="text" id="yearMinFilter">
-            <input type="text" id="yearMaxFilter">
-          </label>
-        </div>
-        <div class="filter-search">
-          <div class="prev-results">
-            <h3>Previous search results:</h3>
-          </div>
-          <div class="filter-btn">
-            <button id="filterButton">Apply Filter</button>
-            <button id="saveButton">Save Filter</button>
-            <button id="clearAllButton">x Clear all filters</button>
-          </div>
-        </div>
+        </div>  
       </div>
     </section>
   </main>
