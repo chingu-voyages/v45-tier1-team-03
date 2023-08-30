@@ -19,7 +19,7 @@ const advanceSearch = document.getElementById("advanceSearch");
 const filterBtn = document.getElementById("filter-btn");
 const filterButton = document.getElementById("filterButton");
 const nameFilter = document.getElementById("nameFilter");
-const idFilter = document.getElementById("idFilter");
+// const idFilter = document.getElementById("idFilter");
 const recclassFilter = document.getElementById("recclassFilter");
 const massMinFilter = document.getElementById("massMinFilter");
 const massMaxFilter = document.getElementById("massMaxFilter");
@@ -46,6 +46,7 @@ let meteorData = [];
 let filteredResults = [];
 
 let searchText; // Variable to store input search terms
+let selectedYearRange;
 
 // Fetch data and store it in the meteorData array
 fetch("https://data.nasa.gov/resource/gh4g-9sfh.json")
@@ -95,11 +96,9 @@ function getResults() {
   // If there are no filtered results or the input field is empty, show all results
   if (filteredResults.length === 0 || searchText === "") {
     console.log("No results found!", meteorData);
-    updateChart([]);
   } else {
     // Display the filtered results in the console
     console.log("Filtered Results:", filteredResults);
-    updateChart(filteredResults);
   }
 }
 
@@ -300,20 +299,18 @@ filterBtn.addEventListener("click", (e) => {
 })
 
 // Search based on advance filter
-filterButton.addEventListener("click", () => {
-  // Get the search terms from input fields
+filterButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  
   const nameTerm = nameFilter.value.toLowerCase().trim();
-  const idTerm = idFilter.value.toLowerCase().trim();
   const recclassTerm = recclassFilter.value.toLowerCase().trim();
   const massMin = parseFloat(massMinFilter.value);
   const massMax = parseFloat(massMaxFilter.value);
   const yearMin = parseInt(yearMinFilter.value);
   const yearMax = parseInt(yearMaxFilter.value);
 
-  // Filter meteorData based on search terms
   const filteredResults = meteorData.filter(meteor => {
     const name = (meteor.name || "").toLowerCase(); 
-    const id = (meteor.id || "").toLowerCase();
     const recclass = (meteor.recclass || "").toLowerCase();
     const mass = parseFloat(meteor.mass);
     const year = parseInt(meteor.year);
@@ -322,24 +319,25 @@ filterButton.addEventListener("click", () => {
     const massInRange = (isNaN(massMin) || mass >= massMin) && (isNaN(massMax) || mass <= massMax);
     const yearInRange = (isNaN(yearMin) || year >= yearMin) && (isNaN(yearMax) || year <= yearMax);
 
-    
+    selectedYearRange = `${yearMin} - ${yearMax}`;
+
     return (
       name.includes(nameTerm) && 
-      id.includes(idTerm) &&
       recclass.includes(recclassTerm) &&
       massInRange && yearInRange
     );
   });
 
-  // Check if there are no results
   if (filteredResults.length === 0) {
     noResultsMessage.classList.remove("hidden");
     noResultsMessage.classList.add("no-results");
+    updateChart([]);
   } else {
     noResultsMessage.classList.add("hidden");
     noResultsMessage.classList.remove("no-results");
+    updateChart(filteredResults, selectedYearRange);
   }
-  // Display the filtered results in the console
+ 
   console.log("Advance Results:", filteredResults);
 });
 
