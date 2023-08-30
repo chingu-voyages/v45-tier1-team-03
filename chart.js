@@ -28,7 +28,7 @@ export default function updateChart(filteredResults) {
     // Calculate and log the average strikes
   const averageStrikes = calculateAverageStrikes(yearCounts);
   console.log("Average Strikes per Year:", averageStrikes);
-  average.innerHTML = `Average strikes per year: ${averageStrikes}`;
+  average.innerHTML = `Average strikes: ${averageStrikes}`;
   // Calculate and log the total strikes
   const totalStrikes = calculateTotalStrikes(yearCounts);
   console.log("Total Strikes:", totalStrikes);

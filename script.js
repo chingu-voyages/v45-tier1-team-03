@@ -15,6 +15,17 @@ const sortArrowDown = document.querySelectorAll(".fa-sort-down");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
 const mainWrapper = document.querySelector(".main-wrapper");
+const advanceSearch = document.getElementById("advanceSearch");
+const filterBtn = document.getElementById("filter-btn");
+const filterButton = document.getElementById("filterButton");
+const nameFilter = document.getElementById("nameFilter");
+const idFilter = document.getElementById("idFilter");
+const recclassFilter = document.getElementById("recclassFilter");
+const massMinFilter = document.getElementById("massMinFilter");
+const massMaxFilter = document.getElementById("massMaxFilter");
+const yearMinFilter  = document.getElementById("yearMinFilter");
+const yearMaxFilter  = document.getElementById("yearMaxFilter");
+const noResultsMessage = document.querySelector(".no-results");
 
 // Array of image paths
 const imagePaths = [
@@ -277,3 +288,54 @@ arrowRight.addEventListener("click", (e) => {
   currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
   changeBackgroundImage();
 });
+
+filterBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  resultSection.classList.add("hidden");
+  advanceSearch.classList.remove("hidden");
+})
+
+// Search based on advance filter
+filterButton.addEventListener("click", () => {
+  // Get the search terms from input fields
+  const nameTerm = nameFilter.value.toLowerCase().trim();
+  const idTerm = idFilter.value.toLowerCase().trim();
+  const recclassTerm = recclassFilter.value.toLowerCase().trim();
+  const massMin = parseFloat(massMinFilter.value);
+  const massMax = parseFloat(massMaxFilter.value);
+  const yearMin = parseInt(yearMinFilter.value);
+  const yearMax = parseInt(yearMaxFilter.value);
+
+  // Filter meteorData based on search terms
+  const filteredResults = meteorData.filter(meteor => {
+    const name = (meteor.name || "").toLowerCase(); 
+    const id = (meteor.id || "").toLowerCase();
+    const recclass = (meteor.recclass || "").toLowerCase();
+    const mass = parseFloat(meteor.mass);
+    const year = parseInt(meteor.year);
+
+    // Check if mass and year are within the specified ranges
+    const massInRange = (isNaN(massMin) || mass >= massMin) && (isNaN(massMax) || mass <= massMax);
+    const yearInRange = (isNaN(yearMin) || year >= yearMin) && (isNaN(yearMax) || year <= yearMax);
+
+    
+    return (
+      name.includes(nameTerm) && 
+      id.includes(idTerm) &&
+      recclass.includes(recclassTerm) &&
+      massInRange && yearInRange
+    );
+  });
+
+  // Check if there are no results
+  if (filteredResults.length === 0) {
+    noResultsMessage.classList.remove("hidden");
+    noResultsMessage.classList.add("no-results");
+  } else {
+    noResultsMessage.classList.add("hidden");
+    noResultsMessage.classList.remove("no-results");
+  }
+  // Display the filtered results in the console
+  console.log("Advance Results:", filteredResults);
+});
+
