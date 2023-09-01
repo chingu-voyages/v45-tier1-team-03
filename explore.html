@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/5d7bb29ba5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Meteor Shower</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="assets/vector.svg" alt="logo" />
+      </div>
+      <nav>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="explore.html">Explore</a>
+        </div>
+        <button class="dropdownSettings"><img id="settingsIcon" src="assets/settings.svg" alt="settings-icon" /></button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="search-container">
+        <input id="searchInput" type="text" placeholder="Search by name, year or keyword to start exploring meteorite strikes" />
+        <button id="clearButton">x</button>
+        <button id="searchButton">
+          <img src="assets/search.svg" alt="search-icon" />
+        </button>
+      </section>
+      <section id="resultSection" class="result-container hidden">
+        <div class="table-container">
+          <div class="table-header">
+            <h2>meteorite landings table</h2>
+            <div class="filters">
+              <button id="filter-btn">Add filters</button>
+              <button>Export PDF</button>
+            </div>
+          </div>
+          <table>
+            <tr class="table-headings-container">
+              <th>name <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+              <th>mass <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+              <th>year <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+              <th>recclass <i class="fa-solid fa-sort-up"></i><i class="fa-solid fa-sort-down"></i></th>
+            </tr>
+            <tbody id="detailDataDisplay"></tbody>
+          </table>
+          <div class="page-info-wrapper">
+            <span id="nextPrevContainer" class="next-prev-container"></span>
+            <span id="paginationInfo" class="pagination-info"></span>
+          </div>
+          <div id="pagination" class="pagination"></div>
+        </div>
+        <!-- <div class="histogram">
+          <div class="calculate">
+            <span id="totalStrikes"></span>
+            <span id="averageStrikes"></span>
+          </div>
+          <div class="chart" id="yearHistogramContainer">
+              <canvas id="yearHistogram"></canvas>
+          </div>  
+        </div> -->
+      </section>
+      
+      <section id="advanceSearch" class="hidden">
+        <p class="no-results hidden">No results match your search criteria. Please refine your search.</p>
+        <div class="filter-container">
+          <div class="filter-options">
+            <label for="nameFilter">
+              <input type="text" id="nameFilter" placeholder="Name">
+            </label>
+            <label for="recclassFilter">
+              <input type="text" id="recclassFilter" placeholder="Composition">
+            </label>
+            <label for="massFilter">
+              <input type="text" id="massMinFilter" placeholder="Min mass">
+              <input type="text" id="massMaxFilter" placeholder="Max mass">
+            </label>
+            <label for="yearFilter">
+              <input type="text" id="yearMinFilter" placeholder="Min year">
+              <input type="text" id="yearMaxFilter" placeholder="Max year">
+            </label>
+          </div>
+          <!-- <div class="filter-search"> -->
+            <!-- <div class="prev-results">
+              <h3>Previous search results:</h3>
+            </div> -->
+          <div class="filter-btn">
+            <button id="filterButton">Apply</button>
+            <button id="saveButton">Save</button>
+            <button id="clearAllButton">Clear</button>
+          </div>
+          <!-- </div> -->
+        </div>
+        <div class="histogram">
+          <div class="calculate">
+            <span id="totalStrikes"></span>
+            <span id="averageStrikes"></span>
+          </div>
+          <div class="chart" id="yearHistogramContainer">
+              <canvas id="yearHistogram"></canvas>
+          </div>  
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+          <a href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master" target="blank">
+              Chingu Voyage
+          </a>
+          | 2023 | Deployed on Netlify
+      </div>  
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" type="module"></script>
+    <script src="chart.js" type="module"></script>
+    
+  </body>
+</html>
