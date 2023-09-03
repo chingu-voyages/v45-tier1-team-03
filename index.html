@@ -39,17 +39,13 @@
         <img src="assets/vector.svg" alt="logo" />
       </div>
       <nav>
-        <div class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-        </div>
-        <div class="search-container">
-          <input id="searchInput" type="text" placeholder="Search by keyword" />
-          <button id="clearButton">x</button>
-          <button id="searchButton">
-            <img src="assets/search.svg" alt="search-icon" />
-          </button>
-        </div>
+        <ul class="nav-links">
+          <li><a data-id="home" class="links">Home</a></li>
+          <li><a data-id="about" class="links">About</a></li>
+          <li>
+            <a data-id="explore" id="exploreLink" class="links">Explore</a>
+          </li>
+        </ul>
         <button class="dropdownSettings">
           <img
             id="settingsIcon"
@@ -61,7 +57,7 @@
     </header>
 
     <main>
-      <section class="main-wrapper">
+      <section id="home" class="main-wrapper panel">
         <p id="error-message"></p>
         <a href="#">
           <img
@@ -76,6 +72,16 @@
             "Meteorites remind us of the dynamic beauty and constant change in
             the universe." - Neil deGrasse Tyson
           </p>
+          <button id="exploreBtn">Start search</button>
+          <!-- <div id="searchWrapper"> -->
+          <!-- <div id="searchWrapper" class="search-container">
+              <input id="searchInput" type="text" placeholder="Search by keyword" />
+              <button id="clearButton">x</button>
+              <button id="searchButton">
+                <img src="assets/search.svg" alt="search-icon" />
+              </button>
+            </div> -->
+          <!-- </div> -->
         </div>
         <a href="#">
           <img
@@ -86,112 +92,125 @@
         </a>
       </section>
 
-      <section id="resultSection" class="result-container hidden">
-        <div class="table-container">
-          <div class="table-header">
-            <h2>meteorite landings table</h2>
-            <div class="filters">
-              <button id="filter-btn">Add filters</button>
-              <button>Export PDF</button>
-            </div>
-          </div>
-          <table>
-            <tr class="table-headings-container">
-              <th>
-                name <i class="fa-solid fa-sort-up"></i
-                ><i class="fa-solid fa-sort-down"></i>
-              </th>
-              <th>
-                mass <i class="fa-solid fa-sort-up"></i
-                ><i class="fa-solid fa-sort-down"></i>
-              </th>
-              <th>
-                year <i class="fa-solid fa-sort-up"></i
-                ><i class="fa-solid fa-sort-down"></i>
-              </th>
-              <th>
-                recclass <i class="fa-solid fa-sort-up"></i
-                ><i class="fa-solid fa-sort-down"></i>
-              </th>
-            </tr>
-            <tbody id="detailDataDisplay"></tbody>
-          </table>
-          <div class="page-info-wrapper">
-            <span id="nextPrevContainer" class="next-prev-container"></span>
-            <span id="paginationInfo" class="pagination-info"></span>
-          </div>
-          <div id="pagination" class="pagination"></div>
+      <section id="explore" class="result-container panel hidden">
+        <div id="searchWrapper" class="search-container">
+          <input id="searchInput" type="text" placeholder="Search by keyword" />
+          <button id="clearButton">x</button>
+          <button id="searchButton">
+            <img src="assets/search.svg" alt="search-icon" />
+          </button>
         </div>
-      </section>
-      <section id="advanceSearch" class="hidden">
-        <p class="no-results hidden">
-          No results match your search criteria. Please refine your search.
-        </p>
-        <div class="filter-container">
-          <div class="filter">
-            <div class="filter-options">
-              <div class="filter-select">
-                <label for="compositionFilter"> Composition: </label>
-                <div class="custom-select">
-                  <select id="compositionFilter">
-                    <option value="">No Select</option>
-                  </select>
+        <div id="advanceSearch">
+          <p class="no-results hidden">
+            No results match your search criteria. Please refine your search.
+          </p>
+          <div class="filter-container">
+            <div class="filter">
+              <div class="filter-options">
+                <div class="filter-select">
+                  <label for="compositionFilter"> Composition: </label>
+                  <div class="custom-select">
+                    <select id="compositionFilter">
+                      <option value="">No Select</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-select">
+                  <label for="massFilter"> Mass:</label>
+                  <div class="custom-select">
+                    <select id="massMinFilter">
+                      <option value="">Minimum</option>
+                    </select>
+                    <select id="massMaxFilter">
+                      <option value="">Maximum</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-select">
+                  <label for="yearFilter"> Year:</label>
+                  <div class="custom-select">
+                    <select id="yearMinFilter">
+                      <option value="">Minimum</option>
+                    </select>
+                    <select id="yearMaxFilter">
+                      <option value="">Maximum</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-btn">
+                  <button id="filterButton">Apply</button>
+                  <button id="saveButton">Save</button>
                 </div>
               </div>
-
-              <div class="filter-select">
-                <label for="massFilter"> Mass:</label>
-                <div class="custom-select">
-                  <select id="massMinFilter">
-                    <option value="">Minimum</option>
-                  </select>
-                  <select id="massMaxFilter">
-                    <option value="">Maximum</option>
-                  </select>
+              <div id="mapWrapper" class="map">
+                <div
+                  id="map"
+                  style="height: 573px; width: 100%; border-radius: 10px"
+                ></div>
+                <button id="switchButton">Table</button>
+              </div>
+              <div id="table" class="table-container hidden">
+                <div class="table-header">
+                  <h2>meteorite landings table</h2>
+                  <div class="filters">
+                    <button id="map-btn">Map</button>
+                    <!-- <button>Export PDF</button> -->
+                  </div>
                 </div>
-              </div>
-
-              <div class="filter-select">
-                <label for="yearFilter"> Year:</label>
-                <div class="custom-select">
-                  <select id="yearMinFilter">
-                    <option value="">Minimum</option>
-                  </select>
-                  <select id="yearMaxFilter">
-                    <option value="">Maximum</option>
-                  </select>
+                <table>
+                  <tr class="table-headings-container">
+                    <th>
+                      name <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
+                    </th>
+                    <th>
+                      mass <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
+                    </th>
+                    <th>
+                      year <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
+                    </th>
+                    <th>
+                      recclass <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
+                    </th>
+                  </tr>
+                  <tbody id="detailDataDisplay"></tbody>
+                </table>
+                <div class="page-info-wrapper">
+                  <span
+                    id="nextPrevContainer"
+                    class="next-prev-container"
+                  ></span>
+                  <span id="paginationInfo" class="pagination-info"></span>
                 </div>
-              </div>
-
-              <div class="filter-btn">
-                <button id="filterButton">Apply</button>
-                <button id="saveButton">Save</button>
+                <div id="pagination" class="pagination"></div>
               </div>
             </div>
-            <div
-              id="map"
-              style="height: 573px; width: 100%; border-radius: 10px"
-            ></div>
-          </div>
 
-          <div class="filter">
-            <div class="show-search">
-              <div class="prev-results">Show previous search</div>
-              <button class="clear-btn" id="clearAllButton">Clear</button>
-            </div>
-            <div class="calculate">
-              <p>
-                Total strikes:
-                <span style="font-size: 25px" id="totalStrikes"></span>
-              </p>
-              <p>
-                Average strikes:
-                <span style="font-size: 25px" id="averageStrikes"></span>
-              </p>
-            </div>
-            <div class="histogram">
-              <div class="chart" id="yearHistogramContainer">
-                <canvas id="yearHistogram"></canvas>
+            <div class="filter">
+              <div class="show-search">
+                <div class="prev-results">Show previous search</div>
+                <button class="clear-btn" id="clearAllButton">Clear</button>
+              </div>
+              <div class="calculate">
+                <p>
+                  Total strikes:
+                  <span style="font-size: 25px" id="totalStrikes"></span>
+                </p>
+                <p>
+                  Average strikes:
+                  <span style="font-size: 25px" id="averageStrikes"></span>
+                </p>
+              </div>
+              <div class="histogram">
+                <div class="chart" id="yearHistogramContainer">
+                  <canvas id="yearHistogram"></canvas>
+                </div>
               </div>
             </div>
           </div>
