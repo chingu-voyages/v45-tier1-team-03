@@ -27,18 +27,29 @@ nav {
   gap: 25px;
   align-items: center;
 }
-.nav-links a {
+ul {
+  display: flex;
+  list-style: none;
+}
+ul li {
+  transition: transform 200ms;
+  cursor: pointer;
+}
+ul li:hover {
+  transform: scale(1.2);
+}
+ul li a {
   text-decoration: none;
   color: #fff;
   font-size: 20px;
   display: inline-block;
   padding: 10px;
-  transition: transform 0.3s ease, font-size 0.3s ease;
+  /* transition: transform 0.3s ease, font-size 0.3s ease; */
 }
-.nav-links a:hover {
+/* ul li a:hover {
   transform: scale(1.1);
   font-size: 25px;
-}
+} */
 .logo {
   padding-left: 10px;
   margin-top: 20px;
@@ -51,10 +62,10 @@ nav {
   align-items: center;
 }
 .search-container input {
-  width: 349px;
-  height: 37px;
+  width: 600px;
+  height: 47px;
   border: 1px solid #c8c8c8;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #c8c8c8;
 }
 .search-container input::placeholder {
@@ -91,10 +102,11 @@ nav {
 
 /******** Main ********/
 main {
-  margin: 60px 20px;
-  padding: 80px 20px;
+  margin: 40px 20px;
+  padding: 40px 30px;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -125,6 +137,12 @@ main {
   font-weight: 300;
   text-align: center;
 }
+.container button {
+  padding: 15px 80px;
+  font-size: 20px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+}
 .arrow-left,
 .arrow-right {
   transition: transform 0.3s ease;
@@ -139,15 +157,18 @@ main {
 .result-container {
   width: 100vw;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
 .result-container .table-container {
-  width: 60%;
+  width: 85%;
   margin: auto;
   height: 550px;
   padding-top: 0.5rem;
   border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .table-header {
@@ -178,10 +199,6 @@ main {
   border-radius: 5px;
 }
 
-.filters button:first-child {
-  background-color: rgba(75, 192, 192, 1);
-}
-
 .result-container .table-container table {
   display: block;
   width: 100%;
@@ -199,17 +216,29 @@ main {
   width: 7px;
   height: 0;
 }
-
-.result-container .table-container table::-webkit-scrollbar-thumb {
+.table-container {
+  display: block;
+  width: 80%;
+  margin: auto;
+  overflow: scroll;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  border-collapse: collapse;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-top: 0.5rem;
+  border-radius: 20px;
+}
+.table-container table::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 }
 
-.result-container .table-container table tr {
+.table-container table tr {
   width: 100%;
 }
 
-.result-container .table-container table tr th {
+.table-container table tr th {
   text-transform: capitalize;
   font-weight: bold;
   background-color: #fff;
@@ -222,7 +251,7 @@ main {
   z-index: 10;
 }
 
-.result-container .table-container table tbody tr td {
+.table-container table tbody tr td {
   width: 300px;
   border: 2px solid rgba(255, 255, 255, 0.5);
   padding: 0.7em 0.5em;
@@ -230,14 +259,14 @@ main {
   font-size: 0.8em;
 }
 
-.result-container .table-container .pagination {
+.table-container .pagination {
   width: 35%;
   margin: 1.5em auto;
   display: flex;
   justify-content: space-evenly;
 }
 
-.result-container .table-container .pagination button {
+.table-container .pagination button {
   display: none;
 }
 
@@ -395,6 +424,22 @@ main {
   border-radius: 5px;
   text-align: center;
   opacity: 0.7;
+}
+
+/******** Chart ********/
+.map {
+  width: 100%;
+  position: relative;
+}
+.map button {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 5px 15px;
+  border: 1px solid transparent;
+  top: 2%;
+  right: 2%;
+  z-index: 9999;
 }
 
 /******** Chart ********/
