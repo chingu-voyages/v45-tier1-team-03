@@ -1,4 +1,4 @@
-// Get references to DOM elements
+// DOM element references
 const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
 const explore = document.getElementById("explore");
@@ -19,7 +19,6 @@ const sortArrowDown = document.querySelectorAll(".fa-sort-down");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
 const mainWrapper = document.querySelector(".main-wrapper");
-// const advanceSearch = document.getElementById("advanceSearch");
 const mapBtn = document.getElementById("map-btn");
 const filterButton = document.getElementById("filterButton");
 const nameFilter = document.getElementById("nameFilter");
@@ -36,6 +35,7 @@ const saveButton = document.getElementById("saveButton");
 const clearPrevBtn = document.getElementById("clearPrevBtn");
 const resetButton = document.getElementById("resetButton");
 
+// Data
 let meteorData = []; // Store fetched meteor data
 let filteredResults = []; // Store filtered data
 let filteredAdvanceResults = []; // Store filtered advance results
@@ -46,14 +46,14 @@ let searchText; // Store input search terms
 let selectedYearRange; // Store year range data
 let markerCluster; // Store marker cluster
 
-// Array of image paths
+// Constants
 const imagePaths = [
   "assets/landing_page1.jpg",
   "assets/landing_page2.jpg",
   "assets/landing_page3.jpg",
 ];
 
-// Function to fetch data from NASA API
+// Data fetching and initialization
 function fetchData() {
   fetch("https://data.nasa.gov/resource/gh4g-9sfh.json")
     .then((response) => {
@@ -74,7 +74,7 @@ function fetchData() {
     });
 }
 
-// Function to initialize the page
+// Functions related to UI initialization
 function initializePage() {
   fetchData();
   handleLinks();
@@ -91,6 +91,8 @@ function initializePage() {
   filterButton.addEventListener("click", getAdvanceFilter);
   saveButton.addEventListener("click", saveFilter);
   clearPrevBtn.addEventListener("click", clearSavedSearches);
+  resetButton.addEventListener("click", resetResults);
+  clearButton.addEventListener("click", clearSearch);
   resetButton.addEventListener("click", resetResults);
 }
 
@@ -116,6 +118,11 @@ function getSearch() {
   explore.classList.remove("hidden");
   resultsWrapper.classList.remove("hidden");
   searchWrapper.style.transform = "translateY(-70px)";
+  // searchButton.style.transform = "translateX(-600px)";
+}
+
+function clearSearch() {
+  searchInput.value = "";
 }
 
 function switchToTable(e) {
@@ -389,51 +396,60 @@ function initializeMap() {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
 
   L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png", {
+    noWrap: true,
+    bounds: [
+      [-90, -180],
+      [90, 180],
+    ],
     attribution: cartodbAttribution,
   }).addTo(map);
 
-  window.addEventListener("resize", function () {
-    map.invalidateSize();
-  });
+  // window.dispatchEvent(new Event('resize'), function () {
+  //   map.invalidateSize();
+  // });
 }
 
 // Add markers to the map
 function addMarkersToMap(filteredData) {
-  map.eachLayer((layer) => {
-    if (layer instanceof L.Circle) {
-      map.removeLayer(layer);
+  try {
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Circle) {
+        map.removeLayer(layer);
+      }
+    });
+
+    if (markerCluster) {
+      map.removeLayer(markerCluster);
     }
-  });
 
-  if (markerCluster) {
-    map.removeLayer(markerCluster);
-  }
+    const markers = [];
 
-  const markers = [];
+    filteredData.forEach((meteor) => {
+      const lat = parseFloat(meteor.reclat);
+      const lon = parseFloat(meteor.reclong);
 
-  filteredData.forEach((meteor) => {
-    const lat = parseFloat(meteor.reclat);
-    const lon = parseFloat(meteor.reclong);
-
-    if (!isNaN(lat) && !isNaN(lon)) {
-      let marker = L.circle([lat, lon], {
-        color: "#f16122",
-      })
-        .addTo(map)
-        .bindPopup(
-          `Name: ${meteor.name},
+      if (!isNaN(lat) && !isNaN(lon)) {
+        let marker = L.circle([lat, lon], {
+          color: "#f16122",
+        })
+          .addTo(map)
+          .bindPopup(
+            `Name: ${meteor.name},
                     Mass: ${meteor.mass},
                     Year: ${meteor.year},
                     Composition: ${meteor.recclass}
         `
-        );
-      markers.push(marker);
-    }
-  });
+          );
+        markers.push(marker);
+      }
+    });
 
-  markerCluster = L.markerClusterGroup();
-  markerCluster.addLayers(markers);
-  map.addLayer(markerCluster);
+    markerCluster = L.markerClusterGroup();
+    markerCluster.addLayers(markers);
+    map.addLayer(markerCluster);
+  } catch (error) {
+    console.error("Error adding markers to map:", error);
+  }
 }
 
 function getAdvanceFilter(e) {
@@ -519,11 +535,11 @@ const yearHistogram = new Chart(document.getElementById("yearHistogram"), {
   },
 });
 
-function updateChart(filteredResults) {
+function updateChart(results) {
   const average = document.getElementById("averageStrikes");
   const total = document.getElementById("totalStrikes");
 
-  const years = filteredResults.map((item) =>
+  const years = results.map((item) =>
     item.year ? item.year.substring(0, 4) : "Unknown"
   );
   const yearCounts = {};
@@ -601,25 +617,29 @@ function listSavedFilters() {
     deleteBtn.addEventListener("click", () => {
       localStorage.removeItem(timestamp);
       listSavedFilters();
-    })
+    });
 
-    listItemText.addEventListener('click', () => {
+    listItemText.addEventListener("click", () => {
       // console.log(filterData);
       checkResults(filterData);
       addMarkersToMap(filterData);
-    })
+    });
   }
 }
 
 // Function to clear local storage
 function clearSavedSearches() {
-  localStorage.clear()
-  listSavedFilters()
+  localStorage.clear();
+  listSavedFilters();
 }
 
-// Function to reset - display default results
 function resetResults() {
   searchInput.value = "";
+  compositionFilter.value = "";
+  massMinFilter.value = "";
+  massMaxFilter.value = "";
+  yearMinFilter.value = "";
+  yearMaxFilter.value = "";
   filteredResults = [];
   filteredAdvanceResults = [];
   displayResults();
