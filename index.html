@@ -4,12 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Font awesome -->
     <script
       src="https://kit.fontawesome.com/5d7bb29ba5.js"
       crossorigin="anonymous"
     ></script>
-    <!-- Style sheet -->
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -17,6 +15,22 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+
     <title>Meteor Shower</title>
   </head>
   <body>
@@ -25,12 +39,13 @@
         <img src="assets/vector.svg" alt="logo" />
       </div>
       <nav>
-        <div class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="explore.html">Explore</a>
-        </div>
-
+        <ul class="nav-links">
+          <li><a data-id="home" class="links">Home</a></li>
+          <li><a data-id="about" class="links">About</a></li>
+          <li>
+            <a data-id="explore" id="exploreLink" class="links">Explore</a>
+          </li>
+        </ul>
         <button class="dropdownSettings">
           <img
             id="settingsIcon"
@@ -42,7 +57,7 @@
     </header>
 
     <main>
-      <section class="main-wrapper">
+      <section id="home" class="main-wrapper panel">
         <p id="error-message"></p>
         <a href="#">
           <img
@@ -57,7 +72,16 @@
             "Meteorites remind us of the dynamic beauty and constant change in
             the universe." - Neil deGrasse Tyson
           </p>
-          <a href="explore.html">Start searching now!</a>
+          <button id="exploreBtn">Start search</button>
+          <!-- <div id="searchWrapper"> -->
+          <!-- <div id="searchWrapper" class="search-container">
+              <input id="searchInput" type="text" placeholder="Search by keyword" />
+              <button id="clearButton">x</button>
+              <button id="searchButton">
+                <img src="assets/search.svg" alt="search-icon" />
+              </button>
+            </div> -->
+          <!-- </div> -->
         </div>
         <a href="#">
           <img
@@ -67,8 +91,136 @@
           />
         </a>
       </section>
-    </main>
 
+      <section id="explore" class="result-container panel hidden">
+        <div id="searchWrapper" class="search-container">
+          <input id="searchInput" type="text" placeholder="Search by keyword" />
+          <button id="clearButton">x</button>
+          <button id="searchButton">
+            <img src="assets/search.svg" alt="search-icon" />
+          </button>
+        </div>
+        <div id="advanceSearch">
+          <p class="no-results hidden">
+            No results match your search criteria. Please refine your search.
+          </p>
+          <div class="filter-container">
+            <div class="filter">
+              <div class="filter-options">
+                <div class="filter-select">
+                  <label for="compositionFilter"> Composition: </label>
+                  <div class="custom-select">
+                    <select id="compositionFilter">
+                      <option value="">No Select</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-select">
+                  <label for="massFilter"> Mass:</label>
+                  <div class="custom-select">
+                    <select id="massMinFilter">
+                      <option value="">Minimum</option>
+                    </select>
+                    <select id="massMaxFilter">
+                      <option value="">Maximum</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-select">
+                  <label for="yearFilter"> Year:</label>
+                  <div class="custom-select">
+                    <select id="yearMinFilter">
+                      <option value="">Minimum</option>
+                    </select>
+                    <select id="yearMaxFilter">
+                      <option value="">Maximum</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-btn">
+                  <button id="filterButton">Apply</button>
+                  <button id="saveButton">Save</button>
+                  <button id="resetButton">Reset</button>
+                </div>
+              </div>
+              <div id="mapWrapper" class="map">
+                <div
+                  id="map"
+                  style="height: 573px; width: 100%; border-radius: 10px"
+                ></div>
+                <button id="switchButton">Table</button>
+              </div>
+              <div id="table" class="table-container hidden">
+                <div class="table-header">
+                  <h2>meteorite landings</h2>
+                  <div class="filters">
+                    <button id="map-btn">Map</button>
+                    <!-- <button>Export PDF</button> -->
+                  </div>
+                </div>
+                <table>
+                  <tr class="table-headings-container">
+                    <th>
+                      name <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
+                    </th>
+                    <th>
+                      mass <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
+                    </th>
+                    <th>
+                      year <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
+                    </th>
+                    <th>
+                      recclass <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
+                    </th>
+                  </tr>
+                  <tbody id="detailDataDisplay"></tbody>
+                </table>
+                <div class="page-info-wrapper">
+                  <span
+                    id="nextPrevContainer"
+                    class="next-prev-container"
+                  ></span>
+                  <span id="paginationInfo" class="pagination-info"></span>
+                </div>
+                <div id="pagination" class="pagination"></div>
+              </div>
+            </div>
+
+            <div class="filter">
+              <div class="show-search">
+                <div class="prev-results">
+                  <h3>Previous searches</h3>
+                  <ul id="savedFiltersList"></ul>
+                </div>
+                <button class="clear-btn" id="clearPrevBtn">Clear</button>
+              </div>
+              <div class="calculate">
+                <p>
+                  Total strikes:
+                  <span style="font-size: 25px" id="totalStrikes"></span>
+                </p>
+                <p>
+                  Average strikes per year:
+                  <span style="font-size: 25px" id="averageStrikes"></span>
+                </p>
+              </div>
+              <div class="histogram">
+                <div class="chart" id="yearHistogramContainer">
+                  <canvas id="yearHistogram"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
     <footer>
       <div class="footer-container">
         <a
@@ -81,6 +233,7 @@
       </div>
     </footer>
 
-    <script src="script-home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

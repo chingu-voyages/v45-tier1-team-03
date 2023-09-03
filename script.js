@@ -1,8 +1,15 @@
 // Get references to DOM elements
+const links = document.querySelectorAll(".links");
+const panels = document.querySelectorAll(".panel");
+const explore = document.getElementById("explore");
+const exploreLink = document.getElementById("exploreLink");
 const searchInput = document.getElementById("searchInput");
+const searchWrapper = document.getElementById("searchWrapper");
 const searchButton = document.getElementById("searchButton");
+const exploreBtn = document.getElementById("exploreBtn");
 const clearButton = document.getElementById("clearButton");
 const searchIcon = document.getElementById("searchIcon");
+const resultsWrapper = document.getElementById("advanceSearch");
 const table = document.getElementById("detailDataDisplay");
 const pageEl = document.getElementById("pagination");
 const nextPrevContainer = document.getElementById("nextPrevContainer");
@@ -12,9 +19,9 @@ const sortArrowDown = document.querySelectorAll(".fa-sort-down");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
 const mainWrapper = document.querySelector(".main-wrapper");
-const advanceSearch = document.getElementById("advanceSearch");
-const filterBtn = document.getElementById("filter-btn"); // 'add filters' button in simple results display
-const filterButton = document.getElementById("filterButton"); // 'apply' filter button in advanced results display
+// const advanceSearch = document.getElementById("advanceSearch");
+const mapBtn = document.getElementById("map-btn");
+const filterButton = document.getElementById("filterButton");
 const nameFilter = document.getElementById("nameFilter");
 const compositionFilter = document.getElementById("compositionFilter");
 const massMinFilter = document.getElementById("massMinFilter");
@@ -22,6 +29,12 @@ const massMaxFilter = document.getElementById("massMaxFilter");
 const yearMinFilter = document.getElementById("yearMinFilter");
 const yearMaxFilter = document.getElementById("yearMaxFilter");
 const noResultsMessage = document.querySelector(".no-results");
+const tableBtn = document.getElementById("switchButton");
+const tableWrapper = document.getElementById("table");
+const mapWrapper = document.getElementById("mapWrapper");
+const saveButton = document.getElementById("saveButton");
+const clearPrevBtn = document.getElementById("clearPrevBtn");
+const resetButton = document.getElementById("resetButton");
 
 let meteorData = []; // Store fetched meteor data
 let filteredResults = []; // Store filtered data
@@ -31,6 +44,14 @@ let currentPage = 1; // First page of detail display data
 let rows = 100; // Number of rows per page
 let searchText; // Store input search terms
 let selectedYearRange; // Store year range data
+let markerCluster; // Store marker cluster
+
+// Array of image paths
+const imagePaths = [
+  "assets/landing_page1.jpg",
+  "assets/landing_page2.jpg",
+  "assets/landing_page3.jpg",
+];
 
 // Function to fetch data from NASA API
 function fetchData() {
@@ -56,49 +77,86 @@ function fetchData() {
 // Function to initialize the page
 function initializePage() {
   fetchData();
+  handleLinks();
   initializeMap();
 
-  searchButton.addEventListener("click", handleSearchButtonClick);
-  searchInput.addEventListener("keyup", getInputValue);
+  exploreBtn.addEventListener("click", handleStart);
+  exploreLink.addEventListener("click", displayResults);
+  searchButton.addEventListener("click", displayResults);
+  tableBtn.addEventListener("click", switchToTable);
+  mapBtn.addEventListener("click", switchToMap);
+  searchInput.addEventListener("keyup", displayResults);
+  arrowLeft.addEventListener("click", getPrevImg);
+  arrowRight.addEventListener("click", getNextImg);
   filterButton.addEventListener("click", getAdvanceFilter);
-  filterBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    resultSection.classList.add("hidden");
-    advanceSearch.classList.remove("hidden");
+  saveButton.addEventListener("click", saveFilter);
+  clearPrevBtn.addEventListener("click", clearSavedSearches);
+  resetButton.addEventListener("click", resetResults);
+}
+
+function handleLinks() {
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      panels.forEach((element) => {
+        element.classList.add("hidden");
+      });
+      document.getElementById(e.target.dataset.id).classList.remove("hidden");
+    });
   });
 }
 
-function handleSearchButtonClick(e) {
+function handleStart(e) {
   e.preventDefault();
-  getResults();
-  if (filteredResults.length === 0 || searchText === "") {
-    currentPage = 1;
-    displayList(meteorData, table, rows, currentPage, paginationInfo);
-    setupPagination(meteorData, pageEl, rows);
-    nextPrevButtons(nextPrevContainer, meteorData);
-  } else {
-    currentPage = 1;
-    displayList(filteredResults, table, rows, currentPage, paginationInfo);
-    setupPagination(filteredResults, pageEl, rows);
-    nextPrevButtons(nextPrevContainer, filteredResults);
-  }
+  explore.classList.remove("hidden");
+  mainWrapper.classList.add("hidden");
+  resultsWrapper.classList.add("hidden");
+}
+
+function getSearch() {
+  explore.classList.remove("hidden");
+  resultsWrapper.classList.remove("hidden");
+  searchWrapper.style.transform = "translateY(-70px)";
+}
+
+function switchToTable(e) {
+  e.preventDefault();
+  tableWrapper.classList.remove("hidden");
+  mapWrapper.classList.add("hidden");
+}
+
+function switchToMap(e) {
+  e.preventDefault();
+  mapWrapper.classList.remove("hidden");
+  tableWrapper.classList.add("hidden");
 }
 
 function getInputValue(e) {
   if (e.key === "Enter") {
     e.preventDefault();
-    getResults();
-    if (filteredResults.length === 0 || searchText === "") {
-      currentPage = 1;
-      displayList(meteorData, table, rows, currentPage, paginationInfo);
-      setupPagination(meteorData, pageEl, rows);
-      nextPrevButtons(nextPrevContainer, meteorData);
-    } else {
-      currentPage = 1;
-      displayList(filteredResults, table, rows, currentPage, paginationInfo);
-      setupPagination(filteredResults, pageEl, rows);
-      nextPrevButtons(nextPrevContainer, filteredResults);
-    }
+    displayResults();
+  }
+}
+
+function displayResults() {
+  getSearch();
+  getResults();
+
+  if (filteredResults.length === 0 || searchText === "") {
+    currentPage = 1;
+    displayList(meteorData, table, rows, currentPage, paginationInfo);
+    setupPagination(meteorData, pageEl, rows);
+    nextPrevButtons(nextPrevContainer, meteorData);
+    addMarkersToMap(meteorData);
+    updateChart(meteorData);
+    listSavedFilters();
+  } else {
+    currentPage = 1;
+    displayList(filteredResults, table, rows, currentPage, paginationInfo);
+    setupPagination(filteredResults, pageEl, rows);
+    nextPrevButtons(nextPrevContainer, filteredResults);
+    updateChart(filteredResults);
+    addMarkersToMap(filteredResults);
+    listSavedFilters();
   }
 }
 
@@ -125,7 +183,6 @@ function getResults() {
 // Function to display first page items in a table
 function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
   sortData();
-  resultSection.classList.remove("hidden"); // make table visible
 
   wrapper.innerHTML = "";
   page--;
@@ -245,6 +302,32 @@ function paginationBtn(page, items) {
   return btn;
 }
 
+// Change background image
+function changeBackgroundImage() {
+  const newBackgroundImage = `url('${imagePaths[currentImageIndex]}')`;
+  document.body.style.transition =
+    "background-image 0.5s ease, opacity 0.5s ease";
+  document.body.style.backgroundImage = newBackgroundImage;
+  document.body.style.opacity = 0.8;
+  setTimeout(() => {
+    document.body.style.transition = "none";
+    document.body.style.opacity = 1;
+  }, 500);
+}
+
+function getNextImg(e) {
+  e.preventDefault();
+  currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+  changeBackgroundImage();
+}
+
+function getPrevImg(e) {
+  e.preventDefault();
+  currentImageIndex =
+    (currentImageIndex - 1 + imagePaths.length) % imagePaths.length;
+  changeBackgroundImage();
+}
+
 function populateDropdowns() {
   const uniqueCompositions = Array.from(
     new Set(meteorData.map((meteor) => meteor.recclass || ""))
@@ -300,7 +383,7 @@ function populateDropdowns() {
 
 // Initialize the map
 function initializeMap() {
-  map = L.map("map").setView([51.505, -0.09], 13);
+  map = L.map("map").setView([0, 0], 2);
 
   const cartodbAttribution =
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
@@ -316,40 +399,39 @@ function initializeMap() {
 
 // Add markers to the map
 function addMarkersToMap(filteredData) {
-  // Clear existing markers or layers
   map.eachLayer((layer) => {
-    if (layer instanceof L.Marker) {
+    if (layer instanceof L.Circle) {
       map.removeLayer(layer);
     }
   });
 
+  if (markerCluster) {
+    map.removeLayer(markerCluster);
+  }
+
   const markers = [];
 
-  // Add new markers based on filtered data
   filteredData.forEach((meteor) => {
     const lat = parseFloat(meteor.reclat);
     const lon = parseFloat(meteor.reclong);
 
     if (!isNaN(lat) && !isNaN(lon)) {
-      let marker = L.marker([lat, lon], {
+      let marker = L.circle([lat, lon], {
         color: "#f16122",
-        // fillColor: "transparent",
-        // fillOpacity: 0.5,
-        // radius: 500,
       })
         .addTo(map)
         .bindPopup(
           `Name: ${meteor.name},
                     Mass: ${meteor.mass},
                     Year: ${meteor.year},
-                    Composition: ${meteor.recclass}`
+                    Composition: ${meteor.recclass}
+        `
         );
       markers.push(marker);
     }
   });
 
-  // Marker clustering
-  const markerCluster = L.markerClusterGroup();
+  markerCluster = L.markerClusterGroup();
   markerCluster.addLayers(markers);
   map.addLayer(markerCluster);
 }
@@ -390,9 +472,11 @@ function getAdvanceFilter(e) {
 
   checkResults(filteredAdvanceResults);
   addMarkersToMap(filteredAdvanceResults);
+  displayList(filteredAdvanceResults, table, rows, currentPage, paginationInfo);
 }
 
-function checkResults() {
+function checkResults(data) {
+  filteredAdvanceResults = data;
   if (filteredAdvanceResults.length === 0) {
     noResultsMessage.classList.remove("hidden");
     noResultsMessage.classList.add("no-results");
@@ -401,6 +485,14 @@ function checkResults() {
     noResultsMessage.classList.add("hidden");
     noResultsMessage.classList.remove("no-results");
     updateChart(filteredAdvanceResults, selectedYearRange);
+    addMarkersToMap(filteredAdvanceResults);
+    displayList(
+      filteredAdvanceResults,
+      table,
+      rows,
+      currentPage,
+      paginationInfo
+    );
   }
 }
 // Initialize the year histogram
@@ -476,6 +568,61 @@ function calculateTotalStrikes(yearCounts) {
     0
   );
   return totalStrikes;
+}
+
+// Function to save filters to local sotrage
+function saveFilter() {
+  const newFilterItem = JSON.stringify(filteredAdvanceResults);
+  const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
+  localStorage.setItem(timestamp, newFilterItem);
+  listSavedFilters();
+}
+
+// Function to display local storage list of filters
+function listSavedFilters() {
+  const savedFiltersList = document.getElementById("savedFiltersList");
+  savedFiltersList.innerHTML = "";
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const timestamp = localStorage.key(i);
+    const filterDataJSON = localStorage.getItem(timestamp);
+    const filterData = JSON.parse(filterDataJSON);
+
+    const listItem = document.createElement("li");
+    savedFiltersList.appendChild(listItem);
+    const listItemText = document.createElement("span");
+    listItem.appendChild(listItemText);
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    deleteBtn.classList.add("delete-btn");
+    listItemText.textContent = `${timestamp}`;
+    listItem.appendChild(deleteBtn);
+
+    deleteBtn.addEventListener("click", () => {
+      localStorage.removeItem(timestamp);
+      listSavedFilters();
+    })
+
+    listItemText.addEventListener('click', () => {
+      // console.log(filterData);
+      checkResults(filterData);
+      addMarkersToMap(filterData);
+    })
+  }
+}
+
+// Function to clear local storage
+function clearSavedSearches() {
+  localStorage.clear()
+  listSavedFilters()
+}
+
+// Function to reset - display default results
+function resetResults() {
+  searchInput.value = "";
+  filteredResults = [];
+  filteredAdvanceResults = [];
+  displayResults();
 }
 
 // Initialize the page when the DOM is loaded
