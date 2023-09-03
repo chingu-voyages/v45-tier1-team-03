@@ -141,8 +141,9 @@
                 </div>
 
                 <div class="filter-btn">
-                  <button id="filterButton">Apply</button>
-                  <button id="saveButton">Save</button>
+                  <button id="filterButton">Apply Filters</button>
+                  <button id="saveButton">Save Filters</button>
+                  <button id="resetButton">Reset</button>
                 </div>
               </div>
               <div id="mapWrapper" class="map">
@@ -154,7 +155,7 @@
               </div>
               <div id="table" class="table-container hidden">
                 <div class="table-header">
-                  <h2>meteorite landings table</h2>
+                  <h2>meteorite landings</h2>
                   <div class="filters">
                     <button id="map-btn">Map</button>
                     <!-- <button>Export PDF</button> -->
@@ -194,8 +195,11 @@
 
             <div class="filter">
               <div class="show-search">
-                <div class="prev-results">Show previous search</div>
-                <button class="clear-btn" id="clearAllButton">Clear</button>
+                <div class="prev-results">
+                  <h3>Previous searches</h3>
+                  <ul id="savedFiltersList"></ul>
+                </div>
+                <button class="clear-btn" id="clearPrevBtn">Clear</button>
               </div>
               <div class="calculate">
                 <p>
@@ -203,7 +207,7 @@
                   <span style="font-size: 25px" id="totalStrikes"></span>
                 </p>
                 <p>
-                  Average strikes:
+                  Average strikes per year:
                   <span style="font-size: 25px" id="averageStrikes"></span>
                 </p>
               </div>

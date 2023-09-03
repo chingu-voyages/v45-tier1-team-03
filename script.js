@@ -32,6 +32,9 @@ const noResultsMessage = document.querySelector(".no-results");
 const tableBtn = document.getElementById("switchButton");
 const tableWrapper = document.getElementById("table");
 const mapWrapper = document.getElementById("mapWrapper");
+const saveButton = document.getElementById("saveButton");
+const clearPrevBtn = document.getElementById("clearPrevBtn");
+const resetButton = document.getElementById("resetButton");
 
 let meteorData = []; // Store fetched meteor data
 let filteredResults = []; // Store filtered data
@@ -86,6 +89,9 @@ function initializePage() {
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
   filterButton.addEventListener("click", getAdvanceFilter);
+  saveButton.addEventListener("click", saveFilter);
+  clearPrevBtn.addEventListener("click", clearSavedSearches);
+  resetButton.addEventListener("click", resetResults);
 }
 
 function handleLinks() {
@@ -142,6 +148,7 @@ function displayResults() {
     nextPrevButtons(nextPrevContainer, meteorData);
     addMarkersToMap(meteorData);
     updateChart(meteorData);
+    listSavedFilters();
   } else {
     currentPage = 1;
     displayList(filteredResults, table, rows, currentPage, paginationInfo);
@@ -149,6 +156,7 @@ function displayResults() {
     nextPrevButtons(nextPrevContainer, filteredResults);
     updateChart(filteredResults);
     addMarkersToMap(filteredResults);
+    listSavedFilters();
   }
 }
 
@@ -467,7 +475,8 @@ function getAdvanceFilter(e) {
   displayList(filteredAdvanceResults, table, rows, currentPage, paginationInfo);
 }
 
-function checkResults() {
+function checkResults(data) {
+  filteredAdvanceResults = data;
   if (filteredAdvanceResults.length === 0) {
     noResultsMessage.classList.remove("hidden");
     noResultsMessage.classList.add("no-results");
@@ -559,6 +568,61 @@ function calculateTotalStrikes(yearCounts) {
     0
   );
   return totalStrikes;
+}
+
+// Function to save filters to local sotrage
+function saveFilter() {
+  const newFilterItem = JSON.stringify(filteredAdvanceResults);
+  const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
+  localStorage.setItem(timestamp, newFilterItem);
+  listSavedFilters();
+}
+
+// Function to display local storage list of filters
+function listSavedFilters() {
+  const savedFiltersList = document.getElementById("savedFiltersList");
+  savedFiltersList.innerHTML = "";
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const timestamp = localStorage.key(i);
+    const filterDataJSON = localStorage.getItem(timestamp);
+    const filterData = JSON.parse(filterDataJSON);
+
+    const listItem = document.createElement("li");
+    savedFiltersList.appendChild(listItem);
+    const listItemText = document.createElement("span");
+    listItem.appendChild(listItemText);
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    deleteBtn.classList.add("delete-btn");
+    listItemText.textContent = `${timestamp}`;
+    listItem.appendChild(deleteBtn);
+
+    deleteBtn.addEventListener("click", () => {
+      localStorage.removeItem(timestamp);
+      listSavedFilters();
+    })
+
+    listItemText.addEventListener('click', () => {
+      // console.log(filterData);
+      checkResults(filterData);
+      addMarkersToMap(filterData);
+    })
+  }
+}
+
+// Function to clear local storage
+function clearSavedSearches() {
+  localStorage.clear()
+  listSavedFilters()
+}
+
+// Function to reset - display default results
+function resetResults() {
+  searchInput.value = "";
+  filteredResults = [];
+  filteredAdvanceResults = [];
+  displayResults();
 }
 
 // Initialize the page when the DOM is loaded

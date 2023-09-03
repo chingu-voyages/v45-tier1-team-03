@@ -1,17 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&family=VT323&display=swap");
 
-* {
-  margin: 0%;
-  padding: 0%;
-  box-sizing: border-box;
-}
 body {
   font-family: "Roboto", sans-serif;
   background-image: url("assets/landing_page1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgba(0, 0, 0, 0.5);
+}
+/******** Normalize ********/
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+ul li {
+  list-style: none;
+  cursor: pointer;
+}
+button {
+  cursor: pointer;
 }
 
 /******** Header ********/
@@ -27,18 +35,16 @@ nav {
   gap: 25px;
   align-items: center;
 }
-ul {
+header ul {
   display: flex;
-  list-style: none;
 }
-ul li {
+header ul li {
   transition: transform 200ms;
-  cursor: pointer;
 }
-ul li:hover {
+header ul li:hover {
   transform: scale(1.2);
 }
-ul li a {
+header ul li a {
   text-decoration: none;
   color: #fff;
   font-size: 20px;
@@ -81,7 +87,6 @@ ul li a {
 }
 #settingsIcon {
   background-color: transparent;
-  cursor: pointer;
 }
 #clearButton {
   border: none;
@@ -94,7 +99,6 @@ ul li a {
 #searchButton {
   background-color: transparent;
   border: none;
-  cursor: pointer;
 }
 #searchButton img {
   padding: 10px;
@@ -294,7 +298,6 @@ main {
   border: none;
   margin: 0 0.8em;
   font-size: 1em;
-  cursor: pointer;
   opacity: 0.8;
 }
 
@@ -313,7 +316,7 @@ main {
   opacity: 0.8;
 }
 
-/******** Advance search ********/
+/******** Advanced search ********/
 
 #advanceSearch {
   width: 100%;
@@ -361,7 +364,6 @@ main {
   border: 1px solid #caced1;
   border-radius: 10px;
   color: #000;
-  cursor: pointer;
   outline: none;
 }
 .show-search {
@@ -384,6 +386,9 @@ main {
   color: #fff;
   font-family: "VT323", monospace;
   overflow-y: scroll;
+}
+.prev-results .delete-btn {
+  margin-left: 10px;
 }
 .clear-btn {
   padding: 5px 10px;
