@@ -588,9 +588,15 @@ function calculateTotalStrikes(yearCounts) {
 
 // Function to save filters to local sotrage
 function saveFilter() {
+  const dummyEvent = {
+    preventDefault: () => {} // define a preventDefault function to avoid errors
+  };
+  getAdvanceFilter(dummyEvent);
+
   const newFilterItem = JSON.stringify(filteredAdvanceResults);
   const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
-  localStorage.setItem(timestamp, newFilterItem);
+  const filterID = "filterID: " + timestamp
+  localStorage.setItem(filterID, newFilterItem);
   listSavedFilters();
 }
 
@@ -600,36 +606,38 @@ function listSavedFilters() {
   savedFiltersList.innerHTML = "";
 
   for (let i = 0; i < localStorage.length; i++) {
-    const timestamp = localStorage.key(i);
-    const filterDataJSON = localStorage.getItem(timestamp);
-    const filterData = JSON.parse(filterDataJSON);
+    const timestamp = localStorage.key(i)
+    if (timestamp.length === 31 && timestamp.indexOf(" / ") === 20 && timestamp.split(":").length === 4) {
+      const filterDataJSON = localStorage.getItem(timestamp);
+      const filterData = JSON.parse(filterDataJSON);
 
-    const listItem = document.createElement("li");
-    savedFiltersList.appendChild(listItem);
-    const listItemText = document.createElement("span");
-    listItem.appendChild(listItemText);
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "X";
-    deleteBtn.classList.add("delete-btn");
-    listItemText.textContent = `${timestamp}`;
-    listItem.appendChild(deleteBtn);
+      const listItem = document.createElement("li");
+      savedFiltersList.appendChild(listItem);
+      const listItemText = document.createElement("span");
+      listItem.appendChild(listItemText);
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "X";
+      deleteBtn.classList.add("delete-btn");
+      listItemText.textContent = `${timestamp.slice(10)}`;
+      listItem.appendChild(deleteBtn);
 
-    deleteBtn.addEventListener("click", () => {
-      localStorage.removeItem(timestamp);
-      listSavedFilters();
-    });
+      deleteBtn.addEventListener("click", () => {
+        localStorage.removeItem(timestamp);
+        listSavedFilters();
+      })
 
-    listItemText.addEventListener("click", () => {
-      // console.log(filterData);
-      checkResults(filterData);
-      addMarkersToMap(filterData);
-    });
+      listItemText.addEventListener('click', () => {
+        checkResults(filterData);
+        addMarkersToMap(filterData);
+      })
+    }
   }
 }
 
-// Function to clear local storage
+// Function to clear all saved filters
 function clearSavedSearches() {
-  localStorage.clear();
+  const keysToRemove = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20);
+  keysToRemove.forEach(key => localStorage.removeItem(key));
   listSavedFilters();
 }
 
