@@ -202,6 +202,62 @@ function getResults() {
   });
 }
 
+// Add event listener to search button
+searchButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  getResults();
+  if (filteredResults.length === 0 || searchText === "") {
+    displayList(meteorData, table, rows, currentPage);
+    setupPagination(meteorData, pageEl, rows);
+  } else {
+    displayList(filteredResults, table, rows, currentPage);
+    setupPagination(filteredResults, pageEl, rows);
+  }
+})
+
+// Add event listener to input field
+searchInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    getResults();
+    if (filteredResults.length === 0 || searchText === "") {
+      displayList(meteorData, table, rows, currentPage);
+      setupPagination(meteorData, pageEl, rows);
+    } else {
+      displayList(filteredResults, table, rows, currentPage);
+      setupPagination(filteredResults, pageEl, rows);
+    }
+  }
+})
+
+// Sort table results in ascending order
+Array.from(sortArrowUp).forEach((el, i) => {
+  const parameters = ["name", "mass", "year", "recclass"];
+  el.addEventListener("click", () => {
+    const parameter = parameters[i];
+    const sortedResults = filteredResults.slice().sort((a, b) => {
+      const aValue = a[parameter] || "";
+      const bValue = b[parameter] || "";
+      return aValue.localeCompare(bValue, undefined, {numeric: true});
+    })
+    displayList(sortedResults, table, rows, currentPage);
+  })
+})
+
+// Sort table results in descending order
+Array.from(sortArrowDown).forEach((el, i) => {
+  const parameters = ["name", "mass", "year", "recclass"];
+  el.addEventListener("click", () => {
+    const parameter = parameters[i];
+    const sortedResults = filteredResults.slice().sort((a, b) => {
+      const aValue = a[parameter] || "";
+      const bValue = b[parameter] || "";
+      return bValue.localeCompare(aValue, undefined, {numeric: true});
+    })
+    displayList(sortedResults, table, rows, currentPage);
+  })
+})
+
 // Function to display first page items in a table
 function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
   sortData();
