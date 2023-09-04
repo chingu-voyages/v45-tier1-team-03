@@ -23,19 +23,93 @@ button {
 }
 
 /******** Header ********/
-header {
+/* header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
-}
+} */
 nav {
   display: flex;
-  flex-direction: row;
-  gap: 25px;
   align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  color: #fff;
 }
-header ul {
+nav .mainMenu {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
+nav .mainMenu a {
+  display: flex;
+  list-style: none;
+}
+nav .mainMenu li a {
+  display: inline-block;
+  padding: 15px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5em;
+}
+nav .mainMenu li a:hover {
+  background: #000;
+  font-size: 1.6rem;
+}
+nav .openMenu {
+  font-size: 2rem;
+  margin: 20px;
+  display: none;
+  cursor: pointer;
+}
+nav .mainMenu .closeMenu {
+  font-size: 2rem;
+  display: none;
+  cursor: pointer;
+}
+nav .logo {
+  margin: 6px;
+  font-size: 25px;
+  cursor: pointer;
+}
+nav .dropdownSettings {
+  font-size: 1.2rem;
+}
+nav .dropdownSettings:hover {
+  font-size: 1.6rem;
+}
+@media (max-width: 800px) {
+  nav .mainMenu {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    transition: top 1s ease;
+    display: none;
+  }
+  nav .mainMenu .closeMenu {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  nav .openMenu {
+    display: block;
+  }
+  nav .mainMenu li a:hover {
+    background: none;
+    font-size: 1.6rem;
+  }
+}
+
+/* header ul {
   display: flex;
 }
 header ul li {
@@ -51,7 +125,7 @@ header ul li a {
   display: inline-block;
   padding: 10px;
   /* transition: transform 0.3s ease, font-size 0.3s ease; */
-}
+/* } */
 /* ul li a:hover {
   transform: scale(1.1);
   font-size: 25px;
@@ -60,6 +134,7 @@ header ul li a {
   padding-left: 10px;
   margin-top: 20px;
 }
+*/
 
 /******** Search-container ********/
 .search-container {
@@ -91,8 +166,8 @@ header ul li a {
 #clearButton {
   border: none;
   position: absolute;
-  right: 15%;
-  top: 30%;
+  right: 10%;
+  top: 20%;
   color: #818181;
   background-color: transparent;
 }
@@ -135,17 +210,55 @@ main {
   font-weight: 700;
   text-align: center;
 }
+@media (max-width: 800px) {
+  .container h1 {
+    font-size: 50px;
+    margin: 0 10px;
+    max-width: 600px;
+    word-wrap: break-word;
+  }
+}
+@media (max-width: 500px) {
+  .container h1 {
+    font-size: 40px;
+    max-width: 300px;
+    word-wrap: break-word;
+  }
+}
 .container p {
   width: 70%;
   font-size: 20px;
   font-weight: 300;
   text-align: center;
 }
+@media (max-width: 800px) {
+  .container p {
+    font-size: 16px;
+    margin: 0 10px;
+    max-width: 500px;
+    word-wrap: break-word;
+  }
+}
+@media (max-width: 500px) {
+  .container p {
+    font-size: 12px;
+    max-width: 300px;
+    word-wrap: break-word;
+  }
+}
 .container button {
   padding: 15px 80px;
   font-size: 20px;
   border: 1px solid transparent;
   border-radius: 15px;
+}
+@media (max-width: 800px) {
+  .container button {
+    padding: 8px 16px;
+    margin: 0 auto;
+    border-radius: 8px;
+    font-size: 14px;
+  }
 }
 .arrow-left,
 .arrow-right {
@@ -315,6 +428,170 @@ main {
 .page-info-wrapper .pagination-info {
   opacity: 0.8;
 }
+/************About section**********/
+.mission-section,
+.journey-section,
+.credit-section {
+  display: flex;
+  justify-content: space-between;
+}
+.about-section,
+.mission-section,
+.our-team,
+.journey-section,
+.credit-section {
+  margin-bottom: 4rem;
+}
+.about-section,
+.mission-section,
+.journey-section,
+.credit-section {
+  margin-left: 10px;
+}
+@media (max-width: 800px) {
+  .mission-section,
+  .journey-section,
+  .credit-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mission-section,
+  .credit-section {
+    flex-direction: column;
+  }
+  .journey-section {
+    flex-direction: column-reverse;
+  }
+}
+.mission-text,
+.journey-text,
+.credit-text {
+  max-width: 600px;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: #fff;
+  text-align: center;
+}
+@media (max-width: 800px) {
+  .mission-text,
+  .journey-text,
+  .credit-text {
+    max-width: 500px;
+    font-size: 14px;
+  }
+}
+.mission-image,
+.journey-image,
+.credit-image {
+  max-width: 500px;
+  height: 300px;
+}
+.about-section {
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  padding: 10px;
+}
+.about-text {
+  line-height: 1.5;
+  font-weight: 400;
+}
+/* Main content of About Page */
+.about-page {
+  margin: 4.4rem 3rem;
+  color: #fff;
+}
+/* .about-page h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 60px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+} */
+.sub-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+@media (max-width: 800px) {
+  .sub-heading {
+    font-size: 30px;
+  }
+}
+.sub-heading p {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+.our-team {
+  text-align: center;
+}
+.arrow-down {
+  font-size: 32px;
+  color: #fff;
+}
+.team-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 4rem 4rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.team-card {
+  margin: 1rem;
+  padding: 1rem 1rem;
+  background-color: #3d3d3d;
+  flex-basis: 25%;
+  text-align: center;
+  flex: 1;
+  border-radius: 50px;
+}
+.profile-image {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  max-height: 200px;
+}
+@media (max-width: 800px) {
+  .team-card {
+    flex-basis: 50%;
+  }
+  .profile-image {
+    max-height: 150px;
+  }
+}
+.team-card h3 {
+  margin-bottom: 0.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+}
+.skill {
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+button {
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+button a {
+  text-decoration: none;
+  color: #000;
+}
 
 /******** Advanced search ********/
 
@@ -344,6 +621,7 @@ main {
   padding: 20px;
   border-radius: 10px;
   opacity: 0.7;
+  gap: 20px;
 }
 .filter-select {
   display: block;
@@ -352,10 +630,14 @@ main {
   padding: 0px 10px;
 }
 .custom-select {
-  min-width: 300px;
+  min-width: 250px;
+  display: flex;
+  gap: 10px;
 }
-
-.custom-select select {
+.sel {
+  position: relative;
+}
+.sel select {
   appearance: none;
   -webkit-appearance: none;
   font-size: 15px;
@@ -365,7 +647,16 @@ main {
   border-radius: 10px;
   color: #000;
   outline: none;
+  cursor: pointer;
 }
+.sel::after {
+  position: absolute;
+  content: "\26db";
+  top: 55%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
 .show-search {
   width: 100%;
   display: flex;
@@ -498,8 +789,8 @@ footer {
   width: 100%;
 }
 .footer-container {
-  position: fixed;
-  bottom: 0%;
+  display: block;
+  margin-bottom: 2rem;
   width: 100%;
   text-align: center;
   font-size: 15px;
