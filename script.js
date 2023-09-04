@@ -47,11 +47,11 @@ let selectedYearRange; // Store year range data
 let markerCluster; // Store marker cluster
 
 // Constants
-const imagePaths = [
-  "assets/landing_page1.jpg",
-  "assets/landing_page2.jpg",
-  "assets/landing_page3.jpg",
-];
+// const imagePaths = [
+//   "assets/landing_page1.jpg",
+//   "assets/landing_page2.jpg",
+//   "assets/landing_page3.jpg",
+// ];
 
 // Data fetching and initialization
 function fetchData() {
@@ -310,30 +310,30 @@ function paginationBtn(page, items) {
 }
 
 // Change background image
-function changeBackgroundImage() {
-  const newBackgroundImage = `url('${imagePaths[currentImageIndex]}')`;
-  document.body.style.transition =
-    "background-image 0.5s ease, opacity 0.5s ease";
-  document.body.style.backgroundImage = newBackgroundImage;
-  document.body.style.opacity = 0.8;
-  setTimeout(() => {
-    document.body.style.transition = "none";
-    document.body.style.opacity = 1;
-  }, 500);
-}
+// function changeBackgroundImage() {
+//   const newBackgroundImage = `url('${imagePaths[currentImageIndex]}')`;
+//   document.body.style.transition =
+//     "background-image 0.5s ease, opacity 0.5s ease";
+//   document.body.style.backgroundImage = newBackgroundImage;
+//   document.body.style.opacity = 0.8;
+//   setTimeout(() => {
+//     document.body.style.transition = "none";
+//     document.body.style.opacity = 1;
+//   }, 500);
+// }
 
-function getNextImg(e) {
-  e.preventDefault();
-  currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
-  changeBackgroundImage();
-}
+// function getNextImg(e) {
+//   e.preventDefault();
+//   currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+//   changeBackgroundImage();
+// }
 
-function getPrevImg(e) {
-  e.preventDefault();
-  currentImageIndex =
-    (currentImageIndex - 1 + imagePaths.length) % imagePaths.length;
-  changeBackgroundImage();
-}
+// function getPrevImg(e) {
+//   e.preventDefault();
+//   currentImageIndex =
+//     (currentImageIndex - 1 + imagePaths.length) % imagePaths.length;
+//   changeBackgroundImage();
+// }
 
 function populateDropdowns() {
   const uniqueCompositions = Array.from(
