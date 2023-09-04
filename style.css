@@ -621,6 +621,7 @@ button a {
   padding: 20px;
   border-radius: 10px;
   opacity: 0.7;
+  gap: 20px;
 }
 .filter-select {
   display: block;
@@ -629,10 +630,14 @@ button a {
   padding: 0px 10px;
 }
 .custom-select {
-  min-width: 300px;
+  min-width: 250px;
+  display: flex;
+  gap: 10px;
 }
-
-.custom-select select {
+.sel {
+  position: relative;
+}
+.sel select {
   appearance: none;
   -webkit-appearance: none;
   font-size: 15px;
@@ -642,7 +647,16 @@ button a {
   border-radius: 10px;
   color: #000;
   outline: none;
+  cursor: pointer;
 }
+.sel::after {
+  position: absolute;
+  content: "\26db";
+  top: 55%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
 .show-search {
   width: 100%;
   display: flex;
