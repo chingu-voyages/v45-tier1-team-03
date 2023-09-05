@@ -51,11 +51,11 @@ nav .mainMenu li a {
   padding: 15px;
   text-decoration: none;
   color: #fff;
-  font-size: 1.5em;
+  font-size: 1.5rem;
+  transition: transform 200ms;
 }
 nav .mainMenu li a:hover {
-  background: #000;
-  font-size: 1.6rem;
+  transform: scale(1.2);
 }
 nav .openMenu {
   font-size: 2rem;
@@ -130,11 +130,10 @@ header ul li a {
   transform: scale(1.1);
   font-size: 25px;
 } */
-.logo {
+/* .logo {
   padding-left: 10px;
   margin-top: 20px;
-}
-*/
+} */
 
 /******** Search-container ********/
 .search-container {
@@ -486,6 +485,7 @@ main {
 .credit-image {
   max-width: 500px;
   height: 300px;
+  margin: 30px;
 }
 .about-section {
   color: #ffffff;

@@ -42,24 +42,30 @@
       <nav>
         <div class="logo">
           <img src="assets/vector.svg" alt="logo" />
+          <div class="logo-title">
+            <p>Meteor</p>
+          </div>
+          <div class="logo-title"><p>Shower</p></div>
         </div>
         <div class="openMenu"><i class="fa-solid fa-bars"></i></div>
         <ul class="nav-links mainMenu">
           <li><a data-id="home" class="links">Home</a></li>
-          <li><a data-id="about" class="links">About</a></li>
+          <li>
+            <a data-id="about" href="About-page/about.html" class="links"
+              >About Page</a
+            >
+          </li>
+          <li>
+            <a data-id="about" href="Mst-page/mst.html" class="links"
+              >Meteor Shower App</a
+            >
+          </li>
           <li>
             <a data-id="explore" id="exploreLink" class="links">Explore</a>
           </li>
           <div id="settingsIcon" class="dropdownSettings">
             <i class="fa-solid fa-gear"></i>
           </div>
-          <!-- <button class="dropdownSettings">
-              <img
-                id="settingsIcon"
-                src="assets/settings.svg"
-                alt="settings-icon"
-              />
-            </button> -->
           <div class="closeMenu">
             <li><i class="fa-solid fa-xmark"></i></li>
           </div>
@@ -84,15 +90,6 @@
             the universe." - Neil deGrasse Tyson
           </p>
           <button id="exploreBtn">Start search</button>
-          <!-- <div id="searchWrapper"> -->
-          <!-- <div id="searchWrapper" class="search-container">
-              <input id="searchInput" type="text" placeholder="Search by keyword" />
-              <button id="clearButton">x</button>
-              <button id="searchButton">
-                <img src="assets/search.svg" alt="search-icon" />
-              </button>
-            </div> -->
-          <!-- </div> -->
         </div>
         <a href="#">
           <img
@@ -103,21 +100,11 @@
         </a>
       </section>
       <section id="about" class="panel hidden about-page">
-        <div class="mission-section">
-          <div>
-            <h2 class="sub-heading">Our Mission</h2>
-            <p class="mission-text">
-              At Meteor Shower, our mission is to make the wonders of the
-              universe accessible to everyone. We believe that every meteorite
-              strike has a unique tale to tell, and by presenting this data in
-              an intuitive and informative way, we aim to inspire curiosity,
-              spark conversations, and foster a deeper appreciation for the
-              celestial phenomena that have shaped our planet's history.
-            </p>
-          </div>
-          <div>
-            <img src="assets/Rectangle.png" alt="" class="mission-image" />
-          </div>
+        <div>
+          <video controls>
+            <source src="assets/MS.mov" type="video/mp4" />
+            Your Browser does not support the video tag.
+          </video>
         </div>
         <div class="our-team">
           <h2 class="sub-heading">Meet the team behind Meteor Shower</h2>
@@ -127,85 +114,120 @@
               <img src="assets/Zahra.jpg" alt="" class="profile-image" />
               <h3>Zahra Motlagh</h3>
               <p class="skill">Product owner</p>
-              <button>
+              <div class="icons">
                 <a
                   href="https://www.linkedin.com/in/zahra-motlagh/"
                   target="_blank"
-                  >LinkedIn</a
-                >
-              </button>
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+              <div class="icons">
+                <a href="https://github.com/zizi1404" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+              </div>
             </div>
             <div class="team-card">
               <img src="assets/Peter (1).jpg" alt="" class="profile-image" />
               <h3>Petre Circeag</h3>
               <p class="skill">Product owner</p>
-              <button>
+              <div class="icons">
                 <a
                   href="https://www.linkedin.com/in/petre-circeag/"
                   target="_blank"
-                  >Linkedin</a
-                >
-              </button>
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+              <div class="icons">
+                <a href="https://github.com/Petre4488" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+              </div>
             </div>
             <div class="team-card">
               <img src="assets/Vruti.jpg" alt="" class="profile-image" />
               <h3>Vruti Shah</h3>
               <p class="skill">Developer</p>
-              <button>
+              <div class="icons">
                 <a
                   href="https://www.linkedin.com/in/vruti-shah-29a393130"
                   target="_blank"
-                  >Linkedin</a
-                >
-              </button>
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+              <div class="icons">
+                <a href="https://github.com/vrutishah" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+              </div>
             </div>
             <div class="team-card">
               <img src="assets/Mustapha.jpeg" alt="" class="profile-image" />
               <h3>Mustapha Anthonio</h3>
               <p class="skill">Developer</p>
-              <button>
+              <div class="icons">
                 <a
                   href="https://www.linkedin.com/in/mustapha-anthonio"
                   target="_blank"
-                  >Linkedin</a
-                >
-              </button>
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+              <div class="icons">
+                <a href="https://github.com/engamo" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+              </div>
             </div>
             <div class="team-card">
               <img src="assets/Ana.jpeg" alt="" class="profile-image" />
               <h3>Ana Popovic</h3>
               <p class="skill">Developer</p>
-              <button>
+              <div class="icons">
                 <a href="https://de.linkedin.com/in/franecode" target="_blank"
-                  >Linkedin</a
-                >
-              </button>
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+              <div class="icons">
+                <a href="https://github.com/franeCode" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+              </div>
             </div>
             <div class="team-card">
               <img src="assets/Isaac (1).jpeg" alt="" class="profile-image" />
               <h3>Isaac Anim</h3>
               <p class="skill">Developer</p>
-              <button>
+              <div class="icons">
                 <a href="https://www.linkedin.com/in/yawcoder" target="_blank"
-                  >Linkedin</a
-                >
-              </button>
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+              <div class="icons">
+                <a href="https://github.com/yawcoder" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+              </div>
             </div>
             <div class="team-card">
               <img src="assets/eva.jpeg" alt="" class="profile-image" />
               <h3>Eva Langerova</h3>
               <p class="skill">Developer</p>
-              <button>
+              <div class="icons">
                 <a
                   href="https://www.linkedin.com/in/eva-langerova-61059027a/"
                   target="_blank"
-                  >Linkedin</a
-                >
-              </button>
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+              </div>
+              <div class="icons">
+                <a href="https://github.com/eva-lng" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="journey-section">
+        <!-- <div class="journey-section">
           <div>
             <img
               src="assets/All results section.png"
@@ -234,14 +256,20 @@
               scientific community for their contributions to our understanding
               of meteorite strikes and their implications.
             </p>
-          </div>
-          <div>
+          </div> -->
+        <!-- <div>
             <img
               src="assets/Landing Page Image 3.png"
               alt=""
               class="credit-image"
             />
           </div>
+        </div> -->
+        <div>
+          <video controls>
+            <source src="assets/MS2.mov" type="video/mp4" />
+            Your Browser does not support the video tag.
+          </video>
         </div>
       </section>
       <section id="explore" class="result-container panel hidden">
