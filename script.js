@@ -8,7 +8,7 @@ const explore = document.getElementById("explore");
 const exploreLink = document.getElementById("exploreLink");
 const searchInput = document.getElementById("searchInput");
 const searchWrapper = document.getElementById("searchWrapper");
-const searchButton = document.getElementById("searchButton");
+// const searchButton = document.getElementById("searchButton");
 const exploreBtn = document.getElementById("exploreBtn");
 const clearButton = document.getElementById("clearButton");
 const searchIcon = document.getElementById("searchIcon");
@@ -17,8 +17,7 @@ const table = document.getElementById("detailDataDisplay");
 const pageEl = document.getElementById("pagination");
 const nextPrevContainer = document.getElementById("nextPrevContainer");
 const paginationInfo = document.getElementById("paginationInfo");
-const sortArrowUp = document.querySelectorAll(".fa-sort-up");
-const sortArrowDown = document.querySelectorAll(".fa-sort-down");
+const sortArrow = document.querySelectorAll(".fa-sort");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
 const mainWrapper = document.querySelector(".main-wrapper");
@@ -56,10 +55,12 @@ let filteredResults = []; // Store filtered data
 let filteredAdvanceResults = []; // Store filtered advance results
 let currentImageIndex = 0; // Current image index
 let currentPage = 1; // First page of detail display data
-let rows = 100; // Number of rows per page
+let rows = 20; // Number of rows per page
 let searchText; // Store input search terms
 let selectedYearRange; // Store year range data
 let markerCluster; // Store marker cluster
+let currentSortParameter = "name"; // Default sorting parameter
+let isAscending = true; // Default sorting order
 
 // Constants
 const imagePaths = [
@@ -97,7 +98,7 @@ function initializePage() {
 
   exploreBtn.addEventListener("click", handleStart);
   exploreLink.addEventListener("click", displayResults);
-  searchButton.addEventListener("click", displayResults);
+  // searchButton.addEventListener("click", displayResults);
   tableBtn.addEventListener("click", switchToTable);
   mapBtn.addEventListener("click", switchToMap);
   searchInput.addEventListener("keyup", displayResults);
@@ -108,7 +109,6 @@ function initializePage() {
   clearPrevBtn.addEventListener("click", clearSavedSearches);
   resetButton.addEventListener("click", resetResults);
   clearButton.addEventListener("click", clearSearch);
-  resetButton.addEventListener("click", resetResults);
 }
 
 function handleLinks() {
@@ -204,7 +204,6 @@ function getResults() {
 
 // Function to display first page items in a table
 function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
-  sortData();
 
   wrapper.innerHTML = "";
   page--;
@@ -230,34 +229,36 @@ function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
   }
 }
 
-function sortData() {
-  // Sort table results in ascending order
-  Array.from(sortArrowUp).forEach((el, i) => {
+// Adding event listeners to all sort icons
+Array.from(sortArrow).forEach((el, i) => {
+  el.addEventListener("click", () => {
     const parameters = ["name", "mass", "year", "recclass"];
-    el.addEventListener("click", () => {
-      const parameter = parameters[i];
-      const sortedResults = filteredResults.slice().sort((a, b) => {
-        const aValue = a[parameter] || "";
-        const bValue = b[parameter] || "";
-        return aValue.localeCompare(bValue, undefined, { numeric: true });
-      });
-      displayList(sortedResults, table, rows, currentPage, paginationInfo);
-    });
-  });
+    const clickedParameter = parameters[i];
 
-  // Sort table results in descending order
-  Array.from(sortArrowDown).forEach((el, i) => {
-    const parameters = ["name", "mass", "year", "recclass"];
-    el.addEventListener("click", () => {
-      const parameter = parameters[i];
-      const sortedResults = filteredResults.slice().sort((a, b) => {
-        const aValue = a[parameter] || "";
-        const bValue = b[parameter] || "";
-        return bValue.localeCompare(aValue, undefined, { numeric: true });
-      });
-      displayList(sortedResults, table, rows, currentPage, paginationInfo);
-    });
+    if (clickedParameter === currentSortParameter) {
+      isAscending = !isAscending; // Toggle sorting order
+    } else {
+      currentSortParameter = clickedParameter;
+      isAscending = true; // Reset sorting order
+    }
+    if (searchText) {
+      sortData(filteredResults);
+    } else {
+      sortData(meteorData)
+    }
   });
+});
+
+// Function to sort results in ascending/descending order
+function sortData(data) {
+  data = data.sort((a, b) => {
+    const aValue = a[currentSortParameter] || "";
+    const bValue = b[currentSortParameter] || "";
+    return isAscending
+      ? aValue.localeCompare(bValue, undefined, { numeric: true })
+      : bValue.localeCompare(aValue, undefined, { numeric: true });
+  });
+  displayList(data, table, rows, currentPage, paginationInfo);
 }
 
 // Function to create pages
@@ -630,9 +631,9 @@ function listSavedFilters() {
       savedFiltersList.appendChild(listItem);
       const listItemText = document.createElement("span");
       listItem.appendChild(listItemText);
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "X";
-      deleteBtn.classList.add("delete-btn");
+      const deleteBtn = document.createElement("i");
+      deleteBtn.classList.add("fa-solid");
+      deleteBtn.classList.add("fa-trash-can");
       listItemText.textContent = `${timestamp.slice(10)}`;
       listItem.appendChild(deleteBtn);
 
