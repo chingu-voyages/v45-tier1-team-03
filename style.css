@@ -37,8 +37,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 40px;
   color: #fff;
+  height: 100px;
+  margin-top: 40px;
 }
 
 nav .mainMenu {
@@ -63,7 +65,7 @@ nav .mainMenu li a {
 }
 
 nav .mainMenu li a:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 nav .openMenu {
@@ -80,9 +82,15 @@ nav .mainMenu .closeMenu {
 }
 
 nav .logo {
-  margin: 6px;
+  margin: 40px 0;
   font-size: 25px;
   cursor: pointer;
+}
+.logo-title {
+  color: #971b1e;
+  text-transform: uppercase;
+  font-weight: 400;
+  text-align: center;
 }
 
 nav .dropdownSettings {
@@ -93,7 +101,7 @@ nav .dropdownSettings:hover {
   font-size: 1.6rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
   nav .mainMenu {
     height: 100vh;
     position: fixed;
@@ -153,6 +161,9 @@ header ul li a {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  /* max-width: 600px; */
+  margin-top: 100px;
 }
 
 .search-container input {
@@ -161,8 +172,13 @@ header ul li a {
   border: 1px solid #c8c8c8;
   border-radius: 15px;
   background-color: #c8c8c8;
+  text-align: center;
 }
-
+@media (max-width: 800px) {
+  .search-container input {
+    width: 300px;
+  }
+}
 .search-container input::-moz-placeholder {
   position: absolute;
   left: 35%;
@@ -190,11 +206,18 @@ header ul li a {
   border: none;
   position: absolute;
   right: 10%;
-  top: 20%;
+  top: 25%;
   color: #818181;
   background-color: transparent;
 }
-
+@media (max-width: 800px) {
+  #clearButton {
+    right: 20%;
+  }
+}
+#clearButton i {
+  font-size: 20px;
+}
 #searchButton {
   background-color: transparent;
   border: none;
@@ -218,40 +241,40 @@ main {
 .main-wrapper {
   display: flex;
   align-items: center;
-  margin-top: 50px;
+  justify-content: space-evenly;
+  margin: auto;
+  max-width: 800px;
 }
 
 .container {
   color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  width: 1031px;
+  max-width: 800px;
   margin: auto;
   gap: 40px;
   /* margin-top: 70px; */
 }
 
 .container h1 {
-  font-size: 78px;
+  font-size: 60px;
   font-weight: 700;
   text-align: center;
+  width: 100%;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 2;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
   .container h1 {
-    font-size: 50px;
-    margin: 0 10px;
-    max-width: 600px;
-    word-wrap: break-word;
+    font-size: 40px;
   }
 }
 @media (max-width: 500px) {
   .container h1 {
-    font-size: 40px;
-    max-width: 300px;
-    word-wrap: break-word;
+    font-size: 30px;
   }
 }
 .container p {
@@ -259,6 +282,10 @@ main {
   font-size: 20px;
   font-weight: 300;
   text-align: center;
+  transform: translateX(200px);
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 0.5s forwards;
+  animation-iteration-count: 2;
 }
 
 @media (max-width: 800px) {
@@ -266,14 +293,12 @@ main {
     font-size: 16px;
     margin: 0 10px;
     max-width: 500px;
-    word-wrap: break-word;
   }
 }
 @media (max-width: 500px) {
   .container p {
     font-size: 12px;
     max-width: 300px;
-    word-wrap: break-word;
   }
 }
 .container button {
@@ -281,8 +306,11 @@ main {
   font-size: 20px;
   border: 1px solid transparent;
   border-radius: 15px;
+  transition: transform 0.4s ease-in-out;
 }
-
+.container button:hover {
+  transform: scale(1.1);
+}
 @media (max-width: 800px) {
   .container button {
     padding: 8px 16px;
@@ -294,6 +322,7 @@ main {
 .arrow-left,
 .arrow-right {
   transition: transform 0.3s ease;
+  margin: 0 30px;
 }
 
 .arrow-left:hover {
@@ -338,8 +367,8 @@ main {
 
 .filters {
   display: flex;
-  justify-content: end;
-  align-items: last baseline;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
   padding-bottom: 5px;
 }
@@ -466,190 +495,6 @@ main {
   opacity: 0.8;
 }
 
-/************About section**********/
-.mission-section,
-.journey-section,
-.credit-section {
-  display: flex;
-  justify-content: space-between;
-}
-
-.about-section,
-.mission-section,
-.our-team,
-.journey-section,
-.credit-section {
-  margin-bottom: 4rem;
-}
-
-.about-section,
-.mission-section,
-.journey-section,
-.credit-section {
-  margin-left: 10px;
-}
-
-@media (max-width: 800px) {
-  .mission-section,
-  .journey-section,
-  .credit-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .mission-section,
-  .credit-section {
-    flex-direction: column;
-  }
-  .journey-section {
-    flex-direction: column-reverse;
-  }
-}
-.mission-text,
-.journey-text,
-.credit-text {
-  max-width: 600px;
-  line-height: 1.5;
-  margin-bottom: 2rem;
-  color: #fff;
-  text-align: center;
-}
-
-@media (max-width: 800px) {
-  .mission-text,
-  .journey-text,
-  .credit-text {
-    max-width: 500px;
-    font-size: 14px;
-  }
-}
-.mission-image,
-.journey-image,
-.credit-image {
-  max-width: 500px;
-  height: 300px;
-  margin: 30px;
-}
-
-.about-section {
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  /* background-color: rgba(0, 0, 0, 0.5); */
-  padding: 10px;
-}
-
-.about-text {
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-/* Main content of About Page */
-.about-page {
-  margin: 4.4rem 3rem;
-  color: #fff;
-}
-
-/* .about-page h1 {
-  font-family: 'Inter', sans-serif;
-  font-size: 60px;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 2rem;
-} */
-.sub-heading {
-  font-family: "Inter", sans-serif;
-  font-size: 40px;
-  font-weight: 600;
-  text-align: center;
-  color: #fff;
-  margin-bottom: 2rem;
-}
-
-@media (max-width: 800px) {
-  .sub-heading {
-    font-size: 30px;
-  }
-}
-.sub-heading p {
-  font-family: "Inter", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.our-team {
-  text-align: center;
-}
-
-.arrow-down {
-  font-size: 32px;
-  color: #fff;
-}
-
-.team-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 4rem 4rem;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.team-card {
-  margin: 1rem;
-  padding: 1rem 1rem;
-  background-color: #3d3d3d;
-  flex-basis: 25%;
-  text-align: center;
-  flex: 1;
-  border-radius: 50px;
-}
-
-.profile-image {
-  max-width: 200px;
-  height: auto;
-  margin-bottom: 1rem;
-  border-radius: 50%;
-  max-height: 200px;
-}
-
-@media (max-width: 800px) {
-  .team-card {
-    flex-basis: 50%;
-  }
-  .profile-image {
-    max-height: 150px;
-  }
-}
-.team-card h3 {
-  margin-bottom: 0.5rem;
-  font-family: "Inter", sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  text-align: center;
-  color: #ffffff;
-}
-
-.skill {
-  margin-bottom: 1rem;
-  color: #ffffff;
-}
-
-button {
-  padding: 8px 16px;
-  border-radius: 5px;
-  background-color: #fff;
-  cursor: pointer;
-}
-
-button a {
-  text-decoration: none;
-  color: #000;
-}
-
 /******** Advanced search ********/
 #advanceSearch {
   width: 100%;
@@ -657,43 +502,54 @@ button a {
 
 .filter-container {
   display: flex;
+  align-items: flex-start;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 100%;
   height: auto;
+  gap: 40px;
+}
+@media (max-width: 1100px) {
+  .filter-container {
+    flex-wrap: wrap;
+  }
 }
 
 .filter {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
+  margin: 0 40px;
+  width: 100%;
 }
 
 .filter-options {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: #bcbcbc;
-  align-items: center;
   font-weight: 700;
   padding: 20px;
   border-radius: 10px;
   opacity: 0.7;
-  gap: 20px;
 }
 
 .filter-select {
-  display: block;
+  text-align: left;
+  margin: 20px 0;
 }
 
 .filter-select label {
-  padding: 0px 10px;
+  /* padding: 10px 10px; */
+  /* margin-bottom: 2rem; */
 }
 
 .custom-select {
-  min-width: 250px;
+  /* min-width: 250px; */
   display: flex;
   gap: 10px;
+  margin-top: 0.5rem;
 }
 
 .sel {
@@ -705,7 +561,7 @@ button a {
   appearance: none;
   -webkit-appearance: none;
   font-size: 15px;
-  padding: 0.675em 2em 0.675em 1em;
+  padding: 0.675rem 2rem 0.675rem 1rem;
   background-color: #fff;
   border: 1px solid #caced1;
   border-radius: 10px;
@@ -762,6 +618,7 @@ button a {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 }
 
 .filter-btn button {
@@ -1512,3 +1369,17 @@ footer {
     opacity: 0;
   }
 } /*# sourceMappingURL=style.css.map */
+
+@keyframes fadeIn {
+  0% {
+    transform: translateX(200px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

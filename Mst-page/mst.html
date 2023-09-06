@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://kit.fontawesome.com/098c2dda99.js"
       crossorigin="anonymous"
@@ -11,6 +17,36 @@
     <title>Meteor Shower Team</title>
   </head>
   <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="assets/vector.svg" alt="logo" />
+          <div class="logo-title">Meteor</div>
+          <div class="logo-title">Shower</div>
+        </div>
+        <div class="openMenu"><i class="fa-solid fa-bars"></i></div>
+        <ul class="nav-links mainMenu">
+          <li><a data-id="home" class="links" href="../index.html">Home</a></li>
+          <li>
+            <a data-id="about" href="../About-page/about.html" class="links"
+              >About Page</a
+            >
+          </li>
+          <li>
+            <a data-id="about" href="#" class="links">Meteor Shower Team</a>
+          </li>
+          <li>
+            <a data-id="explore" id="exploreLink" class="links">Explore</a>
+          </li>
+          <div id="settingsIcon" class="dropdownSettings">
+            <i class="fa-solid fa-gear"></i>
+          </div>
+          <div class="closeMenu">
+            <li><i class="fa-solid fa-xmark"></i></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
     <div class="video-container">
       <video controls>
         <source src="assets/MS.mov" type="video/mp4" />
@@ -296,5 +332,6 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    <script src="../script.js"></script>
   </body>
 </html>

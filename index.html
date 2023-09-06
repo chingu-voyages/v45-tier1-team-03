@@ -42,10 +42,8 @@
       <nav>
         <div class="logo">
           <img src="assets/vector.svg" alt="logo" />
-          <div class="logo-title">
-            <p>Meteor</p>
-          </div>
-          <div class="logo-title"><p>Shower</p></div>
+          <div class="logo-title">Meteor</div>
+          <div class="logo-title">Shower</div>
         </div>
         <div class="openMenu"><i class="fa-solid fa-bars"></i></div>
         <ul class="nav-links mainMenu">
@@ -57,7 +55,7 @@
           </li>
           <li>
             <a data-id="about" href="Mst-page/mst.html" class="links"
-              >Meteor Shower App</a
+              >Meteor Shower Team</a
             >
           </li>
           <li>
@@ -75,14 +73,17 @@
 
     <main>
       <section id="home" class="main-wrapper panel">
-        <p id="error-message"></p>
-        <a href="#">
-          <img
-            class="arrow-left"
-            src="assets/arrow_left.svg"
-            alt="arrow-left"
-          />
-        </a>
+        <div>
+          <p id="error-message"></p>
+          <a href="#">
+            <img
+              class="arrow-left"
+              src="assets/arrow_left.svg"
+              alt="arrow-left"
+            />
+          </a>
+        </div>
+
         <div class="container">
           <h1>Explore the world of Meteorite Strikes</h1>
           <p>
@@ -91,191 +92,21 @@
           </p>
           <button id="exploreBtn">Start search</button>
         </div>
-        <a href="#">
-          <img
-            class="arrow-right"
-            src="assets/arrow_right.svg"
-            alt="arrow-right"
-          />
-        </a>
-      </section>
-      <section id="about" class="panel hidden about-page">
+
         <div>
-          <video controls>
-            <source src="assets/MS.mov" type="video/mp4" />
-            Your Browser does not support the video tag.
-          </video>
-        </div>
-        <div class="our-team">
-          <h2 class="sub-heading">Meet the team behind Meteor Shower</h2>
-          <ion-icon name="arrow-down-outline" class="arrow-down"></ion-icon>
-          <div class="team-card-container">
-            <div class="team-card">
-              <img src="assets/Zahra.jpg" alt="" class="profile-image" />
-              <h3>Zahra Motlagh</h3>
-              <p class="skill">Product owner</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/zahra-motlagh/"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/zizi1404" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Peter (1).jpg" alt="" class="profile-image" />
-              <h3>Petre Circeag</h3>
-              <p class="skill">Product owner</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/petre-circeag/"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/Petre4488" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Vruti.jpg" alt="" class="profile-image" />
-              <h3>Vruti Shah</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/vruti-shah-29a393130"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/vrutishah" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Mustapha.jpeg" alt="" class="profile-image" />
-              <h3>Mustapha Anthonio</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/mustapha-anthonio"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/engamo" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Ana.jpeg" alt="" class="profile-image" />
-              <h3>Ana Popovic</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a href="https://de.linkedin.com/in/franecode" target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/franeCode" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Isaac (1).jpeg" alt="" class="profile-image" />
-              <h3>Isaac Anim</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a href="https://www.linkedin.com/in/yawcoder" target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/yawcoder" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/eva.jpeg" alt="" class="profile-image" />
-              <h3>Eva Langerova</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/eva-langerova-61059027a/"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/eva-lng" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="journey-section">
-          <div>
+          <a href="#">
             <img
-              src="assets/All results section.png"
-              alt=""
-              class="journey-image"
+              class="arrow-right"
+              src="assets/arrow_right.svg"
+              alt="arrow-right"
             />
-          </div>
-          <div>
-            <h2 class="sub-heading">Join the Cosmic Journey</h2>
-            <p class="journey-text">
-              Whether you're a space enthusiast, a data explorer, or just
-              someone curious about the celestial events that have shaped our
-              world, Meteor Shower welcomes you to embark on a cosmic journey
-              like no other. The universe is vast, and every meteorite holds a
-              piece of its history. Are you ready to uncover the secrets of the
-              stars?
-            </p>
-          </div>
-        </div>
-        <div class="credit-section">
-          <div>
-            <h2 class="sub-heading">Credit</h2>
-            <p class="credit-text">
-              Meteor Shower is made possible through the open-sourced data
-              provided by NASA and its partners. We extend our gratitude to the
-              scientific community for their contributions to our understanding
-              of meteorite strikes and their implications.
-            </p>
-          </div> -->
-        <!-- <div>
-            <img
-              src="assets/Landing Page Image 3.png"
-              alt=""
-              class="credit-image"
-            />
-          </div>
-        </div> -->
-        <div>
-          <video controls>
-            <source src="assets/MS2.mov" type="video/mp4" />
-            Your Browser does not support the video tag.
-          </video>
+          </a>
         </div>
       </section>
       <section id="explore" class="result-container panel hidden">
         <div id="searchWrapper" class="search-container">
           <input id="searchInput" type="text" placeholder="Search by keyword" />
-          <button id="clearButton">x</button>
+          <button id="clearButton"><i class="fa-solid fa-xmark"></i></button>
           <button id="searchButton">
             <img src="assets/search.svg" alt="search-icon" />
           </button>
@@ -288,7 +119,9 @@
             <div class="filter">
               <div class="filter-options">
                 <div class="filter-select">
-                  <label for="compositionFilter"> Composition: </label>
+                  <label for="compositionFilter" class="label">
+                    Composition:
+                  </label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="compositionFilter">

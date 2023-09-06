@@ -9,9 +9,43 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/098c2dda99.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" type="text/css" href="about.css" />
   </head>
   <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="image/vector.svg" alt="logo" />
+          <div class="logo-title">Meteor</div>
+          <div class="logo-title">Shower</div>
+        </div>
+        <div class="openMenu"><i class="fa-solid fa-bars"></i></div>
+        <ul class="nav-links mainMenu">
+          <li><a data-id="home" class="links" href="../index.html">Home</a></li>
+          <li>
+            <a data-id="about" href="#" class="links">About Page</a>
+          </li>
+          <li>
+            <a data-id="about" href="../Mst-page/mst.html" class="links"
+              >Meteor Shower Team</a
+            >
+          </li>
+          <li>
+            <a data-id="explore" id="exploreLink" class="links">Explore</a>
+          </li>
+          <div id="settingsIcon" class="dropdownSettings">
+            <i class="fa-solid fa-gear"></i>
+          </div>
+          <div class="closeMenu">
+            <li><i class="fa-solid fa-xmark"></i></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
     <main class="container">
       <h1>About App</h1>
       <h2>Meteor Shower App: Your Ultimate Meteor Adventure</h2>
@@ -79,5 +113,14 @@
         | 2023 | Deployed on Netlify
       </div>
     </footer>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="../script.js"></script>
   </body>
 </html>

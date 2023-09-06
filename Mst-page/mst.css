@@ -11,6 +11,101 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
 }
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  color: #fff;
+}
+
+nav .mainMenu {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
+
+nav .mainMenu a {
+  display: flex;
+  list-style: none;
+}
+
+nav .mainMenu li a {
+  display: inline-block;
+  padding: 15px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  transition: transform 200ms;
+}
+
+nav .mainMenu li a:hover {
+  transform: scale(1.2);
+}
+
+nav .openMenu {
+  font-size: 2rem;
+  margin: 20px;
+  display: none;
+  cursor: pointer;
+}
+
+nav .mainMenu .closeMenu {
+  font-size: 2rem;
+  display: none;
+  cursor: pointer;
+}
+
+nav .logo {
+  margin: 6px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.logo-title {
+  color: #971b1e;
+  text-transform: uppercase;
+  font-weight: 400;
+  text-align: center;
+}
+
+nav .dropdownSettings {
+  font-size: 1.2rem;
+}
+
+nav .dropdownSettings:hover {
+  font-size: 1.6rem;
+}
+
+@media (max-width: 800px) {
+  nav .mainMenu {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    transition: top 1s ease;
+    display: none;
+  }
+  nav .mainMenu .closeMenu {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  nav .openMenu {
+    display: block;
+  }
+  nav .mainMenu li a:hover {
+    background: none;
+    font-size: 1.6rem;
+  }
+}
 .video-container {
   display: flex;
   justify-content: center;
