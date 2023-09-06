@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  background: url("image/About\ Us\ \(1\).png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.container {
+  margin: 40px auto;
+  color: rgb(8, 229, 245);
+  padding: 20px;
+  max-width: 800px;
+  /* background: #524848; */
+  border-radius: 20px;
+}
+h1 {
+  font-size: 60px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+h2 {
+  font-size: 36px;
+  margin-bottom: 1rem;
+}
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 4rem;
+}
+.button {
+  display: block;
+  text-align: center;
+}
+button {
+  background: rgb(34, 34, 139);
+  padding: 8px 16px;
+  color: #fff;
+  border-radius: 8px;
+}
+/******** Footer ********/
+footer {
+  color: rgb(8, 229, 245);
+  width: 100%;
+}
+.footer-container {
+  display: block;
+  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  gap: 20px;
+}
+.footer-container a {
+  text-decoration: none;
+  color: rgb(8, 229, 245);
+}
