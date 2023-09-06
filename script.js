@@ -213,9 +213,8 @@ function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
   let end = start + rowsPerPage;
   let paginatedItems = items.slice(start, end);
 
-  pageInfowrapper.innerText = `Showing meteorite landings ${start + 1} of ${
-    end > items.length ? items.length : end
-  } out of ${items.length}`;
+  pageInfowrapper.innerText = `Showing meteorite landings ${start + 1} of ${end > items.length ? items.length : end
+    } out of ${items.length}`;
 
   for (let i = 0; i < paginatedItems.length; i++) {
     let item = paginatedItems[i];
@@ -604,7 +603,7 @@ function calculateTotalStrikes(yearCounts) {
 // Function to save filters to local sotrage
 function saveFilter() {
   const dummyEvent = {
-    preventDefault: () => {} // define a preventDefault function to avoid errors
+    preventDefault: () => { } // define a preventDefault function to avoid errors
   };
   getAdvanceFilter(dummyEvent);
 
