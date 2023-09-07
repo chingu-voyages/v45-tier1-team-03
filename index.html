@@ -5,10 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script
-      src="https://kit.fontawesome.com/098c2dda99.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
       src="https://kit.fontawesome.com/5d7bb29ba5.js"
       crossorigin="anonymous"
     ></script>
@@ -38,38 +34,33 @@
     <title>Meteor Shower</title>
   </head>
   <body>
-    <header>
+    <header id="navbar">
+      <div class="logo">
+        <img src="assets/vector.svg" alt="logo" />
+      </div>
       <nav>
-        <div class="logo">
-          <img src="assets/vector.svg" alt="logo" />
-          <div class="logo-title">
-            <p>Meteor</p>
-          </div>
-          <div class="logo-title"><p>Shower</p></div>
-        </div>
         <div class="openMenu"><i class="fa-solid fa-bars"></i></div>
-        <ul class="nav-links mainMenu">
+      <div class="closeMenu">
+        <li><i class="fa-solid fa-xmark"></i></li>
+        </div>
+        <ul class="nav-links">
           <li><a data-id="home" class="links">Home</a></li>
-          <li>
-            <a data-id="about" href="About-page/about.html" class="links"
-              >About Page</a
-            >
-          </li>
-          <li>
-            <a data-id="about" href="Mst-page/mst.html" class="links"
-              >Meteor Shower App</a
-            >
-          </li>
+          <li><a data-id="about" class="links">About</a></li>
           <li>
             <a data-id="explore" id="exploreLink" class="links">Explore</a>
           </li>
-          <div id="settingsIcon" class="dropdownSettings">
-            <i class="fa-solid fa-gear"></i>
-          </div>
-          <div class="closeMenu">
-            <li><i class="fa-solid fa-xmark"></i></li>
-          </div>
+          \
+          <li>
+            <a data-id="aboutTeam" class="links">Team</a>
+          </li>
         </ul>
+        <button class="dropdownSettings">
+          <img
+            id="settingsIcon"
+            src="assets/settings.svg"
+            alt="settings-icon"
+          />
+        </button>
       </nav>
     </header>
 
@@ -90,6 +81,15 @@
             the universe." - Neil deGrasse Tyson
           </p>
           <button id="exploreBtn">Start search</button>
+          <!-- <div id="searchWrapper"> -->
+          <!-- <div id="searchWrapper" class="search-container">
+              <input id="searchInput" type="text" placeholder="Search by keyword" />
+              <button id="clearButton">x</button>
+              <button id="searchButton">
+                <img src="assets/search.svg" alt="search-icon" />
+              </button>
+            </div> -->
+          <!-- </div> -->
         </div>
         <a href="#">
           <img
@@ -99,148 +99,75 @@
           />
         </a>
       </section>
-      <section id="about" class="panel hidden about-page">
-        <div>
-          <video controls>
-            <source src="assets/MS.mov" type="video/mp4" />
-            Your Browser does not support the video tag.
-          </video>
+      <section id="about" class="panel hidden about-section">
+        <div class="about-text">
+          <h1>Meteor Shower App: Your Ultimate Meteor Adventure ☄️</h1>
+          <p>
+            Meteor Shower App is the optimal app for meteorite enthusiasts of
+            all levels. With its intuitive search tools and advanced exploration
+            capabilities, you can easily discover the wonders of meteorite
+            impacts from around the world.
+          </p>
         </div>
-        <div class="our-team">
-          <h2 class="sub-heading">Meet the team behind Meteor Shower</h2>
-          <ion-icon name="arrow-down-outline" class="arrow-down"></ion-icon>
-          <div class="team-card-container">
-            <div class="team-card">
-              <img src="assets/Zahra.jpg" alt="" class="profile-image" />
-              <h3>Zahra Motlagh</h3>
-              <p class="skill">Product owner</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/zahra-motlagh/"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/zizi1404" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Peter (1).jpg" alt="" class="profile-image" />
-              <h3>Petre Circeag</h3>
-              <p class="skill">Product owner</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/petre-circeag/"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/Petre4488" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Vruti.jpg" alt="" class="profile-image" />
-              <h3>Vruti Shah</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/vruti-shah-29a393130"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/vrutishah" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Mustapha.jpeg" alt="" class="profile-image" />
-              <h3>Mustapha Anthonio</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/mustapha-anthonio"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/engamo" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Ana.jpeg" alt="" class="profile-image" />
-              <h3>Ana Popovic</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a href="https://de.linkedin.com/in/franecode" target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/franeCode" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/Isaac (1).jpeg" alt="" class="profile-image" />
-              <h3>Isaac Anim</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a href="https://www.linkedin.com/in/yawcoder" target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/yawcoder" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-            <div class="team-card">
-              <img src="assets/eva.jpeg" alt="" class="profile-image" />
-              <h3>Eva Langerova</h3>
-              <p class="skill">Developer</p>
-              <div class="icons">
-                <a
-                  href="https://www.linkedin.com/in/eva-langerova-61059027a/"
-                  target="_blank"
-                  ><i class="fa-brands fa-linkedin"></i
-                ></a>
-              </div>
-              <div class="icons">
-                <a href="https://github.com/eva-lng" target="_blank"
-                  ><i class="fa-brands fa-github"></i
-                ></a>
-              </div>
-            </div>
-          </div>
+        <div class="about-text">
+          <h2>Dive into Cosmic Thrills 🚀</h2>
+          <p>
+            Immerse yourself in the enchanting universe of meteorites, where
+            curiosity knows no bounds. Explore the latest news and discoveries
+            and learn about the different types of meteorites.
+          </p>
         </div>
-        <div>
-          <video controls>
-            <source src="assets/MS2.mov" type="video/mp4" />
-            Your Browser does not support the video tag.
-          </video>
+        <div class="about-text">
+          <h2>Effortless Discovery 🔎</h2>
+          <p>
+            Unveil the wonders of meteorite impacts effortlessly using our
+            Meteor Shower App's intuitive search tool. Whether you are searching
+            by date, location, or simply your interests, you will find the
+            information you need at your fingertips.
+          </p>
+        </div>
+        <div class="about-text">
+          <h2>Advanced Exploration 🔬</h2>
+          <p>
+            Elevate your journey with Meteor Shower Page's advanced search
+            capabilities. Filter your results by name, year of impact, meteorite
+            composition, and mass range. Delve deeper into the aspects that
+            intrigue you the most.
+          </p>
+        </div>
+        <div class="about-text">
+          <h2>Beyond Search Limits 🌌</h2>
+          <p>
+            Meteor Shower Page offers more than just search functionality. Save
+            your frequently used search criteria for swift access. Visualize
+            results through interactive maps and rows. Seamlessly sort data to
+            unveil hidden patterns.
+          </p>
+        </div>
+        <div class="about-text">
+          <h2>Knowledge Empowerment ⭐</h2>
+          <p>
+            Empower yourself with instant data definitions right within the app.
+            Quickly grasp the significance of each column, eliminating the need
+            for external research.
+          </p>
+        </div>
+        <div class="about-text">
+          <h2>Discover Deeper Insights 👩‍🚀</h2>
+          <p>
+            Embark on uncharted paths and reveal extraordinary insights. From
+            total strike counts to average masses, Meteor Shower Page showcases
+            comprehensive information, ensuring you're in the know.
+          </p>
         </div>
       </section>
       <section id="explore" class="result-container panel hidden">
         <div id="searchWrapper" class="search-container">
+          <input id="searchInput" type="text" placeholder="Search by keyword" />
+          <button id="clearButton">x</button>
           <button id="searchButton">
             <img src="assets/search.svg" alt="search-icon" />
           </button>
-          <input id="searchInput" type="text" placeholder="Search by keyword" />
-          <button id="clearButton">x</button>
         </div>
         <div id="advanceSearch">
           <p class="no-results hidden">
@@ -316,16 +243,20 @@
                 <table>
                   <tr class="table-headings-container">
                     <th>
-                      name <i class="fa-solid fa-sort"></i>
+                      name <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
                     </th>
                     <th>
-                      mass <i class="fa-solid fa-sort"></i>
+                      mass <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
                     </th>
                     <th>
-                      year <i class="fa-solid fa-sort"></i>
+                      year <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
                     </th>
                     <th>
-                      composition <i class="fa-solid fa-sort"></i>
+                      recclass <i class="fa-solid fa-sort-up"></i
+                      ><i class="fa-solid fa-sort-down"></i>
                     </th>
                   </tr>
                   <tbody id="detailDataDisplay"></tbody>
@@ -368,28 +299,275 @@
           </div>
         </div>
       </section>
+      <section id="aboutTeam" class="panel team-section about-section hidden">
+        <h1>Meteor Shower Team</h1>
+        <div class="video-container">
+          <video controls>
+            <source src="assets/animation.mov" type="video/mp4" />
+            Your Browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="about-text">
+          <h2>Project Overview</h2>
+          <h3>Team Formation</h3>
+          <p>
+            The Meteor Shower Team initiated this project within the Chingu
+            community with the goal of gaining valuable teamwork experience and
+            enhancing our skill set. Our team comprised 5 Developers and 2
+            Product Owners.
+          </p>
+          <h3>Project Duration</h3>
+          <p>
+            The project spanned 6 weeks, aligning with Chingu's guidelines and
+            Agile methodology.
+          </p>
+        </div>
+
+        <div class="about-text">
+          <h2>Initial Team Setup</h2>
+          <h3>Introduction and Ideation</h3>
+          <p>
+            Initially, we introduced ourselves as team members, as Chingu admins
+            had arranged the team composition. Each team member contributed to
+            brainstorming project ideas and added optional suggestions.
+          </p>
+        </div>
+        <div class="about-text">
+          <h2>Project Planning and Organization</h2>
+
+          <h3>Project Complexity</h3>
+          <p>
+            While our project wasn't overly complex, we aimed for excellence by
+            employing best practices and integrating optional features. The
+            success of our project can be attributed to the talent and constant
+            dedication of our team members.
+          </p>
+        </div>
+        <div class="about-text">
+          <h3>Communication</h3>
+          <p>
+            We established a robust communication framework, conducting at least
+            one weekly video Stand-Up meeting and daily Stand-Up discussions via
+            chat. These meetings served as opportunities to discuss ongoing
+            tasks, issues, and most notably, generate new ideas. Frequent
+            Discovery-Design Cycles allowed us to continuously improve our
+            project.
+          </p>
+        </div>
+        <div class="about-text">
+          <h2>Agile-Based Development</h2>
+          <h3>Sprint Meetings</h3>
+          <p>
+            We scheduled two video-based meetings each week during the sprints.
+            The first was the weekly Stand-Up, which included discussions of new
+            ideas. The second was the Sprint Review and Retrospective, held at
+            the end of each sprint. During these meetings, we planned for the
+            next sprint and reviewed the accomplishments and lessons learned
+            from the previous sprint.
+          </p>
+        </div>
+        <div class="about-text">
+        <h3>Second Sprint Milestone</h3>
+        <p>
+          In the second sprint, we solidified our project vision, identified
+          epics, user stories, tasks, and acceptance criteria. Additionally, we
+          designed the wireframes, selected the app's name, and created a logo.
+          To manage our project effectively, we established Agile Boards in
+          Trello and GitHub Issues.
+        </p>
+        </div>
+        <div class="about-text">
+        <h3>Responsibilities Shift</h3>
+        <p>
+          Throughout the project, we adapted to the evolving needs. Initially,
+          Product Owners took on more responsibilities during sprints 1, 2, and
+          6, while developers assumed more significant roles in sprints 3, 4,
+          and 5. This flexibility allowed us to maintain our agile workflow
+          effectively.
+        </p>
+      </div>
+      <div class="about-text">
+        <h2>Development and Deployment</h2>
+
+        <h3>Sprints 3, 4, 5</h3>
+        <p>
+          During these sprints, our developers dedicated substantial effort to
+          implementing all planned features. We made the strategic decision to
+          deploy our Meteor Shower App during the middle of sprint 5, enabling
+          us to continue refining the code and adding optional features
+          post-deployment.
+        </p>
+        <h3>Deployment Success</h3>
+        <p>
+          The deployment phase included tasks related to GitHub, and it
+          culminated in the successful launch of our Meteor Shower App.
+        </p>
+      </div>
+      
+      <div class="about-text">
+        <h2>Conclusion</h2>
+
+        <p>
+          In summary, our Meteor Shower Team embarked on a rewarding journey
+          within the Chingu community, adhering to a 6-week sprint-based Agile
+          methodology. Our commitment to effective communication, adaptability,
+          and constant innovation allowed us to deliver a well-crafted project
+          that aligns with our collective goals and aspirations.
+        </p>
+        </div>
+        <div class="link-container">
+          <div class="link">
+            <a
+              href="https://www.figma.com/file/FztzgJW43B03diRCikR8aB/Voyage?type=design&node-id=0-1&mode=design&t=oiIUSWgzDwdiHyo9-0"
+              ><i class="fa-brands fa-figma"></i
+            ></a>
+          </div>
+          <div class="link">
+            <a href="https://trello.com/b/SAvvNjHT/fireball"
+              ><i class="fa-brands fa-trello"></i
+            ></a>
+          </div>
+          <div class="link">
+            <a href="https://github.com/chingu-voyages/v45-tier1-team-03#readme"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+          </div>
+          <!-- <div class="link">
+            <a
+              href="https://github.com/orgs/chingu-voyages/projects/153/views/1"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+          </div> -->
+        </div>
+        <div class="our-team">
+          <h2 class="sub-heading">Meet the team behind Meteor Shower</h2>
+          <ion-icon name="arrow-down-outline" class="arrow-down"></ion-icon>
+          <div class="team-card-container">
+            <div class="team-card">
+              <img src="assets/zahra.jpeg" alt="" class="profile-image" />
+              <h3>Zahra Motlagh</h3>
+              <p>Product owner</p>
+              <div class="icon-container">
+                  <a
+                    href="https://www.linkedin.com/in/zahra-motlagh/"
+                    target="_blank"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/zizi1404" target="_blank"
+                    ><i class="fa-brands fa-github"></i
+                  ></a>
+              </div>
+            </div>
+            <div class="team-card">
+              <img src="assets/peter.jpeg" alt="" class="profile-image" />
+              <h3>Petre Circeag</h3>
+              <p>Product owner</p>
+              <div class="icon-container">
+                  <a
+                    href="https://www.linkedin.com/in/petre-circeag/"
+                    target="_blank"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/Petre4488" target="_blank"
+                    ><i class="fa-brands fa-github"></i
+                  ></a>
+              </div>
+            </div>
+            <div class="team-card">
+              <img src="assets/vruti.jpeg" alt="" class="profile-image" />
+              <h3>Vruti Shah</h3>
+              <p class="skill">Developer</p>
+              <div class="icon-container">
+                <div class="icons">
+                  <a
+                    href="https://www.linkedin.com/in/vruti-shah-29a393130"
+                    target="_blank"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                </div>
+                <div class="icons">
+                  <a href="https://github.com/vrutishah" target="_blank"
+                    ><i class="fa-brands fa-github"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <div class="team-card">
+              <img src="assets/mustapha.jpeg" alt="" class="profile-image" />
+              <h3>Mustapha Anthonio</h3>
+              <p>Developer</p>
+              <div class="icon-container">
+                  <a
+                    href="https://www.linkedin.com/in/mustapha-anthonio"
+                    target="_blank"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/engamo" target="_blank"
+                    ><i class="fa-brands fa-github"></i
+                  ></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-card-container">
+            <div class="team-card">
+              <img src="assets/ana.jpeg" alt="" class="profile-image" />
+              <h3>Ana Popovic</h3>
+              <p>Developer</p>
+              <div class="icon-container">
+                  <a href="https://de.linkedin.com/in/franecode" target="_blank"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/franeCode" target="_blank"
+                    ><i class="fa-brands fa-github"></i
+                  ></a>
+              </div>
+            </div>
+            <div class="team-card">
+              <img src="assets/isaac.jpeg" alt=""/>
+              <h3>Isaac Anim</h3>
+              <p>Developer</p>
+              <div class="icon-container">
+                  <a href="https://www.linkedin.com/in/yawcoder" target="_blank"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/yawcoder" target="_blank"
+                    ><i class="fa-brands fa-github"></i
+                  ></a>
+              </div>
+            </div>
+            <div class="team-card">
+              <img src="assets/eva.jpeg" alt="" />
+              <h3>Eva Langerova</h3>
+              <p>Developer</p>
+              <div class="icon-container">
+                  <a
+                    href="https://www.linkedin.com/in/eva-langerova-61059027a/"
+                    target="_blank"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/eva-lng" target="_blank"
+                    ><i class="fa-brands fa-github"></i
+                  ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
     </main>
     <footer>
-      <div class="footer-container">
-        <a
-          href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master"
-          target="blank"
-        >
-          Chingu Voyage
-        </a>
-        | 2023 | Deployed on Netlify
-      </div>
+      <!-- <div class="footer-container"> -->
+      <a
+        href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master"
+        target="blank"
+      >
+        Chingu Voyage
+      </a>
+      | 2023 | Deployed on Netlify
+      <!-- </div> -->
     </footer>
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="app.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

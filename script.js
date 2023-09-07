@@ -1,14 +1,11 @@
 // DOM element references
-const mainMenu = document.querySelector('.mainMenu');
-const closeMenu = document.querySelector('.closeMenu');
-const openMenu = document.querySelector('.openMenu');
 const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
 const explore = document.getElementById("explore");
 const exploreLink = document.getElementById("exploreLink");
 const searchInput = document.getElementById("searchInput");
 const searchWrapper = document.getElementById("searchWrapper");
-// const searchButton = document.getElementById("searchButton");
+const searchButton = document.getElementById("searchButton");
 const exploreBtn = document.getElementById("exploreBtn");
 const clearButton = document.getElementById("clearButton");
 const searchIcon = document.getElementById("searchIcon");
@@ -17,7 +14,8 @@ const table = document.getElementById("detailDataDisplay");
 const pageEl = document.getElementById("pagination");
 const nextPrevContainer = document.getElementById("nextPrevContainer");
 const paginationInfo = document.getElementById("paginationInfo");
-const sortArrow = document.querySelectorAll(".fa-sort");
+const sortArrowUp = document.querySelectorAll(".fa-sort-up");
+const sortArrowDown = document.querySelectorAll(".fa-sort-down");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
 const mainWrapper = document.querySelector(".main-wrapper");
@@ -37,30 +35,16 @@ const saveButton = document.getElementById("saveButton");
 const clearPrevBtn = document.getElementById("clearPrevBtn");
 const resetButton = document.getElementById("resetButton");
 
-// Nav
-openMenu.addEventListener('click', show);
-closeMenu.addEventListener('click', close);
-
-function show() {
-  mainMenu.style.display = 'flex';
-  mainMenu.style.top = '0';
-}
-function close() {
-  mainMenu.style.top = '-100%';
-}
-
 // Data
 let meteorData = []; // Store fetched meteor data
 let filteredResults = []; // Store filtered data
 let filteredAdvanceResults = []; // Store filtered advance results
 let currentImageIndex = 0; // Current image index
 let currentPage = 1; // First page of detail display data
-let rows = 20; // Number of rows per page
+let rows = 100; // Number of rows per page
 let searchText; // Store input search terms
 let selectedYearRange; // Store year range data
 let markerCluster; // Store marker cluster
-let currentSortParameter = "name"; // Default sorting parameter
-let isAscending = true; // Default sorting order
 
 // Constants
 const imagePaths = [
@@ -98,7 +82,7 @@ function initializePage() {
 
   exploreBtn.addEventListener("click", handleStart);
   exploreLink.addEventListener("click", displayResults);
-  // searchButton.addEventListener("click", displayResults);
+  searchButton.addEventListener("click", displayResults);
   tableBtn.addEventListener("click", switchToTable);
   mapBtn.addEventListener("click", switchToMap);
   searchInput.addEventListener("keyup", displayResults);
@@ -109,6 +93,7 @@ function initializePage() {
   clearPrevBtn.addEventListener("click", clearSavedSearches);
   resetButton.addEventListener("click", resetResults);
   clearButton.addEventListener("click", clearSearch);
+  resetButton.addEventListener("click", resetResults);
 }
 
 function handleLinks() {
@@ -159,6 +144,37 @@ function getInputValue(e) {
   }
 }
 
+// document.addEventListener("DOMContentLoaded", function() {
+//   const navbar = document.getElementById("navbar");
+
+//   if (navbar) {
+//     function updateNavbarPosition() {
+//       const scrollY = window.scrollY;
+
+//       if (scrollY > 0) {
+//         navbar.classList.add("fixed-navbar");
+//       } else {
+//         navbar.classList.remove("fixed-navbar");
+//       }
+//     }
+
+//     window.addEventListener("scroll", updateNavbarPosition);
+//   }
+// });
+// const openMenu = document.querySelector('.openMenu');
+// const closeMenu = document.querySelector('.closeMenu');
+// const navlinks = document.querySelector('.nav-links');
+// openMenu.addEventListener('click', show);
+// closeMenu.addEventListener('click', close);
+
+// function show() {
+//   navlinks.style.display = 'flex';
+//   navlinks.style.top = '0';
+// }
+// function close() {
+//   navlinks.style.top = '-100%';
+// }
+
 function displayResults() {
   getSearch();
   getResults();
@@ -204,6 +220,7 @@ function getResults() {
 
 // Function to display first page items in a table
 function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
+  sortData();
 
   wrapper.innerHTML = "";
   page--;
@@ -229,36 +246,34 @@ function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
   }
 }
 
-// Adding event listeners to all sort icons
-Array.from(sortArrow).forEach((el, i) => {
-  el.addEventListener("click", () => {
+function sortData() {
+  // Sort table results in ascending order
+  Array.from(sortArrowUp).forEach((el, i) => {
     const parameters = ["name", "mass", "year", "recclass"];
-    const clickedParameter = parameters[i];
-
-    if (clickedParameter === currentSortParameter) {
-      isAscending = !isAscending; // Toggle sorting order
-    } else {
-      currentSortParameter = clickedParameter;
-      isAscending = true; // Reset sorting order
-    }
-    if (searchText) {
-      sortData(filteredResults);
-    } else {
-      sortData(meteorData)
-    }
+    el.addEventListener("click", () => {
+      const parameter = parameters[i];
+      const sortedResults = filteredResults.slice().sort((a, b) => {
+        const aValue = a[parameter] || "";
+        const bValue = b[parameter] || "";
+        return aValue.localeCompare(bValue, undefined, { numeric: true });
+      });
+      displayList(sortedResults, table, rows, currentPage, paginationInfo);
+    });
   });
-});
 
-// Function to sort results in ascending/descending order
-function sortData(data) {
-  data = data.sort((a, b) => {
-    const aValue = a[currentSortParameter] || "";
-    const bValue = b[currentSortParameter] || "";
-    return isAscending
-      ? aValue.localeCompare(bValue, undefined, { numeric: true })
-      : bValue.localeCompare(aValue, undefined, { numeric: true });
+  // Sort table results in descending order
+  Array.from(sortArrowDown).forEach((el, i) => {
+    const parameters = ["name", "mass", "year", "recclass"];
+    el.addEventListener("click", () => {
+      const parameter = parameters[i];
+      const sortedResults = filteredResults.slice().sort((a, b) => {
+        const aValue = a[parameter] || "";
+        const bValue = b[parameter] || "";
+        return bValue.localeCompare(aValue, undefined, { numeric: true });
+      });
+      displayList(sortedResults, table, rows, currentPage, paginationInfo);
+    });
   });
-  displayList(data, table, rows, currentPage, paginationInfo);
 }
 
 // Function to create pages
@@ -330,11 +345,13 @@ function changeBackgroundImage() {
   const newBackgroundImage = `url('${imagePaths[currentImageIndex]}')`;
   document.body.style.transition =
     "background-image 0.5s ease, opacity 0.5s ease";
+  document.body.style.backgroundAttachment = "fixed";
   document.body.style.backgroundImage = newBackgroundImage;
   document.body.style.opacity = 0.8;
   setTimeout(() => {
+    document.main.style.height = "100vh";
     document.body.style.transition = "none";
-    document.body.style.opacity = 1;
+    document.body.position = "static";
   }, 500);
 }
 
@@ -604,15 +621,9 @@ function calculateTotalStrikes(yearCounts) {
 
 // Function to save filters to local sotrage
 function saveFilter() {
-  const dummyEvent = {
-    preventDefault: () => {} // define a preventDefault function to avoid errors
-  };
-  getAdvanceFilter(dummyEvent);
-
   const newFilterItem = JSON.stringify(filteredAdvanceResults);
   const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
-  const filterID = "filterID: " + timestamp
-  localStorage.setItem(filterID, newFilterItem);
+  localStorage.setItem(timestamp, newFilterItem);
   listSavedFilters();
 }
 
@@ -622,38 +633,36 @@ function listSavedFilters() {
   savedFiltersList.innerHTML = "";
 
   for (let i = 0; i < localStorage.length; i++) {
-    const timestamp = localStorage.key(i)
-    if (timestamp.length === 31 && timestamp.indexOf(" / ") === 20 && timestamp.split(":").length === 4) {
-      const filterDataJSON = localStorage.getItem(timestamp);
-      const filterData = JSON.parse(filterDataJSON);
+    const timestamp = localStorage.key(i);
+    const filterDataJSON = localStorage.getItem(timestamp);
+    const filterData = JSON.parse(filterDataJSON);
 
-      const listItem = document.createElement("li");
-      savedFiltersList.appendChild(listItem);
-      const listItemText = document.createElement("span");
-      listItem.appendChild(listItemText);
-      const deleteBtn = document.createElement("i");
-      deleteBtn.classList.add("fa-solid");
-      deleteBtn.classList.add("fa-trash-can");
-      listItemText.textContent = `${timestamp.slice(10)}`;
-      listItem.appendChild(deleteBtn);
+    const listItem = document.createElement("li");
+    savedFiltersList.appendChild(listItem);
+    const listItemText = document.createElement("span");
+    listItem.appendChild(listItemText);
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    deleteBtn.classList.add("delete-btn");
+    listItemText.textContent = `${timestamp}`;
+    listItem.appendChild(deleteBtn);
 
-      deleteBtn.addEventListener("click", () => {
-        localStorage.removeItem(timestamp);
-        listSavedFilters();
-      })
+    deleteBtn.addEventListener("click", () => {
+      localStorage.removeItem(timestamp);
+      listSavedFilters();
+    });
 
-      listItemText.addEventListener('click', () => {
-        checkResults(filterData);
-        addMarkersToMap(filterData);
-      })
-    }
+    listItemText.addEventListener("click", () => {
+      // console.log(filterData);
+      checkResults(filterData);
+      addMarkersToMap(filterData);
+    });
   }
 }
 
-// Function to clear all saved filters
+// Function to clear local storage
 function clearSavedSearches() {
-  const keysToRemove = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20);
-  keysToRemove.forEach(key => localStorage.removeItem(key));
+  localStorage.clear();
   listSavedFilters();
 }
 
