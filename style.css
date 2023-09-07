@@ -92,7 +92,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 1031px;
+  width: 70%;
   margin: auto;
   gap: 40px;
 }
@@ -671,8 +671,12 @@ footer a {
   display: none;
   cursor: pointer;
 }
+@media only screen and (min-width: 992px) {
 
+}
 @media (max-width: 850px) {
+
+  /**** Navbar ****/
   nav ul {
     height: 100vh;
     position: fixed;
@@ -686,7 +690,7 @@ footer a {
     background-color: transparent;
     /* filter: blur(5px); */
     transition: top 1s ease;
-    display: none;
+    display: none; 
   }
   .closeMenu {
     display: block;
@@ -700,6 +704,76 @@ footer a {
   nav ul li a:hover {
     background: none;
     font-size: 1.6rem;
+  }
+
+  /**** Landing page ****/
+  .main-wrapper {
+
+  }
+  .container h1 {
+    font-size: 40px;
+  }
+  .container p {
+    font-size: 17px;
+  }
+  .container button {
+    padding: 15px 60px;
+    font-size: 16px;
+  }
+  .arrow-left,
+  .arrow-right {
+    width: 20px;
+  }
+
+  /**** About page ****/
+  .about-section {
+    width: 80%;
+  }
+  .about-text h1 {
+    font-size: 30px;
+  }
+  .about-text h2 {
+    font-size: 25px;
+  }
+  .about-text p {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main-wrapper {
+    margin-top: 0%;
+    align-items: end;
+    width: 90%;
+  }
+  .container {
+    width: 100%;
+  }
+  .container h1 {
+    font-size: 30px;
+  }
+  .container p {
+    font-size: 16px;
+  }
+  .container button {
+    padding: 13px 40px;
+  }
+  .arrow-left,
+  .arrow-right {
+    width: 15px;
+  }
+  .about-section {
+    width: 90%;
+    text-align: center;
+  }
+  .about-text h1 {
+    font-size: 25px;
+  }
+  .about-text h2 {
+    font-size: 20px;
+  }
+  .about-text p {
+    font-size: 16px;
   }
 }
 /******** Misc ********/
