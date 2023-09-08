@@ -245,9 +245,6 @@
                       </select>
                     </div>
                   </div>
-                </div>
-
-                <div class="filter-select">
                   <label for="compositionFilter"> Composition: </label>
                   <div class="custom-select">
                     <div class="sel">
@@ -258,9 +255,20 @@
                   </div>
                 </div>
 
+                <!-- <div class="filter-select">
+                  <label for="compositionFilter"> Composition: </label>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="compositionFilter">
+                        <option value="">No Select</option>
+                      </select>
+                    </div>
+                  </div>
+                </div> -->
+
                 <div class="filter-select">
                   <label for="massFilter"> Mass:</label>
-                  <div class="custom-select">
+                  <!-- <div class="custom-select"> -->
                     <div class="sel">
                       <select id="massMinFilter">
                         <option value="">Min</option>
@@ -271,12 +279,12 @@
                         <option value="">Max</option>
                       </select>
                     </div>
-                  </div>
+                  <!-- </div> -->
                 </div>
 
                 <div class="filter-select">
                   <label for="yearFilter"> Year:</label>
-                  <div class="custom-select">
+                  <!-- <div class="custom-select"> -->
                     <div class="sel">
                       <select id="yearMinFilter">
                         <option value="" default>Min</option>
@@ -287,7 +295,7 @@
                         <option value="">Max</option>
                       </select>
                     </div>
-                  </div>
+                  <!-- </div> -->
                 </div>
 
                 <div class="filter-select">
@@ -314,49 +322,19 @@
                   id="map"
                   style="height: 573px; width: 100%; border-radius: 10px"
                 ></div>
-                <button id="switchButton">Table</button>
+                <butto class="hidden" id="switchButton">Table</button>
               </div>
               <div id="table" class="table-container hidden">
                 <div class="table-header">
                   <h2>meteorite landings</h2>
-                  <div class="filters">
+                  <div class="filters hidden">
                     <button id="map-btn">Map</button>
-                    <!-- <button>Export PDF</button> -->
                   </div>
                 </div>
-                <!-- <table>
-                  <tr class="table-headings-container">
-                    <th>
-                      name <i class="fa-solid fa-sort-up"></i
-                      ><i class="fa-solid fa-sort-down"></i>
-                    </th>
-                    <th>
-                      mass <i class="fa-solid fa-sort-up"></i
-                      ><i class="fa-solid fa-sort-down"></i>
-                    </th>
-                    <th>
-                      year <i class="fa-solid fa-sort-up"></i
-                      ><i class="fa-solid fa-sort-down"></i>
-                    </th>
-                    <th>
-                      recclass <i class="fa-solid fa-sort-up"></i
-                      ><i class="fa-solid fa-sort-down"></i>
-                    </th>
-                  </tr>
-                  <tbody id="detailDataDisplay"></tbody>
-                </table>
-                <div class="page-info-wrapper">
-                  <span
-                    id="nextPrevContainer"
-                    class="next-prev-container"
-                  ></span>
-                  <span id="paginationInfo" class="pagination-info"></span>
-                </div>
-                <div id="pagination" class="pagination"></div> -->
               </div>
             </div>
 
-            <div class="filter">
+            <div class="filter hidden">
               <div class="show-search">
                 <div class="prev-results">
                   <h3>Previous searches</h3>

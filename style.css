@@ -190,6 +190,7 @@ main {
 .result-display {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
   padding: 10px;
 }
@@ -332,50 +333,56 @@ main {
 }
 
 #advanceSearch {
-  width: 100%;
+  width: 100vh;
 }
 
 .filter-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
-  height: auto;
 }
 .filter {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
 }
 .filter-options {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: #bcbcbc;
   align-items: center;
   font-weight: 700;
   padding: 20px;
   border-radius: 10px;
   opacity: 0.7;
+  gap: 30px;
 }
 .dropdown {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .filter-select {
   display: block;
+  padding: 5px;
 }
 .filter-select label {
   padding: 0px 10px;
 }
 .custom-select {
-  min-width: 300px;
-  display: flex;
+  min-width: 100px;
+  /* display: flex; */
   gap: 10px;
   margin-top: 5px;
 }
 .sel {
   position: relative;
+  margin-bottom: 5px;
 }
 .sel select {
   appearance: none;
@@ -389,13 +396,13 @@ main {
   outline: none;
   cursor: pointer;
 }
-.sel::after {
+/* .sel::after {
   position: absolute;
   content: "\26db";
   top: 55%;
   right: 10px;
   transform: translateY(-50%);
-}
+} */
 
 .show-search {
   width: 100%;
@@ -466,12 +473,13 @@ main {
 #map {
   width: 100%;
   border-radius: 10px;
+  height: 400px;
 }
 .map {
   width: 100%;
   position: relative;
 }
-.map button {
+/* .map button {
   position: absolute;
   background-color: #ffffff;
   border-radius: 5px;
@@ -480,7 +488,7 @@ main {
   top: 2%;
   right: 2%;
   z-index: 9999;
-}
+} */
 
 /******** Chart ********/
 .chart-results {
@@ -707,8 +715,11 @@ footer a {
 }
 @media (max-width: 1024px) and (min-width: 850px) {
   /**** Explore page ****/
-  .result-container {
-    /* gap: 10px; */
+  .result-container .table-container {
+    width: 80%;
+  }
+  .result-display {
+    /* width: 100%; */
   }
   .filter-container {
     /* flex-wrap: wrap; */
@@ -753,7 +764,7 @@ footer a {
   font-size: 16px;
 }
 .calculate {
-  width: 80%;
+  width: 100%;
 }
 .calculate p {
   font-size: 14px;
