@@ -40,8 +40,8 @@
       </div>
       <nav>
         <div class="openMenu"><i class="fa-solid fa-bars"></i></div>
-      <div class="closeMenu">
-        <li><i class="fa-solid fa-xmark"></i></li>
+        <div class="closeMenu">
+          <li><i class="fa-solid fa-xmark"></i></li>
         </div>
         <ul class="nav-links">
           <li><a data-id="home" class="links">Home</a></li>
@@ -67,102 +67,97 @@
     <main>
       <section id="home" class="main-wrapper panel">
         <div id="homeSection" class="home">
-        <p id="error-message"></p>
-        <a href="#">
-          <img
-            class="arrow-left"
-            src="assets/arrow_left.svg"
-            alt="arrow-left"
-          />
-        </a>
-        <div class="container">
-          <h1>Explore the world of Meteorite Strikes</h1>
-          <p>
-            "Meteorites remind us of the dynamic beauty and constant change in
-            the universe." - Neil deGrasse Tyson
-          </p>
-          <button id="exploreBtn">Start search</button>
-          <!-- <div id="searchWrapper"> -->
-          <!-- <div id="searchWrapper" class="search-container">
+          <p id="error-message"></p>
+          <a href="#">
+            <img
+              class="arrow-left"
+              src="assets/arrow_left.svg"
+              alt="arrow-left"
+            />
+          </a>
+          <div class="container">
+            <h1>Explore the world of Meteorite Strikes</h1>
+            <p>
+              "Meteorites remind us of the dynamic beauty and constant change in
+              the universe." - Neil deGrasse Tyson
+            </p>
+            <button id="exploreBtn">Start search</button>
+            <!-- <div id="searchWrapper"> -->
+            <!-- <div id="searchWrapper" class="search-container">
               <input id="searchInput" type="text" placeholder="Search by keyword" />
               <button id="clearButton">x</button>
               <button id="searchButton">
                 <img src="assets/search.svg" alt="search-icon" />
               </button>
             </div> -->
-          <!-- </div> -->
+            <!-- </div> -->
+          </div>
+          <a href="#">
+            <img
+              class="arrow-right"
+              src="assets/arrow_right.svg"
+              alt="arrow-right"
+            />
+          </a>
         </div>
-        <a href="#">
-          <img
-            class="arrow-right"
-            src="assets/arrow_right.svg"
-            alt="arrow-right"
-          />
-        </a>
-      </div>
         <div id="resultSection" class="result-container hidden">
           <div id="searchWrapper" class="search-container">
-            <input id="searchInput" type="text" placeholder="Search by keyword" />
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Search by keyword"
+            />
             <button id="clearButton">x</button>
             <button id="searchButton">
               <img src="assets/search.svg" alt="search-icon" />
             </button>
           </div>
           <div class="result-display">
-          <div class="table-container">
-            <div class="table-header">
-              <h2>meteorite landings</h2>
-              <div class="filters">
-                <button id="filterBtn">Add filters</button>
+            <div class="table-container">
+              <div class="table-header">
+                <h2>meteorite landings</h2>
+                <div class="filters">
+                  <button id="filterBtn">Add filters</button>
+                </div>
               </div>
-            </div>
-            <table>
-              <tr class="table-headings-container">
-                <th>
-                  name <i class="fa-solid fa-sort"></i>
-                </th>
-                <th>
-                  mass <i class="fa-solid fa-sort"></i>
-                </th>
-                <th>
-                  year <i class="fa-solid fa-sort"></i>
-                </th>
-                <th>
-                  composition <i class="fa-solid fa-sort"></i>
-                </th>
-              </tr>
-              <tbody id="detailDataDisplay"></tbody>
-            </table>
-            <div class="page-info-wrapper">
-              <span id="nextPrevContainer" class="next-prev-container"></span>
-              <span id="paginationInfo" class="pagination-info"></span>
-            </div>
-            <div id="pagination" class="pagination"></div>
-          
-        </div>
-          <div id="charts">
-            <div class="calculate">
-              <p>
-                Total strikes:
-                <span style="font-size: 25px" id="totalStrikes"></span>
-              </p>
-              <p>
-                Average strikes per year:
-                <span style="font-size: 25px" id="averageStrikes"></span>
-              </p>
-            </div>
-            <div class="histogram">
-              <div class="chart" id="yearHistogramContainer">
-                <canvas id="yearHistogram"></canvas>
+              <table>
+                <tr class="table-headings-container">
+                  <th>name <i class="fa-solid fa-sort"></i></th>
+                  <th>mass <i class="fa-solid fa-sort"></i></th>
+                  <th>year <i class="fa-solid fa-sort"></i></th>
+                  <th>composition <i class="fa-solid fa-sort"></i></th>
+                </tr>
+                <tbody id="detailDataDisplay"></tbody>
+              </table>
+              <div class="page-info-wrapper">
+                <span id="nextPrevContainer" class="next-prev-container"></span>
+                <span id="paginationInfo" class="pagination-info"></span>
               </div>
-              <div class="chart hidden" id="compositionHistogramContainer">
-                <canvas id="compositionHistogram"></canvas>
-              </div>  
-              <button id="switchBtn">Switch charts</button>
+              <div id="pagination" class="pagination"></div>
+            </div>
+            <div id="charts">
+              <div class="calculate">
+                <p>
+                  Total strikes:
+                  <span style="font-size: 25px" id="totalStrikes"></span>
+                </p>
+                <p>
+                  Average strikes per year:
+                  <span style="font-size: 25px" id="averageStrikes"></span>
+                </p>
+              </div>
+              <div class="histogram">
+                <div class="chart" id="yearHistogramContainer">
+                  <canvas id="yearHistogram"></canvas>
+                </div>
+                <div class="chart hidden" id="compositionHistogramContainer">
+                  <canvas id="compositionHistogram"></canvas>
+                </div>
+                <button id="switchBtn">Switch charts</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </section>
       <section id="about" class="panel hidden about-section">
         <div class="about-text">
@@ -235,27 +230,26 @@
             <div class="filter">
               <div class="filter-options">
                 <div class="dropdown">
-
-                <div class="filter-select">
-                  <label for="compositionFilter"> Name: </label>
-                  <div class="custom-select">
-                    <div class="sel">
-                      <select id="nameFilter">
-                        <option value="">No Select</option>
-                      </select>
+                  <div class="filter-select">
+                    <label for="compositionFilter"> Name: </label>
+                    <div class="custom-select">
+                      <div class="sel">
+                        <select id="nameFilter">
+                          <option value="">No Select</option>
+                        </select>
+                      </div>
+                    </div>
+                    <label for="compositionFilter"> Composition: </label>
+                    <div class="custom-select">
+                      <div class="sel">
+                        <select id="compositionFilter">
+                          <option value="">No Select</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
-                  <label for="compositionFilter"> Composition: </label>
-                  <div class="custom-select">
-                    <div class="sel">
-                      <select id="compositionFilter">
-                        <option value="">No Select</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
 
-                <!-- <div class="filter-select">
+                  <!-- <div class="filter-select">
                   <label for="compositionFilter"> Composition: </label>
                   <div class="custom-select">
                     <div class="sel">
@@ -266,9 +260,9 @@
                   </div>
                 </div> -->
 
-                <div class="filter-select">
-                  <label for="massFilter"> Mass:</label>
-                  <!-- <div class="custom-select"> -->
+                  <div class="filter-select">
+                    <label for="massFilter"> Mass:</label>
+                    <!-- <div class="custom-select"> -->
                     <div class="sel">
                       <select id="massMinFilter">
                         <option value="">Min</option>
@@ -279,12 +273,12 @@
                         <option value="">Max</option>
                       </select>
                     </div>
-                  <!-- </div> -->
-                </div>
+                    <!-- </div> -->
+                  </div>
 
-                <div class="filter-select">
-                  <label for="yearFilter"> Year:</label>
-                  <!-- <div class="custom-select"> -->
+                  <div class="filter-select">
+                    <label for="yearFilter"> Year:</label>
+                    <!-- <div class="custom-select"> -->
                     <div class="sel">
                       <select id="yearMinFilter">
                         <option value="" default>Min</option>
@@ -295,34 +289,33 @@
                         <option value="">Max</option>
                       </select>
                     </div>
-                  <!-- </div> -->
-                </div>
+                    <!-- </div> -->
+                  </div>
 
-                <div class="filter-select">
-                  <label for="compositionFilter">Saved search: </label>
-                  <div class="custom-select">
-                    <div class="sel">
-                      <select id="savedSearchFilter">
-                        <option value="">No Select</option>
-                      </select>
+                  <div class="filter-select">
+                    <label for="compositionFilter">Saved search: </label>
+                    <div class="custom-select">
+                      <div class="sel">
+                        <select id="savedSearchFilter">
+                          <option value="">No Select</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-              </div>
                 <div class="filter-btn">
                   <button id="filterButton">Apply</button>
                   <button id="saveButton">Save</button>
                   <button id="resetButton">Reset</button>
+                </div>
               </div>
-            </div>
 
               <div id="mapWrapper" class="map">
                 <div
                   id="map"
                   style="height: 573px; width: 100%; border-radius: 10px"
                 ></div>
-                <butto class="hidden" id="switchButton">Table</button>
+                <button class="hidden" id="switchButton">Table</button>
               </div>
               <div id="table" class="table-container hidden">
                 <div class="table-header">
@@ -430,53 +423,54 @@
           </p>
         </div>
         <div class="about-text">
-        <h3>Second Sprint Milestone</h3>
-        <p>
-          In the second sprint, we solidified our project vision, identified
-          epics, user stories, tasks, and acceptance criteria. Additionally, we
-          designed the wireframes, selected the app's name, and created a logo.
-          To manage our project effectively, we established Agile Boards in
-          Trello and GitHub Issues.
-        </p>
+          <h3>Second Sprint Milestone</h3>
+          <p>
+            In the second sprint, we solidified our project vision, identified
+            epics, user stories, tasks, and acceptance criteria. Additionally,
+            we designed the wireframes, selected the app's name, and created a
+            logo. To manage our project effectively, we established Agile Boards
+            in Trello and GitHub Issues.
+          </p>
         </div>
         <div class="about-text">
-        <h3>Responsibilities Shift</h3>
-        <p>
-          Throughout the project, we adapted to the evolving needs. Initially,
-          Product Owners took on more responsibilities during sprints 1, 2, and
-          6, while developers assumed more significant roles in sprints 3, 4,
-          and 5. This flexibility allowed us to maintain our agile workflow
-          effectively.
-        </p>
-      </div>
-      <div class="about-text">
-        <h2>Development and Deployment</h2>
+          <h3>Responsibilities Shift</h3>
+          <p>
+            Throughout the project, we adapted to the evolving needs. Initially,
+            Product Owners took on more responsibilities during sprints 1, 2,
+            and 6, while developers assumed more significant roles in sprints 3,
+            4, and 5. This flexibility allowed us to maintain our agile workflow
+            effectively.
+          </p>
+        </div>
+        <div class="about-text">
+          <h2>Development and Deployment</h2>
 
-        <h3>Sprints 3, 4, 5</h3>
-        <p>
-          During these sprints, our developers dedicated substantial effort to
-          implementing all planned features. We made the strategic decision to
-          deploy our Meteor Shower App during the middle of sprint 5, enabling
-          us to continue refining the code and adding optional features
-          post-deployment.
-        </p>
-        <h3>Deployment Success</h3>
-        <p>
-          The deployment phase included tasks related to GitHub, and it
-          culminated in the successful launch of our Meteor Shower App.
-        </p>
-      </div>
-      
-      <div class="about-text">
-        <h2>Conclusion</h2>
+          <h3>Sprints 3, 4, 5</h3>
+          <p>
+            During these sprints, our developers dedicated substantial effort to
+            implementing all planned features. We made the strategic decision to
+            deploy our Meteor Shower App during the middle of sprint 5, enabling
+            us to continue refining the code and adding optional features
+            post-deployment.
+          </p>
+          <h3>Deployment Success</h3>
+          <p>
+            The deployment phase included tasks related to GitHub, and it
+            culminated in the successful launch of our Meteor Shower App.
+          </p>
+        </div>
 
-        <p>
-          In summary, our Meteor Shower Team embarked on a rewarding journey
-          within the Chingu community, adhering to a 6-week sprint-based Agile
-          methodology. Our commitment to effective communication, adaptability,
-          and constant innovation allowed us to deliver a well-crafted project
-          that aligns with our collective goals and aspirations.
-        </p>
+        <div class="about-text">
+          <h2>Conclusion</h2>
+
+          <p>
+            In summary, our Meteor Shower Team embarked on a rewarding journey
+            within the Chingu community, adhering to a 6-week sprint-based Agile
+            methodology. Our commitment to effective communication,
+            adaptability, and constant innovation allowed us to deliver a
+            well-crafted project that aligns with our collective goals and
+            aspirations.
+          </p>
         </div>
         <div class="link-container">
           <div class="link">
@@ -511,14 +505,14 @@
               <h3>Zahra Motlagh</h3>
               <p>Product owner</p>
               <div class="icon-container">
-                  <a
-                    href="https://www.linkedin.com/in/zahra-motlagh/"
-                    target="_blank"
-                    ><i class="fa-brands fa-linkedin"></i
-                  ></a>
-                  <a href="https://github.com/zizi1404" target="_blank"
-                    ><i class="fa-brands fa-github"></i
-                  ></a>
+                <a
+                  href="https://www.linkedin.com/in/zahra-motlagh/"
+                  target="_blank"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+                <a href="https://github.com/zizi1404" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
               </div>
             </div>
             <div class="team-card">
@@ -526,14 +520,14 @@
               <h3>Petre Circeag</h3>
               <p>Product owner</p>
               <div class="icon-container">
-                  <a
-                    href="https://www.linkedin.com/in/petre-circeag/"
-                    target="_blank"
-                    ><i class="fa-brands fa-linkedin"></i
-                  ></a>
-                  <a href="https://github.com/Petre4488" target="_blank"
-                    ><i class="fa-brands fa-github"></i
-                  ></a>
+                <a
+                  href="https://www.linkedin.com/in/petre-circeag/"
+                  target="_blank"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+                <a href="https://github.com/Petre4488" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
               </div>
             </div>
             <div class="team-card">
@@ -560,14 +554,14 @@
               <h3>Mustapha Anthonio</h3>
               <p>Developer</p>
               <div class="icon-container">
-                  <a
-                    href="https://www.linkedin.com/in/mustapha-anthonio"
-                    target="_blank"
-                    ><i class="fa-brands fa-linkedin"></i
-                  ></a>
-                  <a href="https://github.com/engamo" target="_blank"
-                    ><i class="fa-brands fa-github"></i
-                  ></a>
+                <a
+                  href="https://www.linkedin.com/in/mustapha-anthonio"
+                  target="_blank"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+                <a href="https://github.com/engamo" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
               </div>
             </div>
           </div>
@@ -577,25 +571,25 @@
               <h3>Ana Popovic</h3>
               <p>Developer</p>
               <div class="icon-container">
-                  <a href="https://de.linkedin.com/in/franecode" target="_blank"
-                    ><i class="fa-brands fa-linkedin"></i
-                  ></a>
-                  <a href="https://github.com/franeCode" target="_blank"
-                    ><i class="fa-brands fa-github"></i
-                  ></a>
+                <a href="https://de.linkedin.com/in/franecode" target="_blank"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+                <a href="https://github.com/franeCode" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
               </div>
             </div>
             <div class="team-card">
-              <img src="assets/isaac.jpeg" alt=""/>
+              <img src="assets/isaac.jpeg" alt="" />
               <h3>Isaac Anim</h3>
               <p>Developer</p>
               <div class="icon-container">
-                  <a href="https://www.linkedin.com/in/yawcoder" target="_blank"
-                    ><i class="fa-brands fa-linkedin"></i
-                  ></a>
-                  <a href="https://github.com/yawcoder" target="_blank"
-                    ><i class="fa-brands fa-github"></i
-                  ></a>
+                <a href="https://www.linkedin.com/in/yawcoder" target="_blank"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+                <a href="https://github.com/yawcoder" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
               </div>
             </div>
             <div class="team-card">
@@ -603,19 +597,19 @@
               <h3>Eva Langerova</h3>
               <p>Developer</p>
               <div class="icon-container">
-                  <a
-                    href="https://www.linkedin.com/in/eva-langerova-61059027a/"
-                    target="_blank"
-                    ><i class="fa-brands fa-linkedin"></i
-                  ></a>
-                  <a href="https://github.com/eva-lng" target="_blank"
-                    ><i class="fa-brands fa-github"></i
-                  ></a>
+                <a
+                  href="https://www.linkedin.com/in/eva-langerova-61059027a/"
+                  target="_blank"
+                  ><i class="fa-brands fa-linkedin"></i
+                ></a>
+                <a href="https://github.com/eva-lng" target="_blank"
+                  ><i class="fa-brands fa-github"></i
+                ></a>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <!-- </div> -->
       </section>
     </main>
     <footer>
