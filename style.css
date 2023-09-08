@@ -275,12 +275,11 @@ main {
 .table-container .pagination button {
   display: none;
 }
-.fa-sort-up,
-.fa-sort-down {
+.fa-sort {
   cursor: pointer;
+  padding-left: 5px;
 }
-.fa-sort-up:hover,
-.fa-sort-down:hover {
+.fa-sort:hover {
   opacity: 0.5;
 }
 .page-info-wrapper {
