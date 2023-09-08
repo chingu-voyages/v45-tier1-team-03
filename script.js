@@ -33,12 +33,13 @@ const massMinFilter = document.getElementById("massMinFilter");
 const massMaxFilter = document.getElementById("massMaxFilter");
 const yearMinFilter = document.getElementById("yearMinFilter");
 const yearMaxFilter = document.getElementById("yearMaxFilter");
+const savedSearchFilter = document.getElementById("savedSearchFilter");
 const noResultsMessage = document.querySelector(".no-results");
 const tableBtn = document.getElementById("switchButton");
 const tableWrapper = document.getElementById("table");
 const mapWrapper = document.getElementById("mapWrapper");
 const saveButton = document.getElementById("saveButton");
-const clearPrevBtn = document.getElementById("clearPrevBtn");
+// const clearPrevBtn = document.getElementById("clearPrevBtn");
 const resetButton = document.getElementById("resetButton");
 
 // Data
@@ -47,7 +48,7 @@ let filteredResults = []; // Store filtered data
 let filteredAdvanceResults = []; // Store filtered advance results
 let currentImageIndex = 0; // Current image index
 let currentPage = 1; // First page of detail display data
-let rows = 100; // Number of rows per page
+let rows = 10; // Number of rows per page
 let searchText; // Store input search terms
 let selectedYearRange; // Store year range data
 let markerCluster; // Store marker cluster
@@ -100,10 +101,9 @@ function initializePage() {
   filterBtn. addEventListener("click", getSearch);
   filterButton.addEventListener("click", getAdvanceFilter);
   saveButton.addEventListener("click", saveFilter);
-  clearPrevBtn.addEventListener("click", clearSavedSearches);
+  // clearPrevBtn.addEventListener("click", clearSavedSearches);
   resetButton.addEventListener("click", resetResults);
   clearButton.addEventListener("click", clearSearch);
-  resetButton.addEventListener("click", resetResults);
 }
 
 function handleLinks() {
@@ -217,7 +217,6 @@ function displayResults() {
     nextPrevButtons(nextPrevContainer, meteorData);
     addMarkersToMap(meteorData);
     updateChart(meteorData);
-    listSavedFilters();
   } else {
     currentPage = 1;
     displayList(filteredResults, table, rows, currentPage, paginationInfo);
@@ -225,7 +224,6 @@ function displayResults() {
     nextPrevButtons(nextPrevContainer, filteredResults);
     updateChart(filteredResults);
     addMarkersToMap(filteredResults);
-    listSavedFilters();
   }
 }
 
@@ -451,6 +449,8 @@ function populateDropdowns() {
     yearMinFilter.appendChild(optionMin);
     yearMaxFilter.appendChild(optionMax);
   });
+  // Call a function to poulate saved filters dropdown
+  populateFiltersDropdown();
 }
 
 // Initialize the map
@@ -688,49 +688,51 @@ function calculateTotalStrikes(yearCounts) {
 
 // Function to save filters to local sotrage
 function saveFilter() {
+  const dummyEvent = {
+    preventDefault: () => {} // define a preventDefault function to avoid errors
+  };
+  getAdvanceFilter(dummyEvent);
+
   const newFilterItem = JSON.stringify(filteredAdvanceResults);
   const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
-  localStorage.setItem(timestamp, newFilterItem);
-  listSavedFilters();
+  const filterID = "filterID: " + timestamp
+  localStorage.setItem(filterID, newFilterItem);
+  populateFiltersDropdown();
 }
 
-// Function to display local storage list of filters
-function listSavedFilters() {
-  const savedFiltersList = document.getElementById("savedFiltersList");
-  savedFiltersList.innerHTML = "";
-
-  for (let i = 0; i < localStorage.length; i++) {
-    const timestamp = localStorage.key(i);
-    const filterDataJSON = localStorage.getItem(timestamp);
-    const filterData = JSON.parse(filterDataJSON);
-
-    const listItem = document.createElement("li");
-    savedFiltersList.appendChild(listItem);
-    const listItemText = document.createElement("span");
-    listItem.appendChild(listItemText);
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "X";
-    deleteBtn.classList.add("delete-btn");
-    listItemText.textContent = `${timestamp}`;
-    listItem.appendChild(deleteBtn);
-
-    deleteBtn.addEventListener("click", () => {
-      localStorage.removeItem(timestamp);
-      listSavedFilters();
-    });
-
-    listItemText.addEventListener("click", () => {
-      // console.log(filterData);
-      checkResults(filterData);
-      addMarkersToMap(filterData);
-    });
-  }
+// Function to populate saved filters dropdown
+function populateFiltersDropdown() {
+  // Populate saved search dropdown
+  savedSearchFilter.innerHTML = `<option value="">No Select</option>`;
+  const filterIDs = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20).sort();
+  const filterItems = filterIDs.map(item => {
+    const timestamp = item.replace("filterID: ", "");
+    return {
+      id: item,
+      timestamp: timestamp
+    };
+  });
+  filterItems.forEach(item => {
+    const optionFilter = document.createElement("option");
+    optionFilter.value = item.id;
+    optionFilter.textContent = item.timestamp;
+    savedSearchFilter.appendChild(optionFilter);
+  });
+  // Add event listeners to each dropdown option to display the saved filter
+  savedSearchFilter.addEventListener("change", () => {
+    const selectedOption = savedSearchFilter.value;
+    const savedfilterDataJSON = localStorage.getItem(selectedOption);
+    const savedfilterData = JSON.parse(savedfilterDataJSON)
+    checkResults(savedfilterData);
+    addMarkersToMap(savedfilterData);
+  });
 }
 
-// Function to clear local storage
+// Function to clear all saved filters
 function clearSavedSearches() {
-  localStorage.clear();
-  listSavedFilters();
+  const keysToRemove = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20);
+  keysToRemove.forEach(key => localStorage.removeItem(key));
+  populateFiltersDropdown();
 }
 
 function resetResults() {
