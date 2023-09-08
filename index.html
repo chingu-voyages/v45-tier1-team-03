@@ -66,6 +66,7 @@
 
     <main>
       <section id="home" class="main-wrapper panel">
+        <div id="homeSection">
         <p id="error-message"></p>
         <a href="#">
           <img
@@ -98,6 +99,74 @@
             alt="arrow-right"
           />
         </a>
+      </div>
+        <div id="resultSection" class="result-container hidden">
+          <div id="searchWrapper" class="search-container">
+            <input id="searchInput" type="text" placeholder="Search by keyword" />
+            <button id="clearButton">x</button>
+            <button id="searchButton">
+              <img src="assets/search.svg" alt="search-icon" />
+            </button>
+          </div>
+          <div class="result-display">
+          <div class="table-container">
+            <div class="table-header">
+              <h2>meteorite landings table</h2>
+              <div class="filters">
+                <button id="filterBtn">Add filters</button>
+              </div>
+            </div>
+            <table>
+              <tr class="table-headings-container">
+                <th>
+                  name <i class="fa-solid fa-sort-up"></i
+                  ><i class="fa-solid fa-sort-down"></i>
+                </th>
+                <th>
+                  mass <i class="fa-solid fa-sort-up"></i
+                  ><i class="fa-solid fa-sort-down"></i>
+                </th>
+                <th>
+                  year <i class="fa-solid fa-sort-up"></i
+                  ><i class="fa-solid fa-sort-down"></i>
+                </th>
+                <th>
+                  recclass <i class="fa-solid fa-sort-up"></i
+                  ><i class="fa-solid fa-sort-down"></i>
+                </th>
+              </tr>
+              <tbody id="detailDataDisplay"></tbody>
+            </table>
+            <div class="page-info-wrapper">
+              <span id="nextPrevContainer" class="next-prev-container"></span>
+              <span id="paginationInfo" class="pagination-info"></span>
+            </div>
+            <div id="pagination" class="pagination"></div>
+          
+        </div>
+          <div id="charts">
+            <div class="calculate">
+              <p>
+                Total strikes:
+                <span style="font-size: 25px" id="totalStrikes"></span>
+              </p>
+              <p>
+                Average strikes:
+                <span style="font-size: 25px" id="averageStrikes"></span>
+              </p>
+            </div>
+            <div class="histogram">
+              <div class="chart" id="yearHistogramContainer">
+                <canvas id="yearHistogram"></canvas>
+              </div>
+              <div class="chart hidden" id="compositionHistogramContainer">
+                <canvas id="compositionHistogram"></canvas>
+              </div>  
+              <button id="switchBtn">Switch charts</button>
+            </div>
+          </div>
+        </div>
+      </div>
       </section>
       <section id="about" class="panel hidden about-section">
         <div class="about-text">
@@ -161,14 +230,7 @@
           </p>
         </div>
       </section>
-      <section id="explore" class="result-container panel hidden">
-        <div id="searchWrapper" class="search-container">
-          <input id="searchInput" type="text" placeholder="Search by keyword" />
-          <button id="clearButton">x</button>
-          <button id="searchButton">
-            <img src="assets/search.svg" alt="search-icon" />
-          </button>
-        </div>
+      <section id="explore" class="panel hidden">
         <div id="advanceSearch">
           <p class="no-results hidden">
             No results match your search criteria. Please refine your search.
@@ -176,6 +238,7 @@
           <div class="filter-container">
             <div class="filter">
               <div class="filter-options">
+                <div class="dropdown">
                 <div class="filter-select">
                   <label for="compositionFilter"> Composition: </label>
                   <div class="custom-select">
@@ -192,12 +255,12 @@
                   <div class="custom-select">
                     <div class="sel">
                       <select id="massMinFilter">
-                        <option value="">Minimum</option>
+                        <option value="">Min</option>
                       </select>
                     </div>
                     <div class="sel">
                       <select id="massMaxFilter">
-                        <option value="">Maximum</option>
+                        <option value="">Max</option>
                       </select>
                     </div>
                   </div>
@@ -208,23 +271,24 @@
                   <div class="custom-select">
                     <div class="sel">
                       <select id="yearMinFilter">
-                        <option value="" default>Minimum</option>
+                        <option value="" default>Min</option>
                       </select>
                     </div>
                     <div class="sel">
                       <select id="yearMaxFilter">
-                        <option value="">Maximum</option>
+                        <option value="">Max</option>
                       </select>
                     </div>
                   </div>
                 </div>
-
-                <div class="filter-btn">
-                  <button id="filterButton">Apply Filters</button>
-                  <button id="saveButton">Save Filters</button>
-                  <button id="resetButton">Reset</button>
-                </div>
               </div>
+                <div class="filter-btn">
+                  <button id="filterButton">Apply</button>
+                  <button id="saveButton">Save</button>
+                  <button id="resetButton">Reset</button>
+              </div>
+            </div>
+
               <div id="mapWrapper" class="map">
                 <div
                   id="map"
@@ -240,7 +304,7 @@
                     <!-- <button>Export PDF</button> -->
                   </div>
                 </div>
-                <table>
+                <!-- <table>
                   <tr class="table-headings-container">
                     <th>
                       name <i class="fa-solid fa-sort-up"></i
@@ -268,7 +332,7 @@
                   ></span>
                   <span id="paginationInfo" class="pagination-info"></span>
                 </div>
-                <div id="pagination" class="pagination"></div>
+                <div id="pagination" class="pagination"></div> -->
               </div>
             </div>
 
@@ -280,13 +344,13 @@
                 </div>
                 <button class="clear-btn" id="clearPrevBtn">Clear</button>
               </div>
-              <div class="calculate">
+              <!-- <div class="calculate">
                 <p>
                   Total strikes:
                   <span style="font-size: 25px" id="totalStrikes"></span>
                 </p>
                 <p>
-                  Average strikes per year:
+                  Average strikes:
                   <span style="font-size: 25px" id="averageStrikes"></span>
                 </p>
               </div>
@@ -294,7 +358,7 @@
                 <div class="chart" id="yearHistogramContainer">
                   <canvas id="yearHistogram"></canvas>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

@@ -1,11 +1,18 @@
 // DOM element references
 const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
+const homeSection = document.getElementById("homeSection");
+const resultSection = document.getElementById("resultSection");
+const switchBtn = document.getElementById("switchBtn");
+const yearChart = document.getElementById("yearHistogramContainer");
+const compositionChart = document.getElementById("compositionHistogramContainer");
+const advanceSection = document.getElementById("advanceSearch");
 const explore = document.getElementById("explore");
 const exploreLink = document.getElementById("exploreLink");
 const searchInput = document.getElementById("searchInput");
 const searchWrapper = document.getElementById("searchWrapper");
 const searchButton = document.getElementById("searchButton");
+const filterBtn = document.getElementById("filterBtn");
 const exploreBtn = document.getElementById("exploreBtn");
 const clearButton = document.getElementById("clearButton");
 const searchIcon = document.getElementById("searchIcon");
@@ -84,10 +91,12 @@ function initializePage() {
   exploreLink.addEventListener("click", displayResults);
   searchButton.addEventListener("click", displayResults);
   tableBtn.addEventListener("click", switchToTable);
+  switchBtn.addEventListener("click", switchChart);
   mapBtn.addEventListener("click", switchToMap);
   searchInput.addEventListener("keyup", displayResults);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
+  filterBtn. addEventListener("click", getSearch);
   filterButton.addEventListener("click", getAdvanceFilter);
   saveButton.addEventListener("click", saveFilter);
   clearPrevBtn.addEventListener("click", clearSavedSearches);
@@ -109,20 +118,41 @@ function handleLinks() {
 
 function handleStart(e) {
   e.preventDefault();
-  explore.classList.remove("hidden");
-  mainWrapper.classList.add("hidden");
-  resultsWrapper.classList.add("hidden");
+  displayResults(meteorData);
+  // explore.classList.remove("hidden");
+  homeSection.classList.add("hidden");
+  resultSection.classList.remove("hidden");
+  // mainWrapper.classList.add("hidden");
+  // advanceSection.classList.add("hidden");
+  // searchWrapper.classList.add("hidden");
 }
 
 function getSearch() {
+  mainWrapper.classList.add("hidden");
   explore.classList.remove("hidden");
-  resultsWrapper.classList.remove("hidden");
-  searchWrapper.style.transform = "translateY(-70px)";
-  // searchButton.style.transform = "translateX(-600px)";
+  // explore.classList.remove("hidden");
+  // resultSection.classList.add("hidden");
+  // searchButton.classList.add("hidden");
+  // searchWrapper.style.transform = "translateY(-70px)";
 }
 
 function clearSearch() {
   searchInput.value = "";
+}
+function switchChart() {
+  console.log("Switch chart function called");
+  
+  if (compositionChart.classList.contains("hidden")) {
+    console.log("Composition chart is hidden");
+    compositionChart.classList.remove("hidden");
+    yearChart.classList.add("hidden");
+    switchBtn.style.backgroundColor = "rgb(225, 85, 33, 1)"
+  } else {
+    console.log("Year chart is hidden");
+    compositionChart.classList.add("hidden");
+    yearChart.classList.remove("hidden");
+    switchBtn.style.backgroundColor = "rgba(75, 192, 192, 1)";
+  }
 }
 
 function switchToTable(e) {
@@ -176,7 +206,7 @@ function getInputValue(e) {
 // }
 
 function displayResults() {
-  getSearch();
+  // getSearch();
   getResults();
 
   if (filteredResults.length === 0 || searchText === "") {
@@ -568,6 +598,31 @@ const yearHistogram = new Chart(document.getElementById("yearHistogram"), {
   },
 });
 
+// Initialize the composition histogram
+const compositionHistogram = new Chart(document.getElementById("compositionHistogram"), {
+  type: "bar",
+  data: {
+    labels: [],
+    datasets: [
+      {
+        label: "Number of Strikes by Composition",
+        data: [],
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+        color: "rgb(255, 255, 255)",
+      },
+    ],
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
+
 function updateChart(results) {
   const average = document.getElementById("averageStrikes");
   const total = document.getElementById("totalStrikes");
@@ -575,14 +630,24 @@ function updateChart(results) {
   const years = results.map((item) =>
     item.year ? item.year.substring(0, 4) : "Unknown"
   );
+  const compositions = filteredResults.map(item => item.recclass || "Unknown");
+
   const yearCounts = {};
+  const compositionCounts = {};
   years.forEach((year) => (yearCounts[year] = (yearCounts[year] || 0) + 1));
+  
+  compositions.forEach(composition => compositionCounts[composition] = (compositionCounts[composition] || 0) + 1);
 
   // Update the year histogram data
   yearHistogram.data.labels = Object.keys(yearCounts);
   yearHistogram.data.datasets[0].data = Object.values(yearCounts);
 
+  // Update the composition histogram data
+  compositionHistogram.data.labels = Object.keys(compositionCounts);
+  compositionHistogram.data.datasets[0].data = Object.values(compositionCounts);
+
   yearHistogram.update();
+  compositionHistogram.update();
 
   // Calculate and log the average strikes
   const averageStrikes = calculateAverageStrikes(yearCounts);
