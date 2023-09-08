@@ -66,7 +66,7 @@
 
     <main>
       <section id="home" class="main-wrapper panel">
-        <div id="homeSection">
+        <div id="homeSection" class="home">
         <p id="error-message"></p>
         <a href="#">
           <img
@@ -239,6 +239,18 @@
             <div class="filter">
               <div class="filter-options">
                 <div class="dropdown">
+
+                <div class="filter-select">
+                  <label for="compositionFilter"> Name: </label>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="nameFilter">
+                        <option value="">No Select</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="filter-select">
                   <label for="compositionFilter"> Composition: </label>
                   <div class="custom-select">
@@ -281,6 +293,18 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="filter-select">
+                  <label for="compositionFilter">Saved search: </label>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="savedSearchFilter">
+                        <option value="">No Select</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
               </div>
                 <div class="filter-btn">
                   <button id="filterButton">Apply</button>

@@ -86,7 +86,7 @@ main {
   align-items: center;
   /* margin-top: 50px; */
 }
-#homeSection {
+.home {
   display: flex;
   flex-direction: row;
   align-items: center;
