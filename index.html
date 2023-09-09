@@ -39,7 +39,9 @@
         <img src="assets/vector.svg" alt="logo" />
       </div>
       <nav>
-        <div id="openNav" class="hamburger"><i class="fa-solid fa-bars"></i></div>
+        <div id="openNav" class="hamburger">
+          <i class="fa-solid fa-bars"></i>
+        </div>
         <div id="closeNav" class="closeMenu hidden">
           <i class="fa-solid fa-xmark"></i>
         </div>
@@ -49,10 +51,7 @@
           <li>
             <a data-id="explore" id="exploreLink" class="links">Explore</a>
           </li>
-          \
-          <li>
-            <a data-id="aboutTeam" class="links">Team</a>
-          </li>
+          <li><a data-id="aboutTeam" class="links">Team</a></li>
         </ul>
       </nav>
     </header>
@@ -206,101 +205,93 @@
         </div>
       </section>
       <section id="explore" class="panel hidden">
-        <!-- <div id="advanceSearch"> -->
-          <p class="no-results hidden">
-            No results match your search criteria. Please refine your search.
-          </p>
-          <div class="filter-container">
-            <div class="filter">
-              <div class="filter-options">
-                <div class="dropdown">
-                  <div class="filter-select">
-                    <label for="compositionFilter"> Name: </label>
-                    <div class="custom-select">
-                      <div class="sel">
-                        <select id="nameFilter">
-                          <option value="">No Select</option>
-                        </select>
-                      </div>
-                    </div>
-                    <label for="compositionFilter"> Composition: </label>
-                    <div class="custom-select">
-                      <div class="sel">
-                        <select id="compositionFilter">
-                          <option value="">No Select</option>
-                        </select>
-                      </div>
+        <p class="no-results hidden">
+          No results match your search criteria. Please refine your search.
+        </p>
+        <div class="filter-container">
+          <div class="filter">
+            <div class="filter-options">
+              <div class="dropdown">
+                <div class="filter-select">
+                  <label for="compositionFilter">Name:</label>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="nameFilter">
+                        <option value="">No Select</option>
+                      </select>
                     </div>
                   </div>
-
-                  <div class="filter-select">
-                    <label for="massFilter"> Mass:</label>
-                    <!-- <div class="custom-select"> -->
+                  <label for="compositionFilter">Composition:</label>
+                  <div class="custom-select">
                     <div class="sel">
-                      <select id="massMinFilter">
-                        <option value="">Min</option>
+                      <select id="compositionFilter">
+                        <option value="">No Select</option>
                       </select>
-                    </div>
-                    <div class="sel">
-                      <select id="massMaxFilter">
-                        <option value="">Max</option>
-                      </select>
-                    </div>
-                    <!-- </div> -->
-                  </div>
-
-                  <div class="filter-select">
-                    <label for="yearFilter"> Year:</label>
-                    <!-- <div class="custom-select"> -->
-                    <div class="sel">
-                      <select id="yearMinFilter">
-                        <option value="" default>Min</option>
-                      </select>
-                    </div>
-                    <div class="sel">
-                      <select id="yearMaxFilter">
-                        <option value="">Max</option>
-                      </select>
-                    </div>
-                    <!-- </div> -->
-                  </div>
-
-                  <div class="filter-select">
-                    <label for="compositionFilter">Saved search: </label>
-                    <div class="custom-select">
-                      <div class="sel">
-                        <select id="savedSearchFilter">
-                          <option value="">No Select</option>
-                        </select>
-                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="filter-btn">
-                  <button id="filterButton">Apply</button>
-                  <button id="saveButton">Save</button>
-                  <button id="resetButton">Reset</button>
+
+                <div class="filter-select">
+                  <label for="massFilter">Mass:</label>
+                  <div class="sel">
+                    <select id="massMinFilter">
+                      <option value="">Min</option>
+                    </select>
+                  </div>
+                  <div class="sel">
+                    <select id="massMaxFilter">
+                      <option value="">Max</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-select">
+                  <label for="yearFilter">Year:</label>
+                  <div class="sel">
+                    <select id="yearMinFilter">
+                      <option value="" default>Min</option>
+                    </select>
+                  </div>
+                  <div class="sel">
+                    <select id="yearMaxFilter">
+                      <option value="">Max</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="filter-select">
+                  <label for="compositionFilter">Saved:</label>
+                  <div class="sel">
+                    <select id="savedSearchFilter">
+                      <option value="">No Select</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-
-              <div id="mapWrapper" class="map">
-                <div
-                  id="map"
-                  style="height: 573px; width: 100%; border-radius: 10px"
-                ></div>
-                <button class="hidden" id="switchButton">Table</button>
+              <div class="filter-btn">
+                <button id="filterButton">Apply</button>
+                <button id="saveButton">Save</button>
+                <button id="resetButton">Reset</button>
               </div>
-              <div id="table" class="table-container hidden">
-                <div class="table-header">
-                  <h2>meteorite landings</h2>
-                  <div class="filters hidden">
-                    <button id="map-btn">Map</button>
-                  </div>
+            </div>
+
+            <div id="mapWrapper" class="map">
+              <div
+                id="map"
+                style="height: 573px; width: 100%; border-radius: 10px"
+              ></div>
+              <button class="hidden" id="switchButton">Table</button>
+            </div>
+            <div id="table" class="table-container hidden">
+              <div class="table-header">
+                <h2>meteorite landings</h2>
+                <div class="filters hidden">
+                  <button id="map-btn">Map</button>
                 </div>
               </div>
             </div>
           </div>
-        <!-- </div> -->
+        </div>
       </section>
       <section id="aboutTeam" class="panel team-section about-section hidden">
         <h1>Meteor Shower Team</h1>
@@ -561,7 +552,6 @@
       </section>
     </main>
     <footer>
-      <!-- <div class="footer-container"> -->
       <a
         href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master"
         target="blank"
@@ -569,7 +559,6 @@
         Chingu Voyage
       </a>
       | 2023 | Deployed on Netlify
-      <!-- </div> -->
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
