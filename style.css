@@ -369,10 +369,11 @@ main {
 }
 .filter-select {
   display: block;
-  padding: 5px;
+  padding: 10px;
 }
 .filter-select label {
-  padding: 0px 10px;
+  /* padding: 10px 10px; */
+  /* margin-top: 20px; */
 }
 .custom-select {
   min-width: 100px;
@@ -611,6 +612,7 @@ canvas {
 /******** Team section ********/
 .team-section {
   /* font-family: "VT323", monospace; */
+  width: 100vw;
 }
 .team-section h1 {
   font-size: 40px;
@@ -714,69 +716,50 @@ footer a {
   cursor: pointer;
 }
 @media (max-width: 1024px) and (min-width: 850px) {
-  /**** Explore page ****/
+
+  /**** Search page ****/
   .result-container .table-container {
     width: 80%;
   }
-  .result-display {
-    /* width: 100%; */
-  }
-  .filter-container {
-    /* flex-wrap: wrap; */
-    gap: 0%;
-  }
   .search-container input {
     width: 500px;
+  }
+  .calculate {
+    width: 100%;
+  }
+  .calculate p {
+    font-size: 14px;
+    text-align: center;
+  }
+  canvas {
+    min-width: 300px;
+    min-height: 150px;
+  }
+
+  /**** Explore page ****/
+  .filter-container {
+    gap: 0%;
   }
   .filter-select {
     margin-right: 10px;
   }
   .filter-options {
     width: 100%;
-    /* flex-direction: column; */
   }
   .custom-select {
     min-width: 80px;
-    /* display: flex; */
     gap: 10px;
-    /* flex-direction: column; */
-    /* margin-top: 5px; */
 }
-.sel select {
-  width: 100px;
-  padding: 5px;
-}
-.filter-btn button {
-  padding: 5px 10px;
-}
-.show-search {
-  width: 80%;
-  padding: 5px 10px;
-}
-#map {
-  height: 373px;
-}
-/* .show-search {
-  width: 80%;
-} */
-.clear-btn {
-  width: 30%;
-  font-size: 16px;
-}
-.calculate {
-  width: 100%;
-}
-.calculate p {
-  font-size: 14px;
-  text-align: center;
-}
-/* .chart {
-  width: 90%;
-} */
-canvas {
-  min-width: 300px;
-  min-height: 150px;
-}
+  .sel select {
+    width: 100px;
+    padding: 5px;
+  }
+  .filter-btn button {
+    padding: 5px 10px;
+  }
+  #map {
+    height: 373px;
+  }
 }
 @media (max-width: 850px) {
 
@@ -811,9 +794,6 @@ canvas {
   }
 
   /**** Landing page ****/
-  .main-wrapper {
-
-  }
   .container h1 {
     font-size: 40px;
   }
@@ -843,29 +823,53 @@ canvas {
     font-size: 18px;
   }
 
-  /**** Explore page ****/
+  /**** Search page ****/
   .result-container {
     gap: 0%;
   }
   .result-container .table-container {
     width: 80%;
   }
-  .filter-container {
-    flex-wrap: wrap;
-    gap: 15px;
-  }
   .search-container input {
     width: 500px;
     margin-bottom: 15px;
+  }
+  .filter-btn button {
+    padding: 5px 10px;
+  }
+  .calculate {
+    margin-top: 15px;
+  }
+  .calculate p {
+    font-size: 14px;
+    text-align: center;
+  }
+  canvas {
+    min-width: 400px;
+    min-height: 200px;
+  }
+  
+  /**** Explore page ****/
+  #explore {
+    width: 100vw;
+  }
+  .filter-container {
+    flex-wrap: wrap;
+    gap: 15px;
   }
   .filter {
     width: 80%;
   }
   .filter-select {
     margin-right: 10px;
+    padding-bottom: 0%;
+  }
+  .filter-select label {
+    /* padding: 10%; */
   }
   .filter-options {
     width: 100%;
+    flex-wrap: wrap;
     /* flex-direction: column; */
   }
   .custom-select {
@@ -873,46 +877,21 @@ canvas {
     /* display: flex; */
     gap: 10px;
     flex-direction: column;
-    /* margin-top: 5px; */
 }
   .sel select {
-    width: 110px;
+    width: 80px;
     padding: 5px;
   }
-  .filter-btn button {
-    padding: 5px 10px;
-  }
-  #map {
-    /* height: 473px; */
-  }
-  /* .show-search {
-    width: 80%;
-  } */
-  .clear-btn {
-    width: 30%;
-    font-size: 16px;
-  }
-  .clear-btn {
-    width: 30%;
-  }
-  .calculate {
-    /* width: 90%; */
-    margin-top: 15px;
-  }
-  .calculate p {
-    font-size: 14px;
-    text-align: center;
-  }
-  /* .chart {
-    width: 90%;
-  } */
-  canvas {
-    min-width: 400px;
-    min-height: 200px;
+  .filter-btn {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
   }
 }
 
 @media only screen and (max-width: 600px) {
+
+  /**** Landing page ****/
   .main-wrapper {
     margin-top: 0%;
     align-items: end;
@@ -948,13 +927,13 @@ canvas {
     font-size: 16px;
   }
 
-  /**** Explore page ****/
+  /**** Search page ****/
   .result-container {
     gap: 0;
     align-items: center;
   }
   .result-container .table-container {
-    width: 100%;
+    width: 90%;
   }
   .table-header {
     width: 80%;
@@ -966,10 +945,6 @@ canvas {
     font-size: 15px;
     padding: 3px 10px;
   }
-  .filter-container {
-    flex-wrap: wrap;
-    gap: 15px;
-  }
   .search-container input {
     width: 300px;
   }
@@ -980,62 +955,17 @@ canvas {
   #searchButton {
     display: none;
   }
-  /* .dropdown {
-    flex
-  } */
-  .filter-select {
-    margin-right: 10px;
-  }
-  /* .filter-select label {
-    text-align: start;
-  } */
-  .filter-options {
-    /* width: 90%; */
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 5px;
-  }
-  .custom-select {
-    /* max-width: 70px; */
-    /* display: flex; */
-    gap: 10px;
-    flex-direction: column;
-    /* margin-top: 5px; */
-  }
-  .sel select {
-    width: 80px;
-    padding: 5px;
-  }
-  .filter-btn {
-    flex-direction: row;
-    margin-top: 5px;
-  }
-  /* .filter-btn button {
-    padding: 5px 10px;
-  } */
-  #map {
-    height: 273px;
-    width: 70%;
-    margin: 0 auto;
-  }
-  /* .leaflet-container {
-    height: 273px;
-    width: 80%;
-    margin: 0 auto;
-  } */
   .histogram button {
     font-size: 14px;
   }
   .chart {
-    width: 100%;
+    width: 90%;
   }
   .clear-btn {
     width: 30%;
   }
   .calculate {
     width: 100%;
-    /* justify-content: center; */
-    /* padding: 5px; */
   }
   .calculate p {
     font-size: 14px;
@@ -1044,6 +974,39 @@ canvas {
   canvas {
     min-width: 300px;
     min-height: 150px;
+  }
+
+  /**** Explore page ****/
+  .filter-container {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .dropdown {
+    flex-wrap: wrap;
+  }
+  .filter-select {
+    margin-right: 10px;
+  }
+  .filter-select label {
+    font-weight: 600;
+  }
+  .filter-options {
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 5px;
+  }
+  .custom-select {
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-direction: column;
+  }
+  .sel select {
+    width: 80px;
+    padding: 5px;
+  }
+  .filter-btn {
+    flex-direction: row;
+    margin-top: 5px;
   }
 }
 /******** Misc ********/
