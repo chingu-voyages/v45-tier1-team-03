@@ -1,9 +1,8 @@
 // DOM element references
 const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
-const navbarWrapper = document.getElementById("navbarWrapper");
-const openNav = document.getElementById("openNav");
-const closeNav = document.getElementById("closeNav");
+const burger = document.querySelector(".burger");
+const nav = document.querySelector(".nav-links");
 const homeSection = document.getElementById("homeSection");
 const resultSection = document.getElementById("resultSection");
 const switchBtn = document.getElementById("switchBtn");
@@ -11,7 +10,6 @@ const yearChart = document.getElementById("yearHistogramContainer");
 const compositionChart = document.getElementById(
   "compositionHistogramContainer"
 );
-// const advanceSection = document.getElementById("advanceSearch");
 const explore = document.getElementById("explore");
 const exploreLink = document.getElementById("exploreLink");
 const searchInput = document.getElementById("searchInput");
@@ -97,8 +95,7 @@ function initializePage() {
 
   exploreBtn.addEventListener("click", handleStart);
   exploreLink.addEventListener("click", displayResults);
-  openNav.addEventListener("click", openMenu);
-  closeNav.addEventListener("click", closeMenu);
+  burger.addEventListener("click", toggleMenu);
   searchButton.addEventListener("click", displayResults);
   switchBtn.addEventListener("click", switchChart);
   searchInput.addEventListener("keyup", displayResults);
@@ -123,25 +120,17 @@ function handleLinks() {
   });
 }
 
+function toggleMenu(e) {
+  e.preventDefault();
+  nav.classList.toggle("open");
+  burger.classList.toggle("open");
+}
+
 function handleStart(e) {
   e.preventDefault();
   displayResults(meteorData);
   homeSection.classList.add("hidden");
   resultSection.classList.remove("hidden");
-}
-
-function openMenu() {
-  navbarWrapper.classList.add("navbar-mobile");
-  navbarWrapper.style.display = "block";
-  openNav.classList.add("hidden");
-  closeNav.classList.remove("hidden");
-}
-function closeMenu() {
-  navbarWrapper.classList.remove("navbar-mobile");
-  navbarWrapper.style.display = "hidden";
-  navbarWrapper.style.display = "none";
-  openNav.classList.remove("hidden");
-  closeNav.classList.add("hidden");
 }
 function getSearch() {
   mainWrapper.classList.add("hidden");
@@ -692,7 +681,7 @@ function saveFilter() {
 
 // Function to populate saved filters dropdown
 function populateFiltersDropdown() {
-  savedSearchFilter.innerHTML = `<option value="">No Select</option>`;
+  savedSearchFilter.innerHTML = `<option value="">Options</option>`;
   const filterIDs = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20).sort();
   // Populate saved search dropdown
   filterIDs.forEach(item => {
