@@ -39,13 +39,7 @@
         <img src="assets/vector.svg" alt="logo" />
       </div>
       <nav>
-        <div id="openNav" class="hamburger">
-          <i class="fa-solid fa-bars"></i>
-        </div>
-        <div id="closeNav" class="closeMenu hidden">
-          <i class="fa-solid fa-xmark"></i>
-        </div>
-        <ul id="navbarWrapper" class="nav-links">
+        <ul class="nav-links">
           <li><a data-id="home" class="links">Home</a></li>
           <li><a data-id="about" class="links">About</a></li>
           <li>
@@ -53,6 +47,11 @@
           </li>
           <li><a data-id="aboutTeam" class="links">Team</a></li>
         </ul>
+        <div class="burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </nav>
     </header>
 
@@ -217,7 +216,7 @@
                   <div class="custom-select">
                     <div class="sel">
                       <select id="nameFilter">
-                        <option value="">No Select</option>
+                        <option value="">Options</option>
                       </select>
                     </div>
                   </div>
@@ -225,53 +224,71 @@
                   <div class="custom-select">
                     <div class="sel">
                       <select id="compositionFilter">
-                        <option value="">No Select</option>
+                        <option value="">Options</option>
                       </select>
                     </div>
                   </div>
                 </div>
 
                 <div class="filter-select">
-                  <label for="massFilter">Mass:</label>
-                  <div class="sel">
-                    <select id="massMinFilter">
-                      <option value="">Min</option>
-                    </select>
+                  <label for="massFilter">Minimum Mass:</label>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="massMinFilter">
+                        <option value="">Options</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="sel">
-                    <select id="massMaxFilter">
-                      <option value="">Max</option>
-                    </select>
+                  <label for="massFilter">Maximum Mass:</label>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="massMaxFilter">
+                        <option value="">Options</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
                 <div class="filter-select">
-                  <label for="yearFilter">Year:</label>
-                  <div class="sel">
-                    <select id="yearMinFilter">
-                      <option value="" default>Min</option>
-                    </select>
+                  <label for="yearFilter">Minimum Year:</label>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="yearMinFilter">
+                        <option value="" default>Options</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="sel">
-                    <select id="yearMaxFilter">
-                      <option value="">Max</option>
-                    </select>
+                  <label for="massFilter">Maximum Year:</label>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="yearMaxFilter">
+                        <option value="">Options</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
                 <div class="filter-select">
                   <label for="savedSearchFilter">Saved:</label>
-                  <div class="sel">
-                    <select id="savedSearchFilter">
-                      <option value="">No Select</option>
-                    </select>
-                  </div>
-                  <div class="prev-searches-filter-btn">
-                    <button id="delFilterBtn">Delete Filter</button>
-                    <button id="delAllFiltersBtn">Clear All</button>
+                  <div class="custom-select">
+                    <div class="sel">
+                      <select id="savedSearchFilter">
+                        <option value="">Options</option>
+                      </select>
+                    </div>
+                    <div>
+                      <button class="hidden" id="delFilterBtn">
+                        <i
+                          class="fa-solid fa-trash-can"
+                          style="color: #000000; background-color: transparent:"
+                        ></i>
+                      </button>
+                      <button class="hidden" id="delAllFiltersBtn"></button>
+                    </div>
                   </div>
                 </div>
               </div>
+
               <div class="filter-btn">
                 <button id="filterButton">Apply</button>
                 <button id="saveButton">Save</button>
