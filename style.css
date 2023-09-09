@@ -549,21 +549,16 @@ canvas {
   margin: 4.4rem 3rem;
   color: #fff;
 }
-.sub-heading {
-  font-family: "Inter", sans-serif;
+.team {
+  text-align: center;
+  margin-top: 40px;
+}
+.team h2 {
   font-size: 40px;
   font-weight: 600;
   text-align: center;
   color: #fff;
-}
-.sub-heading p {
-  font-family: "Inter", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-}
-.our-team {
-  text-align: center;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .arrow-down {
   font-size: 32px;
@@ -624,6 +619,7 @@ canvas {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  width: 50%;
 }
 .link {
   display: flex;
@@ -864,17 +860,12 @@ footer a {
     margin-right: 10px;
     padding-bottom: 0%;
   }
-  .filter-select label {
-    /* padding: 10%; */
-  }
   .filter-options {
     width: 100%;
     flex-wrap: wrap;
-    /* flex-direction: column; */
   }
   .custom-select {
     min-width: 80px;
-    /* display: flex; */
     gap: 10px;
     flex-direction: column;
 }
@@ -886,6 +877,13 @@ footer a {
     flex-direction: row;
     width: 100%;
     justify-content: center;
+  }
+
+  /**** Team page ****/
+  .team-card-container {
+    flex-wrap: wrap;
+    margin: 20px 30px;
+    gap: 15px;
   }
 }
 
@@ -1008,6 +1006,31 @@ footer a {
     flex-direction: row;
     margin-top: 5px;
   }
+
+  /**** Team page ****/
+.team-section {
+  width: 100%;
+}
+.team-card-container {
+  gap: 10px;
+}
+.team h2 {
+  font-size: 25px;
+}
+.team-card {
+  height: 200px;
+}
+.team-card img {
+  width: 70px;
+  height: 70px;
+}
+.team-card h3 {
+  font-size: 15px;
+  height: 40px;
+}
+.team-card p {
+   font-size: 12px
+}
 }
 /******** Misc ********/
 .hidden {
