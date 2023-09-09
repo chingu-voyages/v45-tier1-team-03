@@ -53,16 +53,9 @@ nav {
   gap: 25px;
   align-items: center;
 }
-.fixed-navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  opacity: 1;
-  transition: top 0.3s, background-color 0.3s;
-}
 header ul {
   display: flex;
+  transition: transform 350ms ease-out;
 }
 header ul li {
   transition: transform 200ms;
@@ -81,6 +74,21 @@ header ul li a {
   padding-left: 10px;
   margin-top: 20px;
 }
+.burger {
+  display: none;
+  position: relative;
+  font-size: 1.2rem;
+  cursor: pointer; 
+  z-index: 1;
+}
+.burger span {
+  margin-right: 1em;
+  display: block;
+  width: 2.2em;
+  height: 0.1em;
+  margin-bottom: 0.5em;
+  background-color: var(--clr-white);
+}
 .navbar-mobile {
   height: 100vh;
   position: fixed;
@@ -90,7 +98,7 @@ header ul li a {
   z-index: 10;
   background-color: transparent;
   backdrop-filter: blur(5px);
-  transition: top 1s ease;
+  transition: all 350ms ease-in;
 }
 
 /******** Main ********/
@@ -394,6 +402,7 @@ main {
   margin-bottom: 5px;
 }
 .sel select {
+  width: 120px;
   appearance: none;
   -webkit-appearance: none;
   font-size: 15px;
@@ -404,6 +413,9 @@ main {
   color: var(--clr-black);
   outline: none;
   cursor: pointer;
+}
+.sel select option {
+  width: 120px;
 }
 .filter-btn {
   display: flex;
@@ -443,16 +455,6 @@ main {
   display: flex;
   justify-content: space-around;
   gap: 5px;
-}
-
-.prev-searches-filter-btn button {
-  padding: 3px 10px;
-  font-size: 15px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  color: #fff;
-  background-color: #389f36;
-  opacity: 1;
 }
 
 /******** Map ********/
@@ -682,10 +684,7 @@ footer a {
   color: var(--clr-white);
 }
 @media (max-width: 1024px) and (min-width: 850px) {
-  /**** Navbar ****/
-  nav ul li {
-    margin: 0 30%;
-  }
+
   /**** Search page ****/
   .result-container .table-container {
     width: 80%;
@@ -732,11 +731,38 @@ footer a {
 }
 @media (max-width: 850px) {
   /**** navbar ****/
-  .hamburger {
+  .burger {
     display: block;
   }
-  nav ul {
-    display: none;
+  .nav-links {
+    position: fixed;
+    inset: 0 0 0 65%;
+    flex-direction: column;
+    padding: min(30vh, 10rem) 2em;
+    gap: 2em;
+    z-index: 1;
+    margin: 0%;
+    transform: translateX(100%);
+    transition: transform 350ms ease-out; 
+    background: var(--clr-grey);
+    backdrop-filter: blur(2rem); 
+  }
+  .nav-links.open {
+    right: 0;
+    transform: translateX(0%);
+  }
+  .burger.open span:nth-child(1) {
+    transform: rotate(45deg) translateY(0.9em);
+  }
+  .burger.open span:nth-child(2) {
+    opacity: 0;
+    width: 0;
+  }
+  .burger.open span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-0.9em);
+  }
+  .burger span {
+    transition: all 350ms ease-in;
   }
   nav ul li {
     margin: 0 20%;
@@ -822,7 +848,7 @@ footer a {
   }
   .filter-options {
     width: 100%;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
   .custom-select {
     min-width: 80px;
