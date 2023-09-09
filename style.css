@@ -190,6 +190,8 @@ main {
 #searchButton img {
   padding: 10px;
 }
+
+/**** Table ****/
 .result-container {
   width: 100vw;
   display: flex;
@@ -198,12 +200,28 @@ main {
   gap: 40px;
 }
 .result-container .table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 50%;
-  height: 550px;
+  height: 600px;
   padding-top: 0.5rem;
   border-radius: 20px;
   background-color: var(--clr-white-opacity);
   border-radius: 10px;
+}
+.result-container .table-container table {
+  display: block;
+  width: 90%;
+  height: 70%;
+  margin: auto;
+  overflow-y: scroll;
+  background-color: var(--clr-white-opacity);
+  position: relative;
+  border-collapse: collapse;
+}
+.result-container .table-container table::-webkit-scrollbar {
+  /* scrollbar-width: thin; */
 }
 .result-display {
   display: flex;
@@ -218,39 +236,25 @@ main {
   font-size: 17px;
 }
 .table-header {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 3em 0;
+  padding: 0 50px;
 }
 .table-header h2 {
   text-transform: capitalize;
   text-align: center;
   margin: 0.8em 0;
-  color: var(--clr-white);
-}
-
-/**** Table ****/
-.result-container .table-container table {
-  display: block;
-  width: 100%;
-  margin: auto;
-  overflow: scroll;
-  background-color: var(--clr-white-opacity);
-  position: relative;
-  border-collapse: collapse;
-}
-.result-container .table-container table::-webkit-scrollbar {
-  width: 7px;
-  height: 0;
+  color: var(--clr-orange);
 }
 .table-container {
-  display: block;
-  overflow: scroll;
-  background-color: var(--clr-white-opacity);
-  position: relative;
-  border-collapse: collapse;
-  border-radius: 20px;
+  /* display: block; */
+  /* overflow-y: scroll; */
+  /* background-color: var(--clr-white-opacity); */
+  /* position: relative; */
+  /* border-collapse: collapse; */
+  /* border-radius: 20px; */
 }
 .table-container table::-webkit-scrollbar-thumb {
   background-color: var(--clr-black);
@@ -274,7 +278,7 @@ main {
 .table-container table tbody tr td {
   width: 300px;
   border: 2px solid var(--clr-white-opacity);
-  padding: 0.7em 0.5em;
+  padding: 1.3em 0.5em;
   opacity: 0.8;
   font-size: 0.8em;
 }
@@ -295,9 +299,10 @@ main {
   opacity: 0.5;
 }
 .page-info-wrapper {
-  width: 100%;
-  padding: 1em;
+  width: 90%;
+  padding: 25px;
   background-color: var(--clr-white-opacity);
+  /* border-top: 1px solid var(--clr-orange); */
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   display: flex;
