@@ -1,6 +1,9 @@
 // DOM element references
 const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
+const navbarWrapper = document.getElementById("navbarWrapper");
+const openNav = document.getElementById("openNav");
+const closeNav = document.getElementById("closeNav");
 const homeSection = document.getElementById("homeSection");
 const resultSection = document.getElementById("resultSection");
 const switchBtn = document.getElementById("switchBtn");
@@ -91,6 +94,8 @@ function initializePage() {
 
   exploreBtn.addEventListener("click", handleStart);
   exploreLink.addEventListener("click", displayResults);
+  openNav.addEventListener("click", openMenu);
+  closeNav.addEventListener("click", closeMenu);
   searchButton.addEventListener("click", displayResults);
   tableBtn.addEventListener("click", switchToTable);
   switchBtn.addEventListener("click", switchChart);
@@ -128,6 +133,19 @@ function handleStart(e) {
   // searchWrapper.classList.add("hidden");
 }
 
+function openMenu() {
+  navbarWrapper.classList.add('navbar-mobile');
+  navbarWrapper.style.display = "block";
+  openNav.classList.add("hidden");
+  closeNav.classList.remove("hidden");
+}
+function closeMenu() {
+  navbarWrapper.classList.remove('navbar-mobile');
+  navbarWrapper.style.display = "hidden";
+  navbarWrapper.style.display = "none";
+  openNav.classList.remove("hidden");
+  closeNav.classList.add("hidden");
+}
 function getSearch() {
   mainWrapper.classList.add("hidden");
   explore.classList.remove("hidden");
