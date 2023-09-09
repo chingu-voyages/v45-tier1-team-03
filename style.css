@@ -221,7 +221,7 @@ main {
   border-collapse: collapse;
 }
 .result-container .table-container table::-webkit-scrollbar {
-  /* scrollbar-width: thin; */
+  scrollbar-width: thin;
 }
 .result-display {
   display: flex;
