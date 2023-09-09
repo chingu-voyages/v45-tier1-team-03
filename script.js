@@ -362,8 +362,20 @@ function getPrevImg(e) {
 }
 
 function populateDropdowns() {
+  const uniqueName = Array.from(
+    new Set(meteorData.map((meteor) => meteor.name || ""))
+  );
+  // Sort alphabetically
+  uniqueName.sort((a, b) => a.localeCompare(b));
+
+  uniqueName.forEach((name) => {
+    const option = document.createElement("option");
+    option.value = name.toLowerCase();
+    option.textContent = name;
+    nameFilter.appendChild(option);
+  });
   const uniqueCompositions = Array.from(
-    new Set(meteorData.map((meteor) => meteor.recclass || ""))
+    new Set(meteorData.map((meteor) => meteor.composition || ""))
   );
   // Sort alphabetically
   uniqueCompositions.sort((a, b) => a.localeCompare(b));
@@ -483,6 +495,7 @@ function addMarkersToMap(filteredData) {
 function getAdvanceFilter(e) {
   e.preventDefault();
 
+  const nameTerm = nameFilter.value.toLowerCase().trim(); 
   const compositionTerm = compositionFilter.value.toLowerCase().trim();
   const massMin = parseFloat(massMinFilter.value);
   const massMax = parseFloat(massMaxFilter.value);
@@ -490,6 +503,7 @@ function getAdvanceFilter(e) {
   const yearMax = parseInt(yearMaxFilter.value);
 
   filteredAdvanceResults = meteorData.filter((meteor) => {
+    const name = (meteor.name || "").toLowerCase();
     const composition = (meteor.recclass || "").toLowerCase();
     const mass = parseFloat(meteor.mass);
     const year = parseInt(meteor.year);
@@ -505,15 +519,17 @@ function getAdvanceFilter(e) {
     const selectedComposition = (meteor.recclass || "").toLowerCase();
 
     if (
-      compositionValue === "" ||
-      selectedComposition.includes(compositionValue)
+      (nameTerm === "" || name.includes(nameTerm)) && 
+      (compositionValue === "" || selectedComposition.includes(compositionValue)) &&
+      composition.includes(compositionTerm) &&
+      massInRange &&
+      yearInRange
     ) {
-      return (
-        composition.includes(compositionTerm) && massInRange && yearInRange
-      );
+      return true;
     }
+    return false;
   });
-
+  
   checkResults(filteredAdvanceResults);
   addMarkersToMap(filteredAdvanceResults);
   displayList(filteredAdvanceResults, table, rows, currentPage, paginationInfo);
