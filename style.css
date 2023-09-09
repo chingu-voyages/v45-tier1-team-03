@@ -916,7 +916,7 @@ canvas {
   .main-wrapper {
     margin-top: 0%;
     align-items: end;
-    width: 90%;
+    width: 100vw;
   }
   .container {
     width: 100%;
@@ -956,12 +956,29 @@ canvas {
   .result-container .table-container {
     width: 100%;
   }
+  .table-header {
+    width: 80%;
+  }
+  .table-header h2 {
+    text-align: start;
+  }
+  .filters button {
+    font-size: 15px;
+    padding: 3px 10px;
+  }
   .filter-container {
     flex-wrap: wrap;
     gap: 15px;
   }
   .search-container input {
     width: 300px;
+  }
+  #clearButton {
+    right: 15%;
+    top: 25%;
+  }
+  #searchButton {
+    display: none;
   }
   /* .dropdown {
     flex
@@ -1006,15 +1023,19 @@ canvas {
     width: 80%;
     margin: 0 auto;
   } */
-  .show-search {
-    width: 80%;
+  .histogram button {
+    font-size: 14px;
+  }
+  .chart {
+    width: 100%;
   }
   .clear-btn {
     width: 30%;
   }
   .calculate {
-    width: 80%;
+    width: 100%;
     /* justify-content: center; */
+    /* padding: 5px; */
   }
   .calculate p {
     font-size: 14px;
