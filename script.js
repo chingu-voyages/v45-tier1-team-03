@@ -8,7 +8,9 @@ const homeSection = document.getElementById("homeSection");
 const resultSection = document.getElementById("resultSection");
 const switchBtn = document.getElementById("switchBtn");
 const yearChart = document.getElementById("yearHistogramContainer");
-const compositionChart = document.getElementById("compositionHistogramContainer");
+const compositionChart = document.getElementById(
+  "compositionHistogramContainer"
+);
 // const advanceSection = document.getElementById("advanceSearch");
 const explore = document.getElementById("explore");
 const exploreLink = document.getElementById("exploreLink");
@@ -97,16 +99,13 @@ function initializePage() {
   openNav.addEventListener("click", openMenu);
   closeNav.addEventListener("click", closeMenu);
   searchButton.addEventListener("click", displayResults);
-  tableBtn.addEventListener("click", switchToTable);
   switchBtn.addEventListener("click", switchChart);
-  mapBtn.addEventListener("click", switchToMap);
   searchInput.addEventListener("keyup", displayResults);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
-  filterBtn. addEventListener("click", getSearch);
+  filterBtn.addEventListener("click", getSearch);
   filterButton.addEventListener("click", getAdvanceFilter);
   saveButton.addEventListener("click", saveFilter);
-  // clearPrevBtn.addEventListener("click", clearSavedSearches);
   resetButton.addEventListener("click", resetResults);
   clearButton.addEventListener("click", clearSearch);
 }
@@ -125,22 +124,18 @@ function handleLinks() {
 function handleStart(e) {
   e.preventDefault();
   displayResults(meteorData);
-  // explore.classList.remove("hidden");
   homeSection.classList.add("hidden");
   resultSection.classList.remove("hidden");
-  // mainWrapper.classList.add("hidden");
-  // advanceSection.classList.add("hidden");
-  // searchWrapper.classList.add("hidden");
 }
 
 function openMenu() {
-  navbarWrapper.classList.add('navbar-mobile');
+  navbarWrapper.classList.add("navbar-mobile");
   navbarWrapper.style.display = "block";
   openNav.classList.add("hidden");
   closeNav.classList.remove("hidden");
 }
 function closeMenu() {
-  navbarWrapper.classList.remove('navbar-mobile');
+  navbarWrapper.classList.remove("navbar-mobile");
   navbarWrapper.style.display = "hidden";
   navbarWrapper.style.display = "none";
   openNav.classList.remove("hidden");
@@ -149,41 +144,23 @@ function closeMenu() {
 function getSearch() {
   mainWrapper.classList.add("hidden");
   explore.classList.remove("hidden");
-  // explore.classList.remove("hidden");
-  // resultSection.classList.add("hidden");
-  // searchButton.classList.add("hidden");
-  // searchWrapper.style.transform = "translateY(-70px)";
 }
 
 function clearSearch() {
   searchInput.value = "";
+  displayResults(meteorData);
 }
+
 function switchChart() {
-  console.log("Switch chart function called");
-  
   if (compositionChart.classList.contains("hidden")) {
-    console.log("Composition chart is hidden");
     compositionChart.classList.remove("hidden");
     yearChart.classList.add("hidden");
-    switchBtn.style.backgroundColor = "rgb(225, 85, 33, 1)"
+    switchBtn.style.backgroundColor = "var(--clr-orange)";
   } else {
-    console.log("Year chart is hidden");
     compositionChart.classList.add("hidden");
     yearChart.classList.remove("hidden");
-    switchBtn.style.backgroundColor = "rgba(75, 192, 192, 1)";
+    switchBtn.style.backgroundColor = "var(--clr-blue)";
   }
-}
-
-function switchToTable(e) {
-  e.preventDefault();
-  tableWrapper.classList.remove("hidden");
-  mapWrapper.classList.add("hidden");
-}
-
-function switchToMap(e) {
-  e.preventDefault();
-  mapWrapper.classList.remove("hidden");
-  tableWrapper.classList.add("hidden");
 }
 
 function getInputValue(e) {
@@ -193,39 +170,7 @@ function getInputValue(e) {
   }
 }
 
-// document.addEventListener("DOMContentLoaded", function() {
-//   const navbar = document.getElementById("navbar");
-
-//   if (navbar) {
-//     function updateNavbarPosition() {
-//       const scrollY = window.scrollY;
-
-//       if (scrollY > 0) {
-//         navbar.classList.add("fixed-navbar");
-//       } else {
-//         navbar.classList.remove("fixed-navbar");
-//       }
-//     }
-
-//     window.addEventListener("scroll", updateNavbarPosition);
-//   }
-// });
-// const openMenu = document.querySelector('.openMenu');
-// const closeMenu = document.querySelector('.closeMenu');
-// const navlinks = document.querySelector('.nav-links');
-// openMenu.addEventListener('click', show);
-// closeMenu.addEventListener('click', close);
-
-// function show() {
-//   navlinks.style.display = 'flex';
-//   navlinks.style.top = '0';
-// }
-// function close() {
-//   navlinks.style.top = '-100%';
-// }
-
 function displayResults() {
-  // getSearch();
   getResults();
 
   if (filteredResults.length === 0 || searchText === "") {
@@ -267,29 +212,29 @@ function getResults() {
 
 // Function to display first page items in a table
 function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
-
-  wrapper.innerHTML = "";
   page--;
 
-  let start = rowsPerPage * page;
-  let end = start + rowsPerPage;
-  let paginatedItems = items.slice(start, end);
+  const start = rowsPerPage * page;
+  const end = Math.min(start + rowsPerPage, items.length);
+  const paginatedItems = items.slice(start, end);
 
-  pageInfowrapper.innerText = `Showing meteorite landings ${start + 1} of ${
-    end > items.length ? items.length : end
-  } out of ${items.length}`;
+  const itemCount = Math.min(end, items.length);
+  pageInfowrapper.innerText = `Showing meteorite landings ${
+    start + 1
+  } to ${itemCount} out of ${items.length}`;
 
-  for (let i = 0; i < paginatedItems.length; i++) {
-    let item = paginatedItems[i];
-    let itemEl = document.createElement("tr");
-    itemEl.innerHTML = `
+  wrapper.innerHTML = paginatedItems
+    .map(
+      (item) => `
+    <tr>
       <td>${item.name || "-"}</td>
       <td>${item.mass || "-"}</td>
       <td>${item.year ? item.year.substring(0, 4) : "-"}</td>
       <td>${item.recclass || "-"}</td>
-      `;
-    wrapper.appendChild(itemEl);
-  }
+    </tr>
+  `
+    )
+    .join("");
 }
 
 // Adding event listeners to all sort icons
@@ -307,7 +252,7 @@ Array.from(sortArrow).forEach((el, i) => {
     if (searchText) {
       sortData(filteredResults);
     } else {
-      sortData(meteorData)
+      sortData(meteorData);
     }
   });
 });
@@ -397,9 +342,9 @@ function changeBackgroundImage() {
   document.body.style.backgroundImage = newBackgroundImage;
   document.body.style.opacity = 0.8;
   setTimeout(() => {
-    document.main.style.height = "100vh";
     document.body.style.transition = "none";
-    document.body.position = "static";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundSize = "cover";
   }, 500);
 }
 
@@ -467,7 +412,7 @@ function populateDropdowns() {
     yearMinFilter.appendChild(optionMin);
     yearMaxFilter.appendChild(optionMax);
   });
-  // Call a function to poulate saved filters dropdown
+  // Call a function to populate saved filters dropdown
   populateFiltersDropdown();
 }
 
@@ -513,14 +458,14 @@ function addMarkersToMap(filteredData) {
 
       if (!isNaN(lat) && !isNaN(lon)) {
         let marker = L.circle([lat, lon], {
-          color: "#f16122",
+          color: "var(--clr-orange)",
         })
           .addTo(map)
           .bindPopup(
-            `Name: ${meteor.name},
-                    Mass: ${meteor.mass},
-                    Year: ${meteor.year},
-                    Composition: ${meteor.recclass}
+            `Name: ${meteor.name},<br>
+             Mass: ${meteor.mass},<br>
+             Year: ${meteor.year},<br>
+             Composition: ${meteor.recclass}
         `
           );
         markers.push(marker);
@@ -619,29 +564,32 @@ const yearHistogram = new Chart(document.getElementById("yearHistogram"), {
 });
 
 // Initialize the composition histogram
-const compositionHistogram = new Chart(document.getElementById("compositionHistogram"), {
-  type: "bar",
-  data: {
-    labels: [],
-    datasets: [
-      {
-        label: "Number of Strikes by Composition",
-        data: [],
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-        color: "rgb(255, 255, 255)",
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
+const compositionHistogram = new Chart(
+  document.getElementById("compositionHistogram"),
+  {
+    type: "bar",
+    data: {
+      labels: [],
+      datasets: [
+        {
+          label: "Number of Strikes by Composition",
+          data: [],
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+          color: "rgb(255, 255, 255)",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
       },
     },
-  },
-});
+  }
+);
 
 function updateChart(results) {
   const average = document.getElementById("averageStrikes");
@@ -650,13 +598,19 @@ function updateChart(results) {
   const years = results.map((item) =>
     item.year ? item.year.substring(0, 4) : "Unknown"
   );
-  const compositions = filteredResults.map(item => item.recclass || "Unknown");
+  const compositions = filteredResults.map(
+    (item) => item.recclass || "Unknown"
+  );
 
   const yearCounts = {};
   const compositionCounts = {};
   years.forEach((year) => (yearCounts[year] = (yearCounts[year] || 0) + 1));
-  
-  compositions.forEach(composition => compositionCounts[composition] = (compositionCounts[composition] || 0) + 1);
+
+  compositions.forEach(
+    (composition) =>
+      (compositionCounts[composition] =
+        (compositionCounts[composition] || 0) + 1)
+  );
 
   // Update the year histogram data
   yearHistogram.data.labels = Object.keys(yearCounts);
@@ -707,13 +661,13 @@ function calculateTotalStrikes(yearCounts) {
 // Function to save filters to local sotrage
 function saveFilter() {
   const dummyEvent = {
-    preventDefault: () => {} // define a preventDefault function to avoid errors
+    preventDefault: () => {}, // define a preventDefault function to avoid errors
   };
   getAdvanceFilter(dummyEvent);
 
   const newFilterItem = JSON.stringify(filteredAdvanceResults);
   const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
-  const filterID = "filterID: " + timestamp
+  const filterID = "filterID: " + timestamp;
   localStorage.setItem(filterID, newFilterItem);
   populateFiltersDropdown();
 }
@@ -722,15 +676,22 @@ function saveFilter() {
 function populateFiltersDropdown() {
   // Populate saved search dropdown
   savedSearchFilter.innerHTML = `<option value="">No Select</option>`;
-  const filterIDs = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20).sort();
-  const filterItems = filterIDs.map(item => {
+  const filterIDs = Object.keys(localStorage)
+    .filter(
+      (item) =>
+        item.startsWith("filterID: ") &&
+        item.split(":").length === 4 &&
+        item.indexOf(" / ") === 20
+    )
+    .sort();
+  const filterItems = filterIDs.map((item) => {
     const timestamp = item.replace("filterID: ", "");
     return {
       id: item,
-      timestamp: timestamp
+      timestamp: timestamp,
     };
   });
-  filterItems.forEach(item => {
+  filterItems.forEach((item) => {
     const optionFilter = document.createElement("option");
     optionFilter.value = item.id;
     optionFilter.textContent = item.timestamp;
@@ -740,7 +701,7 @@ function populateFiltersDropdown() {
   savedSearchFilter.addEventListener("change", () => {
     const selectedOption = savedSearchFilter.value;
     const savedfilterDataJSON = localStorage.getItem(selectedOption);
-    const savedfilterData = JSON.parse(savedfilterDataJSON)
+    const savedfilterData = JSON.parse(savedfilterDataJSON);
     checkResults(savedfilterData);
     addMarkersToMap(savedfilterData);
   });
@@ -748,8 +709,13 @@ function populateFiltersDropdown() {
 
 // Function to clear all saved filters
 function clearSavedSearches() {
-  const keysToRemove = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20);
-  keysToRemove.forEach(key => localStorage.removeItem(key));
+  const keysToRemove = Object.keys(localStorage).filter(
+    (item) =>
+      item.startsWith("filterID: ") &&
+      item.split(":").length === 4 &&
+      item.indexOf(" / ") === 20
+  );
+  keysToRemove.forEach((key) => localStorage.removeItem(key));
   populateFiltersDropdown();
 }
 

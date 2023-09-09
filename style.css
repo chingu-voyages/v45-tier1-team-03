@@ -1,14 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&family=VT323&display=swap");
 
-/******** Normalize ********/
 :root {
   --clr-white: rgba(250, 250, 250, 1);
   --clr-white-opacity: rgba(250, 250, 250, 0.7);
   --crl-mid-gray: rgba(188, 188, 188, 1);
   --crl-input: rgba(200, 200, 200, 1);
   --clr-light-gray: rgba(150, 150, 150, 1);
-  --clr-clear-btn:rgba(129, 129, 129, 1);
+  --clr-clear-btn: rgba(129, 129, 129, 1);
   --clr-orange: rgb(225, 85, 33, 1);
   --clr-blue: rgba(75, 192, 192, 1);
   --clr-green: rgba(56, 159, 54, 1);
@@ -16,7 +15,6 @@
   --clr-footer: rgba(19, 24, 32, 1);
   --clr-black-opacity: rgba(0, 0, 0, 0.5);
   --clr-black: rgba(0, 0, 0, 1);
-
 }
 * {
   margin: 0%;
@@ -57,8 +55,9 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; 
+  z-index: 1000;
   opacity: 1;
+  transition: top 0.3s, background-color 0.3s;
 }
 header ul {
   display: flex;
@@ -81,15 +80,15 @@ header ul li a {
   margin-top: 20px;
 }
 .navbar-mobile {
-    height: 100vh;
-    position: fixed;
-    top: 10%;
-    right: 0%;
-    left: 75%;
-    z-index: 10;
-    background-color: transparent;
-    backdrop-filter: blur(5px);
-    transition: top 1s ease;
+  height: 100vh;
+  position: fixed;
+  top: 10%;
+  right: 0%;
+  left: 75%;
+  z-index: 10;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  transition: top 1s ease;
 }
 
 /******** Main ********/
@@ -176,7 +175,6 @@ main {
   border: none;
   background-color: transparent;
 }
-
 #clearButton {
   border: none;
   position: absolute;
@@ -585,7 +583,7 @@ canvas {
 }
 /******** About section ********/
 .about-section {
-  color: var(--clr-white);  
+  color: var(--clr-white);
   width: 60%;
   display: flex;
   flex-wrap: wrap;
@@ -660,7 +658,6 @@ footer a {
   color: var(--clr-white);
 }
 @media (max-width: 1024px) and (min-width: 850px) {
-
   /**** Navbar ****/
   nav ul li {
     margin: 0 30%;
@@ -697,7 +694,7 @@ footer a {
   .custom-select {
     min-width: 80px;
     gap: 10px;
-}
+  }
   .sel select {
     width: 100px;
     padding: 5px;
@@ -710,7 +707,6 @@ footer a {
   }
 }
 @media (max-width: 850px) {
-
   /**** navbar ****/
   .hamburger {
     display: block;
@@ -784,7 +780,7 @@ footer a {
     min-width: 400px;
     min-height: 200px;
   }
-  
+
   /**** Explore page ****/
   #explore {
     width: 100vw;
@@ -808,7 +804,7 @@ footer a {
     min-width: 80px;
     gap: 10px;
     flex-direction: column;
-}
+  }
   .sel select {
     width: 80px;
     padding: 5px;
@@ -828,7 +824,6 @@ footer a {
 }
 
 @media only screen and (max-width: 600px) {
-
   /**** Landing page ****/
   .main-wrapper {
     margin-top: 0%;
@@ -948,29 +943,29 @@ footer a {
   }
 
   /**** Team page ****/
-.team-section {
-  width: 100%;
-}
-.team-card-container {
-  gap: 10px;
-}
-.team h2 {
-  font-size: 25px;
-}
-.team-card {
-  height: 200px;
-}
-.team-card img {
-  width: 70px;
-  height: 70px;
-}
-.team-card h3 {
-  font-size: 15px;
-  height: 40px;
-}
-.team-card p {
-   font-size: 12px
-}
+  .team-section {
+    width: 100%;
+  }
+  .team-card-container {
+    gap: 10px;
+  }
+  .team h2 {
+    font-size: 25px;
+  }
+  .team-card {
+    height: 200px;
+  }
+  .team-card img {
+    width: 70px;
+    height: 70px;
+  }
+  .team-card h3 {
+    font-size: 15px;
+    height: 40px;
+  }
+  .team-card p {
+    font-size: 12px;
+  }
 }
 /******** Misc ********/
 .hidden {
