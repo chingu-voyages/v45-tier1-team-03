@@ -44,8 +44,9 @@ const tableBtn = document.getElementById("switchButton");
 const tableWrapper = document.getElementById("table");
 const mapWrapper = document.getElementById("mapWrapper");
 const saveButton = document.getElementById("saveButton");
-// const clearPrevBtn = document.getElementById("clearPrevBtn");
 const resetButton = document.getElementById("resetButton");
+const delAllFiltersBtn = document.getElementById("delAllFiltersBtn");
+const delFilterBtn = document.getElementById("delFilterBtn");
 
 // Data
 let meteorData = []; // Store fetched meteor data
@@ -107,6 +108,7 @@ function initializePage() {
   filterButton.addEventListener("click", getAdvanceFilter);
   saveButton.addEventListener("click", saveFilter);
   resetButton.addEventListener("click", resetResults);
+  delAllFiltersBtn.addEventListener("click", clearSavedSearches);
   clearButton.addEventListener("click", clearSearch);
 }
 
@@ -674,38 +676,35 @@ function saveFilter() {
 
 // Function to populate saved filters dropdown
 function populateFiltersDropdown() {
-  // Populate saved search dropdown
   savedSearchFilter.innerHTML = `<option value="">No Select</option>`;
-  const filterIDs = Object.keys(localStorage)
-    .filter(
-      (item) =>
-        item.startsWith("filterID: ") &&
-        item.split(":").length === 4 &&
-        item.indexOf(" / ") === 20
-    )
-    .sort();
-  const filterItems = filterIDs.map((item) => {
+  const filterIDs = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20).sort();
+  // Populate saved search dropdown
+  filterIDs.forEach(item => {
     const timestamp = item.replace("filterID: ", "");
-    return {
-      id: item,
-      timestamp: timestamp,
-    };
-  });
-  filterItems.forEach((item) => {
     const optionFilter = document.createElement("option");
-    optionFilter.value = item.id;
-    optionFilter.textContent = item.timestamp;
+    optionFilter.value = item;
+    optionFilter.textContent = timestamp;
     savedSearchFilter.appendChild(optionFilter);
   });
   // Add event listeners to each dropdown option to display the saved filter
   savedSearchFilter.addEventListener("change", () => {
     const selectedOption = savedSearchFilter.value;
-    const savedfilterDataJSON = localStorage.getItem(selectedOption);
-    const savedfilterData = JSON.parse(savedfilterDataJSON);
-    checkResults(savedfilterData);
-    addMarkersToMap(savedfilterData);
+    if (selectedOption) {
+      const savedfilterDataJSON = localStorage.getItem(selectedOption);
+      const savedfilterData = JSON.parse(savedfilterDataJSON)
+      checkResults(savedfilterData);
+      addMarkersToMap(savedfilterData);    
+    }
   });
-}
+  // Delete selected item
+  delFilterBtn.addEventListener("click", () => {
+    const selectedOption = savedSearchFilter.value;
+    if (selectedOption && selectedOption) {
+      localStorage.removeItem(selectedOption);
+      populateFiltersDropdown();
+    }
+  })
+};
 
 // Function to clear all saved filters
 function clearSavedSearches() {
