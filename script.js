@@ -1,14 +1,21 @@
 // DOM element references
-const mainMenu = document.querySelector('.mainMenu');
-const closeMenu = document.querySelector('.closeMenu');
-const openMenu = document.querySelector('.openMenu');
 const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
+const burger = document.querySelector(".burger");
+const nav = document.querySelector(".nav-links");
+const homeSection = document.getElementById("homeSection");
+const resultSection = document.getElementById("resultSection");
+const switchBtn = document.getElementById("switchBtn");
+const yearChart = document.getElementById("yearHistogramContainer");
+const compositionChart = document.getElementById(
+  "compositionHistogramContainer"
+);
 const explore = document.getElementById("explore");
 const exploreLink = document.getElementById("exploreLink");
 const searchInput = document.getElementById("searchInput");
 const searchWrapper = document.getElementById("searchWrapper");
-// const searchButton = document.getElementById("searchButton");
+const searchButton = document.getElementById("searchButton");
+const filterBtn = document.getElementById("filterBtn");
 const exploreBtn = document.getElementById("exploreBtn");
 const clearButton = document.getElementById("clearButton");
 const searchIcon = document.getElementById("searchIcon");
@@ -29,33 +36,25 @@ const massMinFilter = document.getElementById("massMinFilter");
 const massMaxFilter = document.getElementById("massMaxFilter");
 const yearMinFilter = document.getElementById("yearMinFilter");
 const yearMaxFilter = document.getElementById("yearMaxFilter");
+const savedSearchFilter = document.getElementById("savedSearchFilter");
 const noResultsMessage = document.querySelector(".no-results");
 const tableBtn = document.getElementById("switchButton");
 const tableWrapper = document.getElementById("table");
 const mapWrapper = document.getElementById("mapWrapper");
 const saveButton = document.getElementById("saveButton");
-const clearPrevBtn = document.getElementById("clearPrevBtn");
 const resetButton = document.getElementById("resetButton");
-
-// Nav
-openMenu.addEventListener('click', show);
-closeMenu.addEventListener('click', close);
-
-function show() {
-  mainMenu.style.display = 'flex';
-  mainMenu.style.top = '0';
-}
-function close() {
-  mainMenu.style.top = '-100%';
-}
+const delAllFiltersBtn = document.getElementById("delAllFiltersBtn");
+const delFilterBtn = document.getElementById("delFilterBtn");
+const animationContainer = document.getElementById("animation-container");
 
 // Data
+let meteorNumber = 25; // Number of meteors in background animation
 let meteorData = []; // Store fetched meteor data
 let filteredResults = []; // Store filtered data
 let filteredAdvanceResults = []; // Store filtered advance results
 let currentImageIndex = 0; // Current image index
 let currentPage = 1; // First page of detail display data
-let rows = 20; // Number of rows per page
+let rows = 10; // Number of rows per page
 let searchText; // Store input search terms
 let selectedYearRange; // Store year range data
 let markerCluster; // Store marker cluster
@@ -68,6 +67,11 @@ const imagePaths = [
   "assets/landing_page2.jpg",
   "assets/landing_page3.jpg",
 ];
+
+// Adding meteors for background animation
+for(let i = 1; i <= meteorNumber; i++){
+  animationContainer.innerHTML += `<div class="meteor-${i}"></div>`
+}
 
 // Data fetching and initialization
 function fetchData() {
@@ -98,16 +102,17 @@ function initializePage() {
 
   exploreBtn.addEventListener("click", handleStart);
   exploreLink.addEventListener("click", displayResults);
-  // searchButton.addEventListener("click", displayResults);
-  tableBtn.addEventListener("click", switchToTable);
-  mapBtn.addEventListener("click", switchToMap);
+  burger.addEventListener("click", toggleMenu);
+  searchButton.addEventListener("click", displayResults);
+  switchBtn.addEventListener("click", switchChart);
   searchInput.addEventListener("keyup", displayResults);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
+  filterBtn.addEventListener("click", getSearch);
   filterButton.addEventListener("click", getAdvanceFilter);
   saveButton.addEventListener("click", saveFilter);
-  clearPrevBtn.addEventListener("click", clearSavedSearches);
   resetButton.addEventListener("click", resetResults);
+  delAllFiltersBtn.addEventListener("click", clearSavedSearches);
   clearButton.addEventListener("click", clearSearch);
 }
 
@@ -122,34 +127,38 @@ function handleLinks() {
   });
 }
 
-function handleStart(e) {
+function toggleMenu(e) {
   e.preventDefault();
-  explore.classList.remove("hidden");
-  mainWrapper.classList.add("hidden");
-  resultsWrapper.classList.add("hidden");
+  nav.classList.toggle("open");
+  burger.classList.toggle("open");
 }
 
+function handleStart(e) {
+  e.preventDefault();
+  displayResults(meteorData);
+  homeSection.classList.add("hidden");
+  resultSection.classList.remove("hidden");
+}
 function getSearch() {
+  mainWrapper.classList.add("hidden");
   explore.classList.remove("hidden");
-  resultsWrapper.classList.remove("hidden");
-  searchWrapper.style.transform = "translateY(-70px)";
-  // searchButton.style.transform = "translateX(-600px)";
 }
 
 function clearSearch() {
   searchInput.value = "";
+  displayResults(meteorData);
 }
 
-function switchToTable(e) {
-  e.preventDefault();
-  tableWrapper.classList.remove("hidden");
-  mapWrapper.classList.add("hidden");
-}
-
-function switchToMap(e) {
-  e.preventDefault();
-  mapWrapper.classList.remove("hidden");
-  tableWrapper.classList.add("hidden");
+function switchChart() {
+  if (compositionChart.classList.contains("hidden")) {
+    compositionChart.classList.remove("hidden");
+    yearChart.classList.add("hidden");
+    switchBtn.style.backgroundColor = "var(--clr-orange)";
+  } else {
+    compositionChart.classList.add("hidden");
+    yearChart.classList.remove("hidden");
+    switchBtn.style.backgroundColor = "var(--clr-blue)";
+  }
 }
 
 function getInputValue(e) {
@@ -160,7 +169,6 @@ function getInputValue(e) {
 }
 
 function displayResults() {
-  getSearch();
   getResults();
 
   if (filteredResults.length === 0 || searchText === "") {
@@ -170,7 +178,6 @@ function displayResults() {
     nextPrevButtons(nextPrevContainer, meteorData);
     addMarkersToMap(meteorData);
     updateChart(meteorData);
-    listSavedFilters();
   } else {
     currentPage = 1;
     displayList(filteredResults, table, rows, currentPage, paginationInfo);
@@ -178,7 +185,6 @@ function displayResults() {
     nextPrevButtons(nextPrevContainer, filteredResults);
     updateChart(filteredResults);
     addMarkersToMap(filteredResults);
-    listSavedFilters();
   }
 }
 
@@ -204,29 +210,29 @@ function getResults() {
 
 // Function to display first page items in a table
 function displayList(items, wrapper, rowsPerPage, page, pageInfowrapper) {
-
-  wrapper.innerHTML = "";
   page--;
 
-  let start = rowsPerPage * page;
-  let end = start + rowsPerPage;
-  let paginatedItems = items.slice(start, end);
+  const start = rowsPerPage * page;
+  const end = Math.min(start + rowsPerPage, items.length);
+  const paginatedItems = items.slice(start, end);
 
-  pageInfowrapper.innerText = `Showing meteorite landings ${start + 1} of ${
-    end > items.length ? items.length : end
-  } out of ${items.length}`;
+  const itemCount = Math.min(end, items.length);
+  pageInfowrapper.innerText = `Showing meteorite landings ${
+    start + 1
+  } to ${itemCount} out of ${items.length}`;
 
-  for (let i = 0; i < paginatedItems.length; i++) {
-    let item = paginatedItems[i];
-    let itemEl = document.createElement("tr");
-    itemEl.innerHTML = `
+  wrapper.innerHTML = paginatedItems
+    .map(
+      (item) => `
+    <tr>
       <td>${item.name || "-"}</td>
       <td>${item.mass || "-"}</td>
       <td>${item.year ? item.year.substring(0, 4) : "-"}</td>
       <td>${item.recclass || "-"}</td>
-      `;
-    wrapper.appendChild(itemEl);
-  }
+    </tr>
+  `
+    )
+    .join("");
 }
 
 // Adding event listeners to all sort icons
@@ -244,7 +250,7 @@ Array.from(sortArrow).forEach((el, i) => {
     if (searchText) {
       sortData(filteredResults);
     } else {
-      sortData(meteorData)
+      sortData(meteorData);
     }
   });
 });
@@ -330,11 +336,13 @@ function changeBackgroundImage() {
   const newBackgroundImage = `url('${imagePaths[currentImageIndex]}')`;
   document.body.style.transition =
     "background-image 0.5s ease, opacity 0.5s ease";
+  document.body.style.backgroundAttachment = "fixed";
   document.body.style.backgroundImage = newBackgroundImage;
   document.body.style.opacity = 0.8;
   setTimeout(() => {
     document.body.style.transition = "none";
-    document.body.style.opacity = 1;
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundSize = "cover";
   }, 500);
 }
 
@@ -352,6 +360,18 @@ function getPrevImg(e) {
 }
 
 function populateDropdowns() {
+  const uniqueName = Array.from(
+    new Set(meteorData.map((meteor) => meteor.name || ""))
+  );
+  // Sort alphabetically
+  uniqueName.sort((a, b) => a.localeCompare(b));
+
+  uniqueName.forEach((name) => {
+    const option = document.createElement("option");
+    option.value = name.toLowerCase();
+    option.textContent = name;
+    nameFilter.appendChild(option);
+  });
   const uniqueCompositions = Array.from(
     new Set(meteorData.map((meteor) => meteor.recclass || ""))
   );
@@ -402,6 +422,8 @@ function populateDropdowns() {
     yearMinFilter.appendChild(optionMin);
     yearMaxFilter.appendChild(optionMax);
   });
+  // Call a function to populate saved filters dropdown
+  populateFiltersDropdown();
 }
 
 // Initialize the map
@@ -420,9 +442,12 @@ function initializeMap() {
     attribution: cartodbAttribution,
   }).addTo(map);
 
-  // window.dispatchEvent(new Event('resize'), function () {
-  //   map.invalidateSize();
-  // });
+  const resizeObserver = new ResizeObserver(() => {
+    map.invalidateSize();
+  });
+  
+  const mapDiv = document.getElementById("map");
+  resizeObserver.observe(mapDiv);
 }
 
 // Add markers to the map
@@ -446,14 +471,14 @@ function addMarkersToMap(filteredData) {
 
       if (!isNaN(lat) && !isNaN(lon)) {
         let marker = L.circle([lat, lon], {
-          color: "#f16122",
+          color: "var(--clr-orange)",
         })
           .addTo(map)
           .bindPopup(
-            `Name: ${meteor.name},
-                    Mass: ${meteor.mass},
-                    Year: ${meteor.year},
-                    Composition: ${meteor.recclass}
+            `Name: ${meteor.name},<br>
+             Mass: ${meteor.mass},<br>
+             Year: ${meteor.year},<br>
+             Composition: ${meteor.recclass}
         `
           );
         markers.push(marker);
@@ -471,13 +496,15 @@ function addMarkersToMap(filteredData) {
 function getAdvanceFilter(e) {
   e.preventDefault();
 
-  const compositionTerm = compositionFilter.value.toLowerCase().trim();
+  const nameTerm = nameFilter.value.toLowerCase(); 
+  const compositionTerm = compositionFilter.value.toLowerCase();
   const massMin = parseFloat(massMinFilter.value);
   const massMax = parseFloat(massMaxFilter.value);
   const yearMin = parseInt(yearMinFilter.value);
   const yearMax = parseInt(yearMaxFilter.value);
 
   filteredAdvanceResults = meteorData.filter((meteor) => {
+    const name = (meteor.name || "").toLowerCase();
     const composition = (meteor.recclass || "").toLowerCase();
     const mass = parseFloat(meteor.mass);
     const year = parseInt(meteor.year);
@@ -493,15 +520,18 @@ function getAdvanceFilter(e) {
     const selectedComposition = (meteor.recclass || "").toLowerCase();
 
     if (
-      compositionValue === "" ||
-      selectedComposition.includes(compositionValue)
+      nameTerm === "" || name.includes(nameTerm) && 
+      compositionValue === "" || selectedComposition.includes(compositionValue) 
     ) {
       return (
-        composition.includes(compositionTerm) && massInRange && yearInRange
+        name.includes(nameTerm) &&
+        composition.includes(compositionTerm) &&
+        massInRange &&
+        yearInRange
       );
     }
   });
-
+  
   checkResults(filteredAdvanceResults);
   addMarkersToMap(filteredAdvanceResults);
   displayList(filteredAdvanceResults, table, rows, currentPage, paginationInfo);
@@ -551,6 +581,34 @@ const yearHistogram = new Chart(document.getElementById("yearHistogram"), {
   },
 });
 
+// Initialize the composition histogram
+const compositionHistogram = new Chart(
+  document.getElementById("compositionHistogram"),
+  {
+    type: "bar",
+    data: {
+      labels: [],
+      datasets: [
+        {
+          label: "Number of Strikes by Composition",
+          data: [],
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+          color: "rgb(255, 255, 255)",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  }
+);
+
 function updateChart(results) {
   const average = document.getElementById("averageStrikes");
   const total = document.getElementById("totalStrikes");
@@ -558,14 +616,30 @@ function updateChart(results) {
   const years = results.map((item) =>
     item.year ? item.year.substring(0, 4) : "Unknown"
   );
+  const compositions = filteredResults.map(
+    (item) => item.recclass || "Unknown"
+  );
+
   const yearCounts = {};
+  const compositionCounts = {};
   years.forEach((year) => (yearCounts[year] = (yearCounts[year] || 0) + 1));
+
+  compositions.forEach(
+    (composition) =>
+      (compositionCounts[composition] =
+        (compositionCounts[composition] || 0) + 1)
+  );
 
   // Update the year histogram data
   yearHistogram.data.labels = Object.keys(yearCounts);
   yearHistogram.data.datasets[0].data = Object.values(yearCounts);
 
+  // Update the composition histogram data
+  compositionHistogram.data.labels = Object.keys(compositionCounts);
+  compositionHistogram.data.datasets[0].data = Object.values(compositionCounts);
+
   yearHistogram.update();
+  compositionHistogram.update();
 
   // Calculate and log the average strikes
   const averageStrikes = calculateAverageStrikes(yearCounts);
@@ -605,65 +679,70 @@ function calculateTotalStrikes(yearCounts) {
 // Function to save filters to local sotrage
 function saveFilter() {
   const dummyEvent = {
-    preventDefault: () => {} // define a preventDefault function to avoid errors
+    preventDefault: () => {}, // define a preventDefault function to avoid errors
   };
   getAdvanceFilter(dummyEvent);
 
   const newFilterItem = JSON.stringify(filteredAdvanceResults);
   const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
-  const filterID = "filterID: " + timestamp
+  const filterID = "filterID: " + timestamp;
   localStorage.setItem(filterID, newFilterItem);
-  listSavedFilters();
+  populateFiltersDropdown();
 }
 
-// Function to display local storage list of filters
-function listSavedFilters() {
-  const savedFiltersList = document.getElementById("savedFiltersList");
-  savedFiltersList.innerHTML = "";
-
-  for (let i = 0; i < localStorage.length; i++) {
-    const timestamp = localStorage.key(i)
-    if (timestamp.length === 31 && timestamp.indexOf(" / ") === 20 && timestamp.split(":").length === 4) {
-      const filterDataJSON = localStorage.getItem(timestamp);
-      const filterData = JSON.parse(filterDataJSON);
-
-      const listItem = document.createElement("li");
-      savedFiltersList.appendChild(listItem);
-      const listItemText = document.createElement("span");
-      listItem.appendChild(listItemText);
-      const deleteBtn = document.createElement("i");
-      deleteBtn.classList.add("fa-solid");
-      deleteBtn.classList.add("fa-trash-can");
-      listItemText.textContent = `${timestamp.slice(10)}`;
-      listItem.appendChild(deleteBtn);
-
-      deleteBtn.addEventListener("click", () => {
-        localStorage.removeItem(timestamp);
-        listSavedFilters();
-      })
-
-      listItemText.addEventListener('click', () => {
-        checkResults(filterData);
-        addMarkersToMap(filterData);
-      })
+// Function to populate saved filters dropdown
+function populateFiltersDropdown() {
+  savedSearchFilter.innerHTML = `<option value="">Options</option>`;
+  const filterIDs = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20).sort();
+  // Populate saved search dropdown
+  filterIDs.forEach(item => {
+    const timestamp = item.replace("filterID: ", "");
+    const optionFilter = document.createElement("option");
+    optionFilter.value = item;
+    optionFilter.textContent = timestamp;
+    savedSearchFilter.appendChild(optionFilter);
+  });
+  // Add event listeners to each dropdown option to display the saved filter
+  savedSearchFilter.addEventListener("change", () => {
+    const selectedOption = savedSearchFilter.value;
+    if (selectedOption) {
+      const savedfilterDataJSON = localStorage.getItem(selectedOption);
+      const savedfilterData = JSON.parse(savedfilterDataJSON)
+      checkResults(savedfilterData);
+      addMarkersToMap(savedfilterData);    
     }
-  }
-}
+  });
+  // Delete selected item
+  delFilterBtn.addEventListener("click", () => {
+    const selectedOption = savedSearchFilter.value;
+    if (selectedOption && selectedOption) {
+      localStorage.removeItem(selectedOption);
+      populateFiltersDropdown();
+    }
+  })
+};
 
 // Function to clear all saved filters
 function clearSavedSearches() {
-  const keysToRemove = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20);
-  keysToRemove.forEach(key => localStorage.removeItem(key));
-  listSavedFilters();
+  const keysToRemove = Object.keys(localStorage).filter(
+    (item) =>
+      item.startsWith("filterID: ") &&
+      item.split(":").length === 4 &&
+      item.indexOf(" / ") === 20
+  );
+  keysToRemove.forEach((key) => localStorage.removeItem(key));
+  populateFiltersDropdown();
 }
 
 function resetResults() {
   searchInput.value = "";
+  nameFilter.value = "";
   compositionFilter.value = "";
   massMinFilter.value = "";
   massMaxFilter.value = "";
   yearMinFilter.value = "";
   yearMaxFilter.value = "";
+  savedSearchFilter.value = "";
   filteredResults = [];
   filteredAdvanceResults = [];
   displayResults();
