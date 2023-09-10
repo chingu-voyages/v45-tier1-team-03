@@ -1,6 +1,4 @@
-Readme:
-
- Project Information
+Project Information
 ## 🌠 Meteor Shower App: Your Ultimate Meteor Adventure 🚀
 Meteor Shower App is the optimal app for meteorite enthusiasts of all levels. With its intuitive search tools and advanced exploration capabilities, you can easily discover the wonders of meteorite impacts from around the world. 🌍
 ## Dive into Cosmic Thrills 🌌
