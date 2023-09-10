@@ -96,7 +96,7 @@ header ul li a {
   position: relative;
   font-size: 1.2rem;
   cursor: pointer; 
-  z-index: 1;
+  z-index: 9999;
 }
 .burger span {
   margin-right: 1em;
@@ -244,6 +244,7 @@ main {
   height: 70%;
   margin: auto;
   overflow-y: scroll;
+  /* scrollbar-color: var(--clr-orange) var(--clr-white); */
   background-color: var(--clr-white-opacity);
   position: relative;
   border-collapse: collapse;
@@ -276,18 +277,10 @@ main {
   margin: 0.8em 0;
   color: var(--clr-orange);
 }
-.table-container {
-  /* display: block; */
-  /* overflow-y: scroll; */
-  /* background-color: var(--clr-white-opacity); */
-  /* position: relative; */
-  /* border-collapse: collapse; */
-  /* border-radius: 20px; */
-}
-.table-container table::-webkit-scrollbar-thumb {
+/* .table-container table::-webkit-scrollbar-thumb {
   background-color: var(--clr-black);
   border-radius: 10px;
-}
+} */
 .table-container table tr {
   width: 100%;
 }
@@ -301,7 +294,7 @@ main {
   padding: 0.5em;
   border: 2px solid var(--clr-white-opacity);
   text-align: left;
-  /* z-index: 10; */
+  z-index: 1;
 }
 .table-container table tbody tr td {
   width: 300px;
@@ -757,7 +750,7 @@ footer a {
     flex-direction: column;
     padding: min(30vh, 10rem) 2em;
     gap: 2em;
-    z-index: 1;
+    z-index: 9999;
     margin: 0%;
     transform: translateX(100%);
     transition: transform 350ms ease-out; 
