@@ -448,9 +448,6 @@ function initializeMap() {
   
   const mapDiv = document.getElementById("map");
   resizeObserver.observe(mapDiv);
-  // window.dispatchEvent(new Event('resize'), function () {
-  //   map.invalidateSize();
-  // });
 }
 
 // Add markers to the map
@@ -499,8 +496,8 @@ function addMarkersToMap(filteredData) {
 function getAdvanceFilter(e) {
   e.preventDefault();
 
-  const nameTerm = nameFilter.value.toLowerCase().trim(); 
-  const compositionTerm = compositionFilter.value.toLowerCase().trim();
+  const nameTerm = nameFilter.value.toLowerCase(); 
+  const compositionTerm = compositionFilter.value.toLowerCase();
   const massMin = parseFloat(massMinFilter.value);
   const massMax = parseFloat(massMaxFilter.value);
   const yearMin = parseInt(yearMinFilter.value);
@@ -523,15 +520,16 @@ function getAdvanceFilter(e) {
     const selectedComposition = (meteor.recclass || "").toLowerCase();
 
     if (
-      (nameTerm === "" || name.includes(nameTerm)) && 
-      (compositionValue === "" || selectedComposition.includes(compositionValue)) &&
-      composition.includes(compositionTerm) &&
-      massInRange &&
-      yearInRange
+      nameTerm === "" || name.includes(nameTerm) && 
+      compositionValue === "" || selectedComposition.includes(compositionValue) 
     ) {
-      return true;
+      return (
+        name.includes(nameTerm) &&
+        composition.includes(compositionTerm) &&
+        massInRange &&
+        yearInRange
+      );
     }
-    return false;
   });
   
   checkResults(filteredAdvanceResults);
@@ -738,6 +736,7 @@ function clearSavedSearches() {
 
 function resetResults() {
   searchInput.value = "";
+  nameFilter.value = "";
   compositionFilter.value = "";
   massMinFilter.value = "";
   massMaxFilter.value = "";
