@@ -373,7 +373,7 @@ function populateDropdowns() {
     nameFilter.appendChild(option);
   });
   const uniqueCompositions = Array.from(
-    new Set(meteorData.map((meteor) => meteor.composition || ""))
+    new Set(meteorData.map((meteor) => meteor.recclass || ""))
   );
   // Sort alphabetically
   uniqueCompositions.sort((a, b) => a.localeCompare(b));
@@ -742,6 +742,7 @@ function resetResults() {
   massMaxFilter.value = "";
   yearMinFilter.value = "";
   yearMaxFilter.value = "";
+  savedSearchFilter.value = "";
   filteredResults = [];
   filteredAdvanceResults = [];
   displayResults();
