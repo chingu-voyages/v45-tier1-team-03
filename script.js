@@ -435,6 +435,12 @@ function initializeMap() {
     attribution: cartodbAttribution,
   }).addTo(map);
 
+  const resizeObserver = new ResizeObserver(() => {
+    map.invalidateSize();
+  });
+  
+  const mapDiv = document.getElementById("map");
+  resizeObserver.observe(mapDiv);
   // window.dispatchEvent(new Event('resize'), function () {
   //   map.invalidateSize();
   // });
