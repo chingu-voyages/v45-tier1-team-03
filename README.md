@@ -51,22 +51,7 @@ Acceptance Criteria
 -While hovering over the map, the data should also be displayed on a small pop-up
 -There should be a paragraph with the numbers of meteorite strikes
 -There should be a scrollable detailed data display that shows meteorite strike history based on the search criteria
-Reset Button
-As a user, I want to have a 'Clear' button
-So that, to clear all search criteria and displays the entire meteorite strike dataset.
-Acceptance Criteria)
--when clicked clear any search criteria and also reset the detail data display and summary metrics to use the entire data set
-Summary Metrics Component
-As a user
-I want to see other results displaying if there is not any result according to user input, or find similar results
-So that i can still get new and interesting informations and stay entertained
-Acceptance Criteria)
-The results should be:
-Total number of strikes
-Average mass
-Histogram showing number of strikes by year
-Histogram showing number of strikes by meteorite composition (recclass).
-There should be a paragraph saying that there is no result according to user input/popup (be creative)
+
 
 Tech Stack
 
