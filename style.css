@@ -301,7 +301,7 @@ main {
   padding: 0.5em;
   border: 2px solid var(--clr-white-opacity);
   text-align: left;
-  z-index: 10;
+  /* z-index: 10; */
 }
 .table-container table tbody tr td {
   width: 300px;
