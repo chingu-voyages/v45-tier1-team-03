@@ -480,7 +480,13 @@ function addMarkersToMap(filteredData) {
              Year: ${meteor.year},<br>
              Composition: ${meteor.recclass}
         `
-          );
+          )
+          .on("mouseover", function (e) {
+            this.openPopup();
+          })
+          .on("mouseout", function (e) {
+            this.closePopup();
+          });
         markers.push(marker);
       }
     });
