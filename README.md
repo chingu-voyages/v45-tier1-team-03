@@ -18,7 +18,7 @@ Embark on uncharted paths and reveal extraordinary insights. From total strike c
 ## [Live link](https://master--aquamarine-custard-31618f.netlify.app/)
 
 
-## User Stories
+## User Stories [Trello](https://trello.com/b/SAvvNjHT/fireball)
 ### MVP (Must Have)
 #### Wireframe
 As a Developer
