@@ -45,10 +45,8 @@ const saveButton = document.getElementById("saveButton");
 const resetButton = document.getElementById("resetButton");
 const delAllFiltersBtn = document.getElementById("delAllFiltersBtn");
 const delFilterBtn = document.getElementById("delFilterBtn");
-const animationContainer = document.getElementById("animation-container");
 
 // Data
-let meteorNumber = 25; // Number of meteors in background animation
 let meteorData = []; // Store fetched meteor data
 let filteredResults = []; // Store filtered data
 let filteredAdvanceResults = []; // Store filtered advance results
@@ -67,11 +65,6 @@ const imagePaths = [
   "assets/landing_page2.jpg",
   "assets/landing_page3.jpg",
 ];
-
-// Adding meteors for background animation
-for(let i = 1; i <= meteorNumber; i++){
-  animationContainer.innerHTML += `<div class="meteor-${i}"></div>`
-}
 
 // Data fetching and initialization
 function fetchData() {
