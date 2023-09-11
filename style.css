@@ -1030,6 +1030,7 @@ footer a {
     width: 100%;
   }
   .team-card-container {
+    flex-direction: column;
     gap: 10px;
   }
   .team h2 {
@@ -1039,15 +1040,15 @@ footer a {
     height: 200px;
   }
   .team-card img {
-    width: 70px;
-    height: 70px;
+    width: 120px;
+    height: 120px;
   }
   .team-card h3 {
-    font-size: 15px;
+    font-size: 20px;
     height: 40px;
   }
   .team-card p {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 /******** Misc ********/
