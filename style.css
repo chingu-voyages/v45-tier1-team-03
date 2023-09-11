@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&family=VT323&display=swap");
-
 :root {
   --clr-white: rgba(250, 250, 250, 1);
   --clr-white-opacity: rgba(250, 250, 250, 0.7);
@@ -28,7 +27,6 @@ ul li {
 button {
   cursor: pointer;
 }
-
 body {
   font-family: "Roboto", sans-serif;
   background-image: url("assets/landing_page1.jpg");
@@ -40,7 +38,6 @@ body {
   position: static;
   overflow-x: hidden;
 }
-
 .animation-container{
   height: 100%;
   width: 100%;
@@ -50,13 +47,11 @@ body {
   background-repeat: no-repeat;
   z-index: 1;
 }
-
 @media(max-width:768px){
   .animation-container{
     display: none;
   }
 }
-
 /******** Header ********/
 header {
   display: flex;
@@ -117,7 +112,6 @@ header ul li a {
   backdrop-filter: blur(5px);
   transition: all 350ms ease-in;
 }
-
 /******** Main ********/
 main {
   margin: 40px 20px;
@@ -128,7 +122,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-
 /******** Landing page ********/
 .main-wrapper {
   display: flex;
@@ -177,7 +170,6 @@ main {
 .arrow-right:hover {
   transform: translateX(10px);
 }
-
 /******** Search-container ********/
 .search-container {
   position: relative;
@@ -218,7 +210,6 @@ main {
 #searchButton img {
   padding: 10px;
 }
-
 /**** Table ****/
 .result-container {
   width: 100vw;
@@ -353,7 +344,6 @@ main {
   right: 5%;
   top: 5%;
 }
-
 /**** Filter *****/
 .filters {
   display: flex;
@@ -482,7 +472,6 @@ main {
   justify-content: space-around;
   gap: 5px;
 }
-
 /******** Map ********/
 #map {
   width: 100%;
@@ -494,7 +483,6 @@ main {
   position: relative;
   padding: 10px;
 }
-
 /******** Chart ********/
 .chart-results {
   display: flex;
@@ -543,7 +531,6 @@ canvas {
   color: var(--clr-black);
   padding: 10px 30px;
 }
-
 /************About section**********/
 .about-text {
   line-height: 1.5;
@@ -607,7 +594,6 @@ canvas {
   text-decoration: none;
   color: var(--clr-white);
 }
-
 /******** Team section ********/
 .team-section {
   width: 100vw;
@@ -675,7 +661,6 @@ canvas {
 .video-container video {
   max-width: 100%;
 }
-
 /******** Footer ********/
 footer {
   color: var(--clr-white);
@@ -693,7 +678,6 @@ footer a {
   text-decoration: none;
   color: var(--clr-white);
 }
-
 .hamburger {
   font-size: 2rem;
   margin: 20px;
@@ -711,7 +695,6 @@ footer a {
   color: var(--clr-white);
 }
 @media (max-width: 1024px) and (min-width: 850px) {
-
   /**** Search page ****/
   .result-container .table-container {
     width: 80%;
@@ -730,7 +713,6 @@ footer a {
     min-width: 300px;
     min-height: 150px;
   }
-
   /**** Explore page ****/
   .filter-container {
     gap: 0%;
@@ -801,7 +783,6 @@ footer a {
     background: none;
     font-size: 22px;
   }
-
   /**** Landing page ****/
   .container h1 {
     font-size: 40px;
@@ -817,7 +798,6 @@ footer a {
   .arrow-right {
     width: 20px;
   }
-
   /**** About page ****/
   .about-section {
     width: 80%;
@@ -831,7 +811,6 @@ footer a {
   .about-text p {
     font-size: 18px;
   }
-
   /**** Search page ****/
   .result-container {
     gap: 0%;
@@ -857,7 +836,6 @@ footer a {
     min-width: 400px;
     min-height: 200px;
   }
-
   /**** Explore page ****/
   #explore {
     width: 100vw;
@@ -891,7 +869,6 @@ footer a {
     width: 100%;
     justify-content: center;
   }
-
   /**** Team page ****/
   .team-card-container {
     flex-wrap: wrap;
@@ -899,7 +876,6 @@ footer a {
     gap: 15px;
   }
 }
-
 @media only screen and (max-width: 600px) {
   /**** Landing page ****/
   .main-wrapper {
@@ -936,7 +912,6 @@ footer a {
   .about-text p {
     font-size: 16px;
   }
-
   /**** Search page ****/
   .result-container {
     gap: 0;
@@ -985,7 +960,6 @@ footer a {
     min-width: 300px;
     min-height: 150px;
   }
-
   /**** Explore page ****/
   .filter-container {
     flex-wrap: wrap;
@@ -1024,7 +998,6 @@ footer a {
     flex-direction: row;
     margin-top: 5px;
   }
-
   /**** Team page ****/
   .team-section {
     width: 100%;
@@ -1038,24 +1011,21 @@ footer a {
   }
   .team-card {
     height: 200px;
-    margin: 30px 0;
   }
   .team-card img {
+    width: 70px;
+    height: 70px;
     width: 120px;
     height: 120px;
   }
   .team-card h3 {
+    font-size: 15px;
     font-size: 20px;
-    height: 20px;
+    height: 40px;
   }
   .team-card p {
+    font-size: 12px;
     font-size: 15px;
-  }
-  .icon-container{
-    padding: 0;
-  }
-  .icon-container a{
-    font-size: 25px;
   }
 }
 /******** Misc ********/
