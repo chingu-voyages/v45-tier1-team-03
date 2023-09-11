@@ -58,7 +58,7 @@
 
     <main>
       <section id="home" class="main-wrapper panel">
-        <div id="homeSection" class="home">
+        <div class="home">
           <p id="error-message"></p>
           <a href="#">
             <img
@@ -83,65 +83,8 @@
             />
           </a>
         </div>
-        <div id="resultSection" class="result-container hidden">
-          <div id="searchWrapper" class="search-container">
-            <input
-              id="searchInput"
-              type="text"
-              placeholder="Search by keyword"
-            />
-            <button id="clearButton">x</button>
-            <button id="searchButton">
-              <img src="assets/search.svg" alt="search-icon" />
-            </button>
-          </div>
-          <div class="result-display">
-            <div class="table-container">
-              <div class="table-header">
-                <h2>meteorite landings</h2>
-                <div class="filters">
-                  <button id="filterBtn">Add filters</button>
-                </div>
-              </div>
-              <table>
-                <tr class="table-headings-container">
-                  <th>name <i class="fa-solid fa-sort"></i></th>
-                  <th>mass <i class="fa-solid fa-sort"></i></th>
-                  <th>year <i class="fa-solid fa-sort"></i></th>
-                  <th>composition <i class="fa-solid fa-sort"></i></th>
-                </tr>
-                <tbody id="detailDataDisplay"></tbody>
-              </table>
-              <div class="page-info-wrapper">
-                <span id="nextPrevContainer" class="next-prev-container"></span>
-                <span id="paginationInfo" class="pagination-info"></span>
-              </div>
-              <div id="pagination" class="pagination"></div>
-            </div>
-            <div id="charts">
-              <div class="calculate">
-                <p>
-                  Total strikes:
-                  <span style="font-size: 25px" id="totalStrikes"></span>
-                </p>
-                <p>
-                  Average strikes per year:
-                  <span style="font-size: 25px" id="averageStrikes"></span>
-                </p>
-              </div>
-              <div class="histogram">
-                <div class="chart" id="yearHistogramContainer">
-                  <canvas id="yearHistogram"></canvas>
-                </div>
-                <div class="chart hidden" id="compositionHistogramContainer">
-                  <canvas id="compositionHistogram"></canvas>
-                </div>
-                <button id="switchBtn">Switch charts</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
+
       <section id="about" class="panel hidden about-section">
         <div class="about-text">
           <h1>Meteor Shower App: Your Ultimate Meteor Adventure ☄️</h1>
@@ -208,9 +151,77 @@
         <p class="no-results hidden">
           No results match your search criteria. Please refine your search.
         </p>
-        <div class="filter-container">
+        <div id="resultSection" class="result-container">
+          <div id="searchWrapper" class="search-container">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Search by keyword"
+            />
+            <button id="clearButton">x</button>
+            <button id="searchButton">
+              <img src="assets/search.svg" alt="search-icon" />
+            </button>
+          </div>
+          <div class="result-display">
+            <div class="table-container">
+              <div class="table-header">
+                <h2>meteorite landings</h2>
+                <div class="filters">
+                  <button id="filterBtn">Add filters</button>
+                  <button id="switchButton">Map</button>
+                </div>
+              </div>
+              <table id="table">
+                <tr class="table-headings-container">
+                  <th>name <i class="fa-solid fa-sort"></i></th>
+                  <th>mass <i class="fa-solid fa-sort"></i></th>
+                  <th>year <i class="fa-solid fa-sort"></i></th>
+                  <th>composition <i class="fa-solid fa-sort"></i></th>
+                </tr>
+                <tbody id="detailDataDisplay"></tbody>
+              </table>
+              <div id="tablePagination" class="page-info-wrapper">
+                <span id="nextPrevContainer" class="next-prev-container"></span>
+                <span id="paginationInfo" class="pagination-info"></span>
+              </div>
+              <div id="pagination" class="pagination"></div>
+              <div id="mapWrapper" class="map hidden">
+                <div
+                  id="map"
+                  style="height: 480px; width: 90%; border-radius: 10px; z-index: 1; bottom: 45px; left: 40px;"
+                ></div>
+                <!-- <button id="switchButton">Table</button> -->
+              </div>
+            </div>
+            <div id="charts">
+              <div class="calculate">
+                <p>
+                  Total strikes:
+                  <span style="font-size: 25px" id="totalStrikes"></span>
+                </p>
+                <p>
+                  Average strikes per year:
+                  <span style="font-size: 25px" id="averageStrikes"></span>
+                </p>
+              </div>
+              <div class="histogram">
+                <div class="chart" id="yearHistogramContainer">
+                  <canvas id="yearHistogram"></canvas>
+                </div>
+                <div class="chart hidden" id="compositionHistogramContainer">
+                  <canvas id="compositionHistogram"></canvas>
+                </div>
+                <button id="switchBtn">Switch charts</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div id="filterContainer" class="filter-container hidden">
           <div class="filter">
             <div class="filter-options">
+              <h1>Filter</h1>
               <div class="dropdown">
                 <div class="filter-select">
                   <label for="nameFilter">Name:</label>
@@ -269,7 +280,7 @@
                   </div>
                 </div>
 
-                <div class="filter-select">
+                <div class="filter-select hidden">
                   <label for="savedSearchFilter">Saved:</label>
                   <div class="custom-select">
                     <div class="sel">
@@ -277,41 +288,28 @@
                         <option value="">Options</option>
                       </select>
                     </div>
-                    <div>
-                      <button class="hidden" id="delFilterBtn">
-                        <i
-                          class="fa-solid fa-trash-can"
-                          style="color: #000000; background-color: transparent;"
-                        ></i>
-                      </button>
-                      <button class="hidden" id="delAllFiltersBtn"></button>
-                    </div>
+                    
                   </div>
                 </div>
+                
               </div>
-
               <div class="filter-btn">
                 <button id="filterButton">Apply</button>
                 <button id="saveButton">Save</button>
                 <button id="resetButton">Reset</button>
               </div>
             </div>
-
-            <div id="mapWrapper" class="map">
-              <div
-                id="map"
-                style="height: 573px; width: 100%; border-radius: 10px; z-index: 1;"
-              ></div>
-              <button class="hidden" id="switchButton">Table</button>
-            </div>
-            <div id="table" class="table-container hidden">
-              <div class="table-header">
-                <h2>meteorite landings</h2>
-                <div class="filters hidden">
-                  <button id="map-btn">Map</button>
+              <div>
+                <div class="saved-search">
+                  <div>Show previous search</div>
+                </div>
+                <div>
+                  <button id="delFilterBtn">Delete
+                  </button>
+                  <button id="delAllFiltersBtn">Clear All</button>
                 </div>
               </div>
-            </div>
+            
           </div>
         </div>
       </section>

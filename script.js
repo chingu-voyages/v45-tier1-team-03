@@ -3,9 +3,10 @@ const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
 const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav-links");
-const homeSection = document.getElementById("homeSection");
+const homeSection = document.getElementById("home");
 const resultSection = document.getElementById("resultSection");
 const switchBtn = document.getElementById("switchBtn");
+const switchButton = document.getElementById("switchButton");
 const yearChart = document.getElementById("yearHistogramContainer");
 const compositionChart = document.getElementById(
   "compositionHistogramContainer"
@@ -16,6 +17,7 @@ const searchInput = document.getElementById("searchInput");
 const searchWrapper = document.getElementById("searchWrapper");
 const searchButton = document.getElementById("searchButton");
 const filterBtn = document.getElementById("filterBtn");
+const filterWrapper = document.getElementById("filterContainer");
 const exploreBtn = document.getElementById("exploreBtn");
 const clearButton = document.getElementById("clearButton");
 const searchIcon = document.getElementById("searchIcon");
@@ -24,6 +26,7 @@ const table = document.getElementById("detailDataDisplay");
 const pageEl = document.getElementById("pagination");
 const nextPrevContainer = document.getElementById("nextPrevContainer");
 const paginationInfo = document.getElementById("paginationInfo");
+const tablePagination = document.getElementById("tablePagination");
 const sortArrow = document.querySelectorAll(".fa-sort");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
@@ -105,11 +108,12 @@ function initializePage() {
   burger.addEventListener("click", toggleMenu);
   searchButton.addEventListener("click", displayResults);
   switchBtn.addEventListener("click", switchChart);
+  switchButton.addEventListener("click", switchDisplay);
   searchInput.addEventListener("keyup", displayResults);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
   filterBtn.addEventListener("click", getSearch);
-  filterButton.addEventListener("click", getAdvanceFilter);
+  filterButton.addEventListener("click", showFilteredResults);
   saveButton.addEventListener("click", saveFilter);
   resetButton.addEventListener("click", resetResults);
   delAllFiltersBtn.addEventListener("click", clearSavedSearches);
@@ -137,16 +141,32 @@ function handleStart(e) {
   e.preventDefault();
   displayResults(meteorData);
   homeSection.classList.add("hidden");
-  resultSection.classList.remove("hidden");
+  explore.classList.remove("hidden");
 }
 function getSearch() {
-  mainWrapper.classList.add("hidden");
-  explore.classList.remove("hidden");
+  resultSection.classList.add("hidden");
+  filterWrapper.classList.remove("hidden");
 }
 
 function clearSearch() {
   searchInput.value = "";
   displayResults(meteorData);
+}
+
+function switchDisplay() {
+  if (mapWrapper.classList.contains("hidden")) {
+    tableWrapper.classList.add("hidden");
+    mapWrapper.classList.remove("hidden");
+    pageEl.classList.add("hidden");
+    tablePagination.classList.add("hidden");
+    switchButton.innerHTML = "Table";
+  } else {
+    tableWrapper.classList.remove("hidden");
+    mapWrapper.classList.add("hidden");
+    pageEl.classList.remove("hidden");
+    tablePagination.classList.remove("hidden");
+    switchButton.innerHTML = "Map";
+  }
 }
 
 function switchChart() {
@@ -166,6 +186,13 @@ function getInputValue(e) {
     e.preventDefault();
     displayResults();
   }
+}
+
+function showFilteredResults(e) {
+  e.preventDefault();
+  getAdvanceFilter();
+  filterWrapper.classList.add("hidden");
+  resultSection.classList.remove("hidden");
 }
 
 function displayResults() {
@@ -493,8 +520,8 @@ function addMarkersToMap(filteredData) {
   }
 }
 
-function getAdvanceFilter(e) {
-  e.preventDefault();
+function getAdvanceFilter() {
+  // e.preventDefault();
 
   const nameTerm = nameFilter.value.toLowerCase(); 
   const compositionTerm = compositionFilter.value.toLowerCase();
@@ -533,6 +560,7 @@ function getAdvanceFilter(e) {
   });
   
   checkResults(filteredAdvanceResults);
+  updateChart(filteredAdvanceResults);
   addMarkersToMap(filteredAdvanceResults);
   displayList(filteredAdvanceResults, table, rows, currentPage, paginationInfo);
 }
