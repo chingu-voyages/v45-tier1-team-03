@@ -755,7 +755,8 @@ function listSavedFilters() {
 
       listItemText.addEventListener('click', () => {
         filterWrapper.classList.add("hidden");
-        resultSection.classList.remove("hidden");
+        summaryWrapper.classList.remove("blur");
+        searchWrapper.classList.remove("blur");
         checkResults(filterData);
         addMarkersToMap(filterData);
       })
