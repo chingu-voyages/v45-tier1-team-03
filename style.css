@@ -218,6 +218,7 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  position: relative;
 }
 .result-container .table-container {
   display: flex;
@@ -458,6 +459,9 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  position: absolute;
+  top: 15%;
+  left: 25%;
 }
 .filter {
   width: 100%;
@@ -1151,4 +1155,8 @@ footer a {
 /******** Misc ********/
 .hidden {
   display: none;
+}
+.blur {
+  /* filter: blur(5px); */
+  opacity: 0.5;
 }

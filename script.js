@@ -5,6 +5,7 @@ const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav-links");
 const homeSection = document.getElementById("home");
 const resultSection = document.getElementById("resultSection");
+const summaryWrapper = document.getElementById("summary");
 const switchBtn = document.getElementById("switchBtn");
 const switchButton = document.getElementById("switchButton");
 const tableIcon = document.querySelector(".fa-table");
@@ -108,7 +109,7 @@ function initializePage() {
   searchInput.addEventListener("keyup", handleInputEvents);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
-  filterBtn.addEventListener("click", getSearch);
+  filterBtn.addEventListener("click", getFilter);
   filterButton.addEventListener("click", showFilteredResults);
   saveButton.addEventListener("click", saveFilter);
   resetButton.addEventListener("click", resetResults);
@@ -139,9 +140,10 @@ function handleStart(e) {
   homeSection.classList.add("hidden");
   explore.classList.remove("hidden");
 }
-function getSearch() {
-  resultSection.classList.add("hidden");
+function getFilter() {
   filterWrapper.classList.remove("hidden");
+  searchWrapper.classList.add("blur");
+  summaryWrapper.classList.add("blur");
 }
 function handleInputEvents(event) {
   event.preventDefault();
@@ -163,7 +165,6 @@ function switchDisplay() {
     mapWrapper.classList.remove("hidden");
     pageEl.classList.add("hidden");
     tablePagination.classList.add("hidden");
-    // switchButton.innerHTML = "Table";
     tableIcon.classList.remove("hidden");
     globeIcon.classList.add("hidden");
   } else {
@@ -171,7 +172,6 @@ function switchDisplay() {
     mapWrapper.classList.add("hidden");
     pageEl.classList.remove("hidden");
     tablePagination.classList.remove("hidden");
-    // switchButton.innerHTML = "Map";
     tableIcon.classList.add("hidden");
     globeIcon.classList.remove("hidden");
   }
@@ -192,9 +192,9 @@ function switchChart() {
 function showFilteredResults(e) {
   e.preventDefault();
   getAdvanceFilter();
-  noResultsMessage.classList.remove("no-results");
   filterWrapper.classList.add("hidden");
-  resultSection.classList.remove("hidden");
+  searchWrapper.classList.remove("blur");
+  summaryWrapper.classList.remove("blur");
 }
 
 function displayResults() {
