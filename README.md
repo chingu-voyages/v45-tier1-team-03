@@ -15,10 +15,7 @@ Empower yourself with instant data definitions right within the app. Quickly gra
 Embark on uncharted paths and reveal extraordinary insights. From total strike counts to average masses, Meteor Shower Page showcases comprehensive information, ensuring you're in the know. 📊✨
 ## Ready to explore the mysteries of meteorites? ⭐🌠
 ## Let’s go!
-# [Live link](https://master--aquamarine-custard-31618f.netlify.app/)
 
-
-## User Stories
 ### MVP (Must Have)
 #### Wireframe
 As a Developer
@@ -101,12 +98,7 @@ Reflects the code for the next release. Developers work in working branches, whi
 
 Only updated from the development branch Pull Requests. This branch always reflects the current production release that is seen by live users.
 
-## Meteor Shower App Team:
-
-## [link to about team](https://master--aquamarine-custard-31618f.netlify.app/)
-
-## Developers: [Ana Popovic](https://www.linkedin.com/in/franecode/), [Isaac Anim](https://www.linkedin.com/in/yawcoder/), [Eva Langerova](https://www.linkedin.com/in/eva-langerova-61059027a/), [Mustapha Anthonio](https://www.linkedin.com/in/mustapha-anthonio/), [Vruti Shah](https://www.linkedin.com/in/vruti-shah-29a393130/)
-## Product Owners: [Petre Circeag](https://www.linkedin.com/in/petre-circeag/), [Zahra Motlagh](https://www.linkedin.com/in/zahra-motlagh/)
+r
 
 
 
