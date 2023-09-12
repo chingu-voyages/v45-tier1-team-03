@@ -112,17 +112,7 @@ header ul li a {
   margin-bottom: 0.5em;
   background-color: var(--clr-white);
 }
-/* .navbar-mobile {
-  height: 100vh;
-  position: fixed;
-  top: 10%;
-  right: 0%;
-  left: 75%;
-  z-index: 11;
-  background-color: transparent;
-  backdrop-filter: blur(5px);
-  transition: all 350ms ease-in;
-} */
+
 /******** Main ********/
 main {
   margin: 40px 20px;
@@ -422,6 +412,11 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
+  background-color: var(--crl-mid-grey);
+  gap: 20px;
+  border-radius: 10px;
+  padding: 10px;
   position: absolute;
   top: 15%;
   left: 25%;
@@ -429,12 +424,6 @@ main {
 .filter {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: var(--crl-mid-grey);
-  gap: 20px;
-  border-radius: 10px;
-  padding: 10px;
 }
 .filter-options {
   width: 100%;
@@ -493,6 +482,7 @@ main {
   border: 1px solid transparent;
   border-radius: 5px;
   padding: 10px;
+  overflow-y: scroll;
   background-color: var(--clr-black-opacity);
   color: var(--clr-white);
   font-family: 'VT323', monospace;
@@ -800,13 +790,15 @@ footer a {
   }
   /**** Explore page ****/
   .filter-container {
+    left: 15%;
     gap: 0%;
   }
   .filter-select {
-    margin-right: 10px;
+    margin-right: 0px;
   }
   .filter-options {
     width: 100%;
+    padding: 10px;
   }
   .custom-select {
     min-width: 80px;
@@ -818,6 +810,9 @@ footer a {
   }
   .filter-btn button {
     padding: 5px 10px;
+  }
+  .saved-search {
+    height: 20vh;
   }
   #map {
     height: 373px;
@@ -943,7 +938,9 @@ footer a {
   }
   .filter-container {
     flex-wrap: wrap;
+    width: 80%;
     gap: 15px;
+    left: 10%;
   }
   .filter {
     width: 80%;
@@ -969,6 +966,9 @@ footer a {
     flex-direction: row;
     width: 100%;
     justify-content: center;
+  }
+  .saved-search {
+    width: 70vw;
   }
   /**** Team page ****/
   .team-card-container {
@@ -1069,13 +1069,13 @@ footer a {
   /**** Explore page ****/
   .filter-container {
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 0px;
   }
-  .dropdown {
-    flex-wrap: wrap;
+  .filter {
+    height: 30vh;
   }
   .filter-select {
-    margin-right: 10px;
+    padding: 0px;
   }
   .filter-select label {
     font-weight: 600;
@@ -1083,13 +1083,19 @@ footer a {
   .filter-options {
     flex-direction: column;
     gap: 10px;
-    padding-bottom: 5px;
+    justify-content: space-evenly;
+    padding: 0px;
   }
-  .filter-options .dropdown{
+  .filter-options h1 {
+    padding: 0px;
+  }
+  .dropdown{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 55%;
+    height: 35%;
+    padding-top: 25px;
   }
   .custom-select {
     flex-wrap: wrap;
@@ -1097,11 +1103,12 @@ footer a {
     flex-direction: column;
   }
   .sel select {
-    width: 100px;
+    width: 80px;
     padding: 5px;
   }
   .filter-btn {
     flex-direction: row;
+    justify-content: space-around;
     margin-top: 5px;
   }
 
