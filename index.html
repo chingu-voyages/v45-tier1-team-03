@@ -165,10 +165,15 @@
           <div class="result-display">
             <div class="table-container">
               <div class="table-header">
-                <h2>meteorite landings</h2>
+                <h2>meteorite landings summary</h2>
                 <div class="filters">
-                  <button id="filterBtn">Add filters</button>
-                  <button id="switchButton">Map</button>
+                  <button id="filterBtn"><i class="fa-solid fa-filter fa-xl" style="color: #444040;"></i></button>
+                  <div class="switch-buttons">
+                    <button id="switchButton">
+                      <i class="fa-solid fa-globe fa-xl" style="color: #444040;"></i>
+                      <i class="hidden fa-solid fa-table fa-xl" style="color: #444040;"></i>
+                    </button>
+                </div>
                 </div>
               </div>
               <table id="table">
@@ -210,7 +215,8 @@
                 <div class="chart hidden" id="compositionHistogramContainer">
                   <canvas id="compositionHistogram"></canvas>
                 </div>
-                <button id="switchBtn"><i class="fa-solid fa-repeat fa-xl" style="color: #ffffff;"></i></button>
+                <button id="switchBtn">Switch charts
+                </button>
               </div>
             </div>
           </div>
@@ -219,10 +225,10 @@
         <div id="filterContainer" class="filter-container hidden">
           <div class="filter">
             <div class="filter-options">
-              <h1>Filter</h1>
+              <h1 style="color: #444040;">Filter</h1>
               <div class="dropdown">
                 <div class="filter-select">
-                  <label for="nameFilter">Name:</label>
+                  <label style="color: #444040;" for="nameFilter">Name:</label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="nameFilter">
@@ -230,7 +236,7 @@
                       </select>
                     </div>
                   </div>
-                  <label for="compositionFilter">Composition:</label>
+                  <label style="color: #444040;" for="compositionFilter">Composition:</label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="compositionFilter">
@@ -241,7 +247,7 @@
                 </div>
 
                 <div class="filter-select">
-                  <label for="massFilter">Minimum Mass:</label>
+                  <label style="color: #444040;" for="massFilter">Minimum Mass:</label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="massMinFilter">
@@ -249,7 +255,7 @@
                       </select>
                     </div>
                   </div>
-                  <label for="massFilter">Maximum Mass:</label>
+                  <label style="color: #444040;" for="massFilter">Maximum Mass:</label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="massMaxFilter">
@@ -260,7 +266,7 @@
                 </div>
 
                 <div class="filter-select">
-                  <label for="yearFilter">Minimum Year:</label>
+                  <label style="color: #444040;" for="yearFilter">Minimum Year:</label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="yearMinFilter">
@@ -268,7 +274,7 @@
                       </select>
                     </div>
                   </div>
-                  <label for="massFilter">Maximum Year:</label>
+                  <label style="color: #444040;" for="massFilter">Maximum Year:</label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="yearMaxFilter">
@@ -279,7 +285,7 @@
                 </div>
 
                 <div class="filter-select hidden">
-                  <label for="savedSearchFilter">Saved:</label>
+                  <label style="color: #444040;" for="savedSearchFilter">Saved:</label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="savedSearchFilter">
@@ -304,7 +310,7 @@
                 <div class="clear-all">
                   <button id="delFilterBtn">Delete
                   </button>
-                  <button id="delAllFiltersBtn">Clear All</button>
+                  <button style="color: #444040;" id="delAllFiltersBtn">Clear All</button>
                 </div>
               </div>
             

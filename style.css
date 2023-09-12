@@ -7,6 +7,7 @@
   --crl-input: rgba(200, 200, 200, 1);
   --clr-light-grey: rgba(150, 150, 150, 1);
   --clr-clear-btn: rgba(129, 129, 129, 1);
+  --clr-text: rgba(68, 64, 64, 1);
   --clr-orange: rgb(225, 85, 33, 1);
   --clr-red: rgba(151, 27, 30, 1);
   --clr-blue: rgba(75, 192, 192, 1);
@@ -102,7 +103,7 @@ header ul li a {
   margin-bottom: 0.5em;
   background-color: var(--clr-white);
 }
-.navbar-mobile {
+/* .navbar-mobile {
   height: 100vh;
   position: fixed;
   top: 10%;
@@ -112,7 +113,7 @@ header ul li a {
   background-color: transparent;
   backdrop-filter: blur(5px);
   transition: all 350ms ease-in;
-}
+} */
 /******** Main ********/
 main {
   margin: 40px 20px;
@@ -249,11 +250,7 @@ main {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 10px;
-}
-.filters button {
-  background-color: var(--clr-blue);
-  color: var(--clr-white);
-  font-size: 17px;
+  margin-top: 50px;
 }
 .table-header {
   width: 100%;
@@ -266,8 +263,122 @@ main {
   text-transform: capitalize;
   text-align: center;
   margin: 0.8em 0;
-  color: var(--clr-orange);
+  color: #444040;
 }
+.filters {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 5px;
+}
+.filters button {
+  font-size: 15px;
+  padding: 3px 10px;
+  background-color: transparent;
+  font-size: 17px;
+  padding: 5px;
+  border: 1px solid transparent;
+  position: relative;
+  cursor: pointer;
+}
+.filters button::before {
+  content: "Add filter";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--clr-white-opacity);
+  color: var(--clr-black);
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 10px;
+  display: none;
+}
+.switch-buttons button {
+  font-size: 15px;
+  padding: 3px 10px;
+  background-color: transparent;
+  font-size: 17px;
+  padding: 5px;
+  border: 1px solid transparent;
+  position: relative;
+  cursor: pointer;
+}
+.switch-buttons button::before {
+  content: "Switch display";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--clr-white-opacity);
+  color: var(--clr-black);
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 10px;
+  display: none;
+}
+/* .switch-buttons button:first-child::before {
+  content: "Switch to map";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 10px;
+  display: none;
+} */
+.filters button:hover::before {
+  display: block;
+}
+.switch-buttons button:hover::before {
+  display: block;
+}
+.filters button:hover {
+  transform: scale(1.2);
+  transition: transform 200ms ease-out;
+}
+.switch-buttons button:hover {
+  transform: scale(1.2);
+  transition: transform 200ms ease-out;
+}
+/* .filters button:last-child::before {
+  content: "Switch to map";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 10px;
+  display: none;
+} */
+
+/* .fa-globe::before {
+  content: "Switch to map";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 10px;
+  display: none;
+}
+
+.fa-table::before {
+  content: "Switch to table";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 10px;
+  display: none;
+} */
+
 .table-container table tr {
   width: 100%;
 }
@@ -282,13 +393,15 @@ main {
   border: 2px solid var(--clr-white-opacity);
   text-align: left;
   z-index: 1;
+  font-size: 18px;
+  color: #444040;
 }
 .table-container table tbody tr td {
   width: 300px;
   border: 2px solid var(--clr-white-opacity);
   padding: 1.3em 0.5em;
   opacity: 0.8;
-  font-size: 0.8em;
+  font-size: 16px;
 }
 .table-container .pagination {
   width: 35%;
@@ -340,18 +453,7 @@ main {
   top: 5%;
 }
 /**** Filter *****/
-.filters {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 5px;
-}
-.filters button {
-  padding: 5px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-}
+
 .filter-container {
   display: flex;
   flex-direction: row;
@@ -501,22 +603,26 @@ main {
   border-radius: 5px;
   padding: 15px 20px;
   font-size: 18px;
-  background-color: var(--clr-blue);
-  color: var(--clr-white);
+  background-color: var(--clr-chart);
+  color: var(--clr-blue);
   cursor: pointer;
 }
 .histogram button::before {
   content: "Switch charts";
   position: absolute;
-  top: -30px;
-  left: 100%;
+  top: -35px;
+  left: 50%;
   transform: translateX(-50%);
-  background-color: var(--clr-black-opacity);
-  color: var(--clr-white);
+  background-color: var(--clr-white-opacity);
+  color: var(--clr-black);
   padding: 5px 15px;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 10px;
   display: none;
+}
+.histogram button:hover {
+  transform: scale(1.2);
+  transition: transform 200ms ease-out;
 }
 .histogram button:hover::before {
   display: block;
@@ -544,7 +650,7 @@ canvas {
   text-align: center;
   border-radius: 10px;
   background-color: var(--crl-mid-grey);
-  color: var(--clr-black);
+  color: var(--clr-text);
   padding: 10px 30px;
 }
 
@@ -942,10 +1048,6 @@ footer a {
   .table-header h2 {
     text-align: start;
   }
-  .filters button {
-    font-size: 15px;
-    padding: 3px 10px;
-  }
   .search-container input {
     width: 300px;
   }
@@ -1014,6 +1116,7 @@ footer a {
     flex-direction: row;
     margin-top: 5px;
   }
+
   /**** Team page ****/
   .team-section {
     width: 100%;
@@ -1044,6 +1147,7 @@ footer a {
     font-size: 15px;
   }
 }
+
 /******** Misc ********/
 .hidden {
   display: none;

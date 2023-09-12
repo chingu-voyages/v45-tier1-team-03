@@ -7,6 +7,8 @@ const homeSection = document.getElementById("home");
 const resultSection = document.getElementById("resultSection");
 const switchBtn = document.getElementById("switchBtn");
 const switchButton = document.getElementById("switchButton");
+const tableIcon = document.querySelector(".fa-table");
+const globeIcon = document.querySelector(".fa-globe");
 const yearChart = document.getElementById("yearHistogramContainer");
 const compositionChart = document.getElementById(
   "compositionHistogramContainer"
@@ -161,13 +163,17 @@ function switchDisplay() {
     mapWrapper.classList.remove("hidden");
     pageEl.classList.add("hidden");
     tablePagination.classList.add("hidden");
-    switchButton.innerHTML = "Table";
+    // switchButton.innerHTML = "Table";
+    tableIcon.classList.remove("hidden");
+    globeIcon.classList.add("hidden");
   } else {
     tableWrapper.classList.remove("hidden");
     mapWrapper.classList.add("hidden");
     pageEl.classList.remove("hidden");
     tablePagination.classList.remove("hidden");
-    switchButton.innerHTML = "Map";
+    // switchButton.innerHTML = "Map";
+    tableIcon.classList.add("hidden");
+    globeIcon.classList.remove("hidden");
   }
 }
 
@@ -175,11 +181,11 @@ function switchChart() {
   if (compositionChart.classList.contains("hidden")) {
     compositionChart.classList.remove("hidden");
     yearChart.classList.add("hidden");
-    switchBtn.style.backgroundColor = "var(--clr-orange)";
+    switchBtn.style.color = "var(--clr-orange)";
   } else {
     compositionChart.classList.add("hidden");
     yearChart.classList.remove("hidden");
-    switchBtn.style.backgroundColor = "var(--clr-blue)";
+    switchBtn.style.color = "var(--clr-blue)";
   }
 }
 
