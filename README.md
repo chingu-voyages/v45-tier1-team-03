@@ -15,10 +15,7 @@ Empower yourself with instant data definitions right within the app. Quickly gra
 Embark on uncharted paths and reveal extraordinary insights. From total strike counts to average masses, Meteor Shower Page showcases comprehensive information, ensuring you're in the know. 📊✨
 ## Ready to explore the mysteries of meteorites? ⭐🌠
 ## Let’s go!
-##link
 
-
-## User Stories [Trello](https://trello.com/b/SAvvNjHT/fireball)
 ### MVP (Must Have)
 #### Wireframe
 As a Developer
@@ -101,14 +98,7 @@ Reflects the code for the next release. Developers work in working branches, whi
 
 Only updated from the development branch Pull Requests. This branch always reflects the current production release that is seen by live users.
 
-
-
-## team
-
-### Developers: [Ana Popovic](https://www.linkedin.com/in/franecode/), [Isaac Anim](https://www.linkedin.com/in/yawcoder/), [Eva Langerova](https://www.linkedin.com/in/eva-langerova-61059027a/), [Mustapha Anthonio](https://www.linkedin.com/in/mustapha-anthonio/), [Vruti Shah](https://www.linkedin.com/in/vruti-shah-29a393130/)
-### Product Owners: [Petre Circeag](https://www.linkedin.com/in/petre-circeag/), [Zahra Motlagh](https://www.linkedin.com/in/zahra-motlagh/)
-### Agile Coach: [Christopher Maxwell](https://www.linkedin.com/in/christopher-maxwell-a59603240/)
-### Chingu Coach: [Jim Medlock ](https://www.linkedin.com/in/jdmedlock/), 
+r
 
 
 
