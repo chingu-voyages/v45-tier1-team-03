@@ -524,17 +524,18 @@ main {
   width: 120px;
 }
 .saved-search {
-  height: 20vh;
+  height: 25vh;
   width: 20vw;
   border: 1px solid transparent;
   border-radius: 5px;
-  padding: 15px;
+  padding: 10px;
   background-color: var(--clr-black-opacity);
   color: var(--clr-white);
-  font-family: "Orbitron",;
+  font-family: 'VT323', monospace;
 }
 .clear-all {
-  margin: 5% 40%;
+  padding: 5px 25px;
+  margin: 3px 50px;
 }
 .clear-all button {
   padding: 5px 25px;
