@@ -5,7 +5,6 @@ const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav-links");
 const homeSection = document.getElementById("home");
 const resultSection = document.getElementById("resultSection");
-const summaryWrapper = document.getElementById("summary");
 const switchBtn = document.getElementById("switchBtn");
 const switchButton = document.getElementById("switchButton");
 const tableIcon = document.querySelector(".fa-table");
@@ -42,7 +41,6 @@ const massMinFilter = document.getElementById("massMinFilter");
 const massMaxFilter = document.getElementById("massMaxFilter");
 const yearMinFilter = document.getElementById("yearMinFilter");
 const yearMaxFilter = document.getElementById("yearMaxFilter");
-const savedSearchFilter = document.getElementById("savedSearchFilter");
 const noResultsMessage = document.querySelector(".no-results");
 const tableBtn = document.getElementById("switchButton");
 const tableWrapper = document.getElementById("table");
@@ -50,7 +48,7 @@ const mapWrapper = document.getElementById("mapWrapper");
 const saveButton = document.getElementById("saveButton");
 const resetButton = document.getElementById("resetButton");
 const delAllFiltersBtn = document.getElementById("delAllFiltersBtn");
-const delFilterBtn = document.getElementById("delFilterBtn");
+const savedSearchDiv = document.getElementById("savedSearchDiv");
 
 // Data
 let meteorData = []; // Store fetched meteor data
@@ -109,7 +107,7 @@ function initializePage() {
   searchInput.addEventListener("keyup", handleInputEvents);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
-  filterBtn.addEventListener("click", getFilter);
+  filterBtn.addEventListener("click", getSearch);
   filterButton.addEventListener("click", showFilteredResults);
   saveButton.addEventListener("click", saveFilter);
   resetButton.addEventListener("click", resetResults);
@@ -140,10 +138,10 @@ function handleStart(e) {
   homeSection.classList.add("hidden");
   explore.classList.remove("hidden");
 }
-function getFilter() {
-  filterWrapper.classList.remove("hidden");
-  searchWrapper.classList.add("blur");
-  summaryWrapper.classList.add("blur");
+function getSearch() {
+  resultSection.classList.add("hidden");
+  filterWrapper.classList.remove("hidden")
+  listSavedFilters();
 }
 function handleInputEvents(event) {
   event.preventDefault();
@@ -165,6 +163,7 @@ function switchDisplay() {
     mapWrapper.classList.remove("hidden");
     pageEl.classList.add("hidden");
     tablePagination.classList.add("hidden");
+    // switchButton.innerHTML = "Table";
     tableIcon.classList.remove("hidden");
     globeIcon.classList.add("hidden");
   } else {
@@ -172,6 +171,7 @@ function switchDisplay() {
     mapWrapper.classList.add("hidden");
     pageEl.classList.remove("hidden");
     tablePagination.classList.remove("hidden");
+    // switchButton.innerHTML = "Map";
     tableIcon.classList.add("hidden");
     globeIcon.classList.remove("hidden");
   }
@@ -192,9 +192,9 @@ function switchChart() {
 function showFilteredResults(e) {
   e.preventDefault();
   getAdvanceFilter();
+  noResultsMessage.classList.remove("no-results");
   filterWrapper.classList.add("hidden");
-  searchWrapper.classList.remove("blur");
-  summaryWrapper.classList.remove("blur");
+  resultSection.classList.remove("hidden");
 }
 
 function displayResults() {
@@ -453,8 +453,6 @@ function populateDropdowns() {
     yearMinFilter.appendChild(optionMin);
     yearMaxFilter.appendChild(optionMax);
   });
-  // Call a function to populate saved filters dropdown
-  populateFiltersDropdown();
 }
 
 // Initialize the map
@@ -719,49 +717,49 @@ function calculateTotalStrikes(yearCounts) {
 
 // Function to save filters to local sotrage
 function saveFilter() {
-  const dummyEvent = {
-    preventDefault: () => {}, // define a preventDefault function to avoid errors
-  };
-  getAdvanceFilter(dummyEvent);
+  getAdvanceFilter();
 
   const newFilterItem = JSON.stringify(filteredAdvanceResults);
   const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
   const filterID = "filterID: " + timestamp;
   localStorage.setItem(filterID, newFilterItem);
-  populateFiltersDropdown();
+  listSavedFilters();
 }
 
-// Function to populate saved filters dropdown
-function populateFiltersDropdown() {
-  savedSearchFilter.innerHTML = `<option value="">Options</option>`;
-  const filterIDs = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20).sort();
-  // Populate saved search dropdown
-  filterIDs.forEach(item => {
-    const timestamp = item.replace("filterID: ", "");
-    const optionFilter = document.createElement("option");
-    optionFilter.value = item;
-    optionFilter.textContent = timestamp;
-    savedSearchFilter.appendChild(optionFilter);
-  });
-  // Add event listeners to each dropdown option to display the saved filter
-  savedSearchFilter.addEventListener("change", () => {
-    const selectedOption = savedSearchFilter.value;
-    if (selectedOption) {
-      const savedfilterDataJSON = localStorage.getItem(selectedOption);
-      const savedfilterData = JSON.parse(savedfilterDataJSON)
-      checkResults(savedfilterData);
-      addMarkersToMap(savedfilterData);    
+// Function to display local storage list of filters
+function listSavedFilters() {
+  savedSearchDiv.innerHTML = "";
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const timestamp = localStorage.key(i)
+    if (timestamp.length === 31 && timestamp.indexOf(" / ") === 20 && timestamp.split(":").length === 4) {
+      const filterDataJSON = localStorage.getItem(timestamp);
+      const filterData = JSON.parse(filterDataJSON);
+
+      const listItem = document.createElement("li");
+      savedSearchDiv.appendChild(listItem);
+      const listItemText = document.createElement("span");
+      listItem.appendChild(listItemText);
+      const deleteBtn = document.createElement("i");
+      deleteBtn.classList.add("fa-solid");
+      deleteBtn.classList.add("fa-trash-can");
+      listItemText.textContent = `${timestamp.slice(10)}`;
+      listItem.appendChild(deleteBtn);
+
+      deleteBtn.addEventListener("click", () => {
+        localStorage.removeItem(timestamp);
+        listSavedFilters();
+      })
+
+      listItemText.addEventListener('click', () => {
+        filterWrapper.classList.add("hidden");
+        resultSection.classList.remove("hidden");
+        checkResults(filterData);
+        addMarkersToMap(filterData);
+      })
     }
-  });
-  // Delete selected item
-  delFilterBtn.addEventListener("click", () => {
-    const selectedOption = savedSearchFilter.value;
-    if (selectedOption && selectedOption) {
-      localStorage.removeItem(selectedOption);
-      populateFiltersDropdown();
-    }
-  })
-};
+  }
+}
 
 // Function to clear all saved filters
 function clearSavedSearches() {
@@ -772,7 +770,7 @@ function clearSavedSearches() {
       item.indexOf(" / ") === 20
   );
   keysToRemove.forEach((key) => localStorage.removeItem(key));
-  populateFiltersDropdown();
+  listSavedFilters();
 }
 
 function resetResults() {
@@ -783,7 +781,6 @@ function resetResults() {
   massMaxFilter.value = "";
   yearMinFilter.value = "";
   yearMaxFilter.value = "";
-  savedSearchFilter.value = "";
   filteredResults = [];
   filteredAdvanceResults = [];
   displayResults();
