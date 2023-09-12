@@ -99,10 +99,11 @@ function initializePage() {
   exploreBtn.addEventListener("click", handleStart);
   exploreLink.addEventListener("click", displayResults);
   burger.addEventListener("click", toggleMenu);
-  searchButton.addEventListener("click", displayResults);
   switchBtn.addEventListener("click", switchChart);
   switchButton.addEventListener("click", switchDisplay);
-  searchInput.addEventListener("keyup", displayResults);
+  searchInput.addEventListener("focus", handleInputEvents);
+  searchInput.addEventListener("blur", handleInputEvents);
+  searchInput.addEventListener("keyup", handleInputEvents);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
   filterBtn.addEventListener("click", getSearch);
@@ -140,9 +141,17 @@ function getSearch() {
   resultSection.classList.add("hidden");
   filterWrapper.classList.remove("hidden");
 }
-
+function handleInputEvents(event) {
+  event.preventDefault();
+  if (event.key === "Enter") {
+    displayResults();
+  } else if (event.type === "focus") {
+    searchButton.classList.add("hidden");
+  } 
+}
 function clearSearch() {
   searchInput.value = "";
+  searchButton.classList.remove("hidden");
   displayResults(meteorData);
 }
 
@@ -174,16 +183,10 @@ function switchChart() {
   }
 }
 
-function getInputValue(e) {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    displayResults();
-  }
-}
-
 function showFilteredResults(e) {
   e.preventDefault();
   getAdvanceFilter();
+  noResultsMessage.classList.remove("no-results");
   filterWrapper.classList.add("hidden");
   resultSection.classList.remove("hidden");
 }
@@ -192,6 +195,7 @@ function displayResults() {
   getResults();
 
   if (filteredResults.length === 0 || searchText === "") {
+    // noResultsMessage.classList.add("no-results");
     currentPage = 1;
     displayList(meteorData, table, rows, currentPage, paginationInfo);
     setupPagination(meteorData, pageEl, rows);
@@ -199,6 +203,7 @@ function displayResults() {
     addMarkersToMap(meteorData);
     updateChart(meteorData);
   } else {
+    // noResultsMessage.classList.remove("no-results");
     currentPage = 1;
     displayList(filteredResults, table, rows, currentPage, paginationInfo);
     setupPagination(filteredResults, pageEl, rows);
@@ -500,7 +505,15 @@ function addMarkersToMap(filteredData) {
              Year: ${meteor.year},<br>
              Composition: ${meteor.recclass}
         `
-          );
+          )
+          .on("mouseover", function () {
+            this.openPopup();
+            this.setRadius(15000);
+          })
+          .on("mouseout", function () {
+            this.closePopup();
+            this.setRadius(10000);
+          });
         markers.push(marker);
       }
     });
@@ -553,20 +566,21 @@ function getAdvanceFilter() {
   });
   
   checkResults(filteredAdvanceResults);
-  updateChart(filteredAdvanceResults);
-  addMarkersToMap(filteredAdvanceResults);
-  displayList(filteredAdvanceResults, table, rows, currentPage, paginationInfo);
 }
 
 function checkResults(data) {
   filteredAdvanceResults = data;
   if (filteredAdvanceResults.length === 0) {
-    noResultsMessage.classList.remove("hidden");
-    noResultsMessage.classList.add("no-results");
-    updateChart([]);
+    updateChart(meteorData);
+    addMarkersToMap(meteorData);
+    displayList(
+      meteorData,
+      table,
+      rows,
+      currentPage,
+      paginationInfo
+    );
   } else {
-    noResultsMessage.classList.add("hidden");
-    noResultsMessage.classList.remove("no-results");
     updateChart(filteredAdvanceResults, selectedYearRange);
     addMarkersToMap(filteredAdvanceResults);
     displayList(
@@ -637,7 +651,7 @@ function updateChart(results) {
   const years = results.map((item) =>
     item.year ? item.year.substring(0, 4) : "Unknown"
   );
-  const compositions = filteredResults.map(
+  const compositions = results.map(
     (item) => item.recclass || "Unknown"
   );
 
