@@ -623,7 +623,7 @@ main {
   gap: 30px;
 }
 .histogram button {
-  position: relative;
+  /* position: relative; */
   border: 1px solid transparent;
   border-radius: 5px;
   padding: 15px 20px;
@@ -632,7 +632,7 @@ main {
   color: var(--clr-blue);
   cursor: pointer;
 }
-.histogram button::before {
+/* .histogram button::before {
   content: "Switch charts";
   position: absolute;
   top: -35px;
@@ -644,14 +644,16 @@ main {
   border-radius: 5px;
   font-size: 10px;
   display: none;
-}
+} */
 .histogram button:hover {
   transform: scale(1.2);
-  transition: transform 200ms ease-out;
+  transition: transform 200ms ease-in-out;
 }
+/*
 .histogram button:hover::before {
   display: block;
-}
+} 
+*/
 .chart {
   border: 1px solid transparent;
   border-radius: 10px;
