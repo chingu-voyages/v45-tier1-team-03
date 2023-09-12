@@ -328,17 +328,6 @@ main {
   font-size: 10px;
   display: none;
 }
-/* .switch-buttons button:first-child::before {
-  content: "Switch to map";
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px 15px;
-  border-radius: 5px;
-  font-size: 10px;
-  display: none;
-} */
 .filters button:hover::before {
   display: block;
 }
@@ -353,42 +342,6 @@ main {
   transform: scale(1.2);
   transition: transform 200ms ease-out;
 }
-/* .filters button:last-child::before {
-  content: "Switch to map";
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px 15px;
-  border-radius: 5px;
-  font-size: 10px;
-  display: none;
-} */
-
-/* .fa-globe::before {
-  content: "Switch to map";
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px 15px;
-  border-radius: 5px;
-  font-size: 10px;
-  display: none;
-}
-
-.fa-table::before {
-  content: "Switch to table";
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px 15px;
-  border-radius: 5px;
-  font-size: 10px;
-  display: none;
-} */
-
 .table-container table tr {
   width: 100%;
 }
@@ -437,12 +390,13 @@ main {
   border-bottom-right-radius: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .page-info-wrapper .next-prev-container button {
   background: none;
   border: none;
   margin: 0 0.8em;
-  font-size: 1em;
+  font-size: 16px;
   opacity: 0.8;
 }
 .page-info-wrapper .next-prev-container button:hover {
@@ -604,6 +558,7 @@ main {
   justify-content: space-around;
   gap: 5px;
 }
+
 /******** Map ********/
 #map {
   width: 100%;
@@ -623,7 +578,6 @@ main {
   gap: 30px;
 }
 .histogram button {
-  /* position: relative; */
   border: 1px solid transparent;
   border-radius: 5px;
   padding: 15px 20px;
@@ -632,28 +586,10 @@ main {
   color: var(--clr-blue);
   cursor: pointer;
 }
-/* .histogram button::before {
-  content: "Switch charts";
-  position: absolute;
-  top: -35px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--clr-white-opacity);
-  color: var(--clr-black);
-  padding: 5px 15px;
-  border-radius: 5px;
-  font-size: 10px;
-  display: none;
-} */
 .histogram button:hover {
   transform: scale(1.2);
-  transition: transform 200ms ease-in-out;
+  transition: transform 200ms ease-out;
 }
-/*
-.histogram button:hover::before {
-  display: block;
-} 
-*/
 .chart {
   border: 1px solid transparent;
   border-radius: 10px;
@@ -846,7 +782,7 @@ footer a {
 @media (max-width: 1024px) and (min-width: 850px) {
   /**** Search page ****/
   .result-container .table-container {
-    width: 80%;
+    width: 90%;
   }
   .search-container input {
     width: 500px;
@@ -971,6 +907,22 @@ footer a {
     width: 500px;
     margin-bottom: 15px;
   }
+  .table-header {
+    padding: 0px 30px;
+    font-size: 16px;
+  }
+  .table-container table tr th {
+    font-size: 16px;
+  }
+  .table-container table tbody tr td {
+    font-size: 14px;
+  }
+  .page-info-wrapper .next-prev-container button {
+    font-size: 14px;
+  }
+  .page-info-wrapper .pagination-info {
+    font-size: 12px;
+  }
   .filter-btn button {
     padding: 5px 10px;
   }
@@ -1069,11 +1021,20 @@ footer a {
   .result-container .table-container {
     width: 90%;
   }
-  .table-header {
-    width: 80%;
-  }
   .table-header h2 {
     text-align: start;
+  }
+  .table-container table tbody tr td {
+    font-size: 12px;
+  }
+  .page-info-wrapper {
+    padding: 15px;
+  }
+  .page-info-wrapper .next-prev-container button {
+    font-size: 12px;
+  }
+  .page-info-wrapper .pagination-info {
+    width: 50%;
   }
   .search-container input {
     width: 300px;
