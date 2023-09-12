@@ -5,6 +5,7 @@ const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav-links");
 const homeSection = document.getElementById("home");
 const resultSection = document.getElementById("resultSection");
+const summaryWrapper = document.getElementById("summaryWrapper");
 const switchBtn = document.getElementById("switchBtn");
 const switchButton = document.getElementById("switchButton");
 const tableIcon = document.querySelector(".fa-table");
@@ -107,7 +108,7 @@ function initializePage() {
   searchInput.addEventListener("keyup", handleInputEvents);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
-  filterBtn.addEventListener("click", getSearch);
+  filterBtn.addEventListener("click", getFilter);
   filterButton.addEventListener("click", showFilteredResults);
   saveButton.addEventListener("click", saveFilter);
   resetButton.addEventListener("click", resetResults);
@@ -138,8 +139,9 @@ function handleStart(e) {
   homeSection.classList.add("hidden");
   explore.classList.remove("hidden");
 }
-function getSearch() {
-  resultSection.classList.add("hidden");
+function getFilter() {
+  summaryWrapper.classList.add("blur");
+  searchWrapper.classList.add("blur");
   filterWrapper.classList.remove("hidden")
   listSavedFilters();
 }
@@ -192,9 +194,9 @@ function switchChart() {
 function showFilteredResults(e) {
   e.preventDefault();
   getAdvanceFilter();
-  noResultsMessage.classList.remove("no-results");
+  summaryWrapper.classList.remove("blur");
+  searchWrapper.classList.remove("blur");
   filterWrapper.classList.add("hidden");
-  resultSection.classList.remove("hidden");
 }
 
 function displayResults() {
