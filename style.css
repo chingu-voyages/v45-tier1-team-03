@@ -219,10 +219,21 @@ main {
   background-color: var(--clr-white-opacity);
   position: relative;
   border-collapse: collapse;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
-.result-container .table-container table::-webkit-scrollbar {
+::-webkit-scrollbar{
+  width: 5px;
+  overflow: hidden;
+}
+::-webkit-scrollbar-thumb{
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 100px;
+}
+
+/* .result-container .table-container table::-webkit-scrollbar {
   scrollbar-width: thin;
-}
+} */
 .result-display {
   display: flex;
   flex-direction: row;
@@ -1135,8 +1146,6 @@ footer a {
   .team-card img {
     width: 70px;
     height: 70px;
-    width: 120px;
-    height: 120px;
   }
   .team-card h3 {
     font-size: 15px;
