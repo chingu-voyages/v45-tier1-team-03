@@ -3,9 +3,13 @@ const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
 const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav-links");
-const homeSection = document.getElementById("homeSection");
+const homeSection = document.getElementById("home");
 const resultSection = document.getElementById("resultSection");
+const summaryWrapper = document.getElementById("summaryWrapper");
 const switchBtn = document.getElementById("switchBtn");
+const switchButton = document.getElementById("switchButton");
+const tableIcon = document.querySelector(".fa-table");
+const globeIcon = document.querySelector(".fa-globe");
 const yearChart = document.getElementById("yearHistogramContainer");
 const compositionChart = document.getElementById(
   "compositionHistogramContainer"
@@ -16,6 +20,7 @@ const searchInput = document.getElementById("searchInput");
 const searchWrapper = document.getElementById("searchWrapper");
 const searchButton = document.getElementById("searchButton");
 const filterBtn = document.getElementById("filterBtn");
+const filterWrapper = document.getElementById("filterContainer");
 const exploreBtn = document.getElementById("exploreBtn");
 const clearButton = document.getElementById("clearButton");
 const searchIcon = document.getElementById("searchIcon");
@@ -24,6 +29,7 @@ const table = document.getElementById("detailDataDisplay");
 const pageEl = document.getElementById("pagination");
 const nextPrevContainer = document.getElementById("nextPrevContainer");
 const paginationInfo = document.getElementById("paginationInfo");
+const tablePagination = document.getElementById("tablePagination");
 const sortArrow = document.querySelectorAll(".fa-sort");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
@@ -36,7 +42,6 @@ const massMinFilter = document.getElementById("massMinFilter");
 const massMaxFilter = document.getElementById("massMaxFilter");
 const yearMinFilter = document.getElementById("yearMinFilter");
 const yearMaxFilter = document.getElementById("yearMaxFilter");
-const savedSearchFilter = document.getElementById("savedSearchFilter");
 const noResultsMessage = document.querySelector(".no-results");
 const tableBtn = document.getElementById("switchButton");
 const tableWrapper = document.getElementById("table");
@@ -44,11 +49,9 @@ const mapWrapper = document.getElementById("mapWrapper");
 const saveButton = document.getElementById("saveButton");
 const resetButton = document.getElementById("resetButton");
 const delAllFiltersBtn = document.getElementById("delAllFiltersBtn");
-const delFilterBtn = document.getElementById("delFilterBtn");
-const animationContainer = document.getElementById("animation-container");
+const savedSearchDiv = document.getElementById("savedSearchDiv");
 
 // Data
-let meteorNumber = 25; // Number of meteors in background animation
 let meteorData = []; // Store fetched meteor data
 let filteredResults = []; // Store filtered data
 let filteredAdvanceResults = []; // Store filtered advance results
@@ -67,11 +70,6 @@ const imagePaths = [
   "assets/landing_page2.jpg",
   "assets/landing_page3.jpg",
 ];
-
-// Adding meteors for background animation
-for(let i = 1; i <= meteorNumber; i++){
-  animationContainer.innerHTML += `<div class="meteor-${i}"></div>`
-}
 
 // Data fetching and initialization
 function fetchData() {
@@ -95,6 +93,7 @@ function fetchData() {
 }
 
 // Functions related to UI initialization
+
 function initializePage() {
   fetchData();
   handleLinks();
@@ -103,13 +102,15 @@ function initializePage() {
   exploreBtn.addEventListener("click", handleStart);
   exploreLink.addEventListener("click", displayResults);
   burger.addEventListener("click", toggleMenu);
-  searchButton.addEventListener("click", displayResults);
   switchBtn.addEventListener("click", switchChart);
-  searchInput.addEventListener("keyup", displayResults);
+  switchButton.addEventListener("click", switchDisplay);
+  searchInput.addEventListener("focus", handleInputEvents);
+  searchInput.addEventListener("blur", handleInputEvents);
+  searchInput.addEventListener("keyup", handleInputEvents);
   arrowLeft.addEventListener("click", getPrevImg);
   arrowRight.addEventListener("click", getNextImg);
-  filterBtn.addEventListener("click", getSearch);
-  filterButton.addEventListener("click", getAdvanceFilter);
+  filterBtn.addEventListener("click", getFilter);
+  filterButton.addEventListener("click", showFilteredResults);
   saveButton.addEventListener("click", saveFilter);
   resetButton.addEventListener("click", resetResults);
   delAllFiltersBtn.addEventListener("click", clearSavedSearches);
@@ -137,37 +138,67 @@ function handleStart(e) {
   e.preventDefault();
   displayResults(meteorData);
   homeSection.classList.add("hidden");
-  resultSection.classList.remove("hidden");
-}
-function getSearch() {
-  mainWrapper.classList.add("hidden");
   explore.classList.remove("hidden");
 }
-
+function getFilter() {
+  summaryWrapper.classList.add("blur");
+  searchWrapper.classList.add("blur");
+  filterWrapper.classList.remove("hidden");
+  listSavedFilters();
+}
+function handleInputEvents(event) {
+  event.preventDefault();
+  if (event.key === "Enter") {
+    displayResults();
+  } else if (event.type === "focus") {
+    searchButton.classList.add("hidden");
+  }
+}
 function clearSearch() {
   searchInput.value = "";
+  searchButton.classList.remove("hidden");
   displayResults(meteorData);
+}
+
+function switchDisplay() {
+  if (mapWrapper.classList.contains("hidden")) {
+    tableWrapper.classList.add("hidden");
+    mapWrapper.classList.remove("hidden");
+    pageEl.classList.add("hidden");
+    tablePagination.classList.add("hidden");
+    tableIcon.classList.remove("hidden");
+    globeIcon.classList.add("hidden");
+  } else {
+    tableWrapper.classList.remove("hidden");
+    mapWrapper.classList.add("hidden");
+    pageEl.classList.remove("hidden");
+    tablePagination.classList.remove("hidden");
+    tableIcon.classList.add("hidden");
+    globeIcon.classList.remove("hidden");
+  }
 }
 
 function switchChart() {
   if (compositionChart.classList.contains("hidden")) {
     compositionChart.classList.remove("hidden");
     yearChart.classList.add("hidden");
-    switchBtn.style.backgroundColor = "var(--clr-orange)";
+    switchBtn.style.color = "var(--clr-orange)";
   } else {
     compositionChart.classList.add("hidden");
     yearChart.classList.remove("hidden");
-    switchBtn.style.backgroundColor = "var(--clr-blue)";
+    switchBtn.style.color = "var(--clr-blue)";
   }
 }
 
-function getInputValue(e) {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    displayResults();
-  }
+function showFilteredResults(e) {
+  e.preventDefault();
+  getAdvanceFilter();
+  summaryWrapper.classList.remove("blur");
+  searchWrapper.classList.remove("blur");
+  filterWrapper.classList.add("hidden");
 }
 
+// Functions to display data
 function displayResults() {
   getResults();
 
@@ -422,8 +453,6 @@ function populateDropdowns() {
     yearMinFilter.appendChild(optionMin);
     yearMaxFilter.appendChild(optionMax);
   });
-  // Call a function to populate saved filters dropdown
-  populateFiltersDropdown();
 }
 
 // Initialize the map
@@ -445,7 +474,7 @@ function initializeMap() {
   const resizeObserver = new ResizeObserver(() => {
     map.invalidateSize();
   });
-  
+
   const mapDiv = document.getElementById("map");
   resizeObserver.observe(mapDiv);
 }
@@ -481,11 +510,13 @@ function addMarkersToMap(filteredData) {
              Composition: ${meteor.recclass}
         `
           )
-          .on("mouseover", function (e) {
+          .on("mouseover", function () {
             this.openPopup();
+            this.setRadius(15000);
           })
-          .on("mouseout", function (e) {
+          .on("mouseout", function () {
             this.closePopup();
+            this.setRadius(10000);
           });
         markers.push(marker);
       }
@@ -499,10 +530,8 @@ function addMarkersToMap(filteredData) {
   }
 }
 
-function getAdvanceFilter(e) {
-  e.preventDefault();
-
-  const nameTerm = nameFilter.value.toLowerCase(); 
+function getAdvanceFilter() {
+  const nameTerm = nameFilter.value.toLowerCase();
   const compositionTerm = compositionFilter.value.toLowerCase();
   const massMin = parseFloat(massMinFilter.value);
   const massMax = parseFloat(massMaxFilter.value);
@@ -526,8 +555,9 @@ function getAdvanceFilter(e) {
     const selectedComposition = (meteor.recclass || "").toLowerCase();
 
     if (
-      nameTerm === "" || name.includes(nameTerm) && 
-      compositionValue === "" || selectedComposition.includes(compositionValue) 
+      nameTerm === "" ||
+      (name.includes(nameTerm) && compositionValue === "") ||
+      selectedComposition.includes(compositionValue)
     ) {
       return (
         name.includes(nameTerm) &&
@@ -537,21 +567,17 @@ function getAdvanceFilter(e) {
       );
     }
   });
-  
+
   checkResults(filteredAdvanceResults);
-  addMarkersToMap(filteredAdvanceResults);
-  displayList(filteredAdvanceResults, table, rows, currentPage, paginationInfo);
 }
 
 function checkResults(data) {
   filteredAdvanceResults = data;
   if (filteredAdvanceResults.length === 0) {
-    noResultsMessage.classList.remove("hidden");
-    noResultsMessage.classList.add("no-results");
-    updateChart([]);
+    updateChart(meteorData);
+    addMarkersToMap(meteorData);
+    displayList(meteorData, table, rows, currentPage, paginationInfo);
   } else {
-    noResultsMessage.classList.add("hidden");
-    noResultsMessage.classList.remove("no-results");
     updateChart(filteredAdvanceResults, selectedYearRange);
     addMarkersToMap(filteredAdvanceResults);
     displayList(
@@ -563,6 +589,7 @@ function checkResults(data) {
     );
   }
 }
+
 // Initialize the year histogram
 const yearHistogram = new Chart(document.getElementById("yearHistogram"), {
   type: "bar",
@@ -622,9 +649,7 @@ function updateChart(results) {
   const years = results.map((item) =>
     item.year ? item.year.substring(0, 4) : "Unknown"
   );
-  const compositions = filteredResults.map(
-    (item) => item.recclass || "Unknown"
-  );
+  const compositions = results.map((item) => item.recclass || "Unknown");
 
   const yearCounts = {};
   const compositionCounts = {};
@@ -684,49 +709,54 @@ function calculateTotalStrikes(yearCounts) {
 
 // Function to save filters to local sotrage
 function saveFilter() {
-  const dummyEvent = {
-    preventDefault: () => {}, // define a preventDefault function to avoid errors
-  };
-  getAdvanceFilter(dummyEvent);
+  getAdvanceFilter();
 
   const newFilterItem = JSON.stringify(filteredAdvanceResults);
   const timestamp = new Date().toJSON().slice(0, 19).replace("T", " / ");
   const filterID = "filterID: " + timestamp;
   localStorage.setItem(filterID, newFilterItem);
-  populateFiltersDropdown();
+  listSavedFilters();
 }
 
-// Function to populate saved filters dropdown
-function populateFiltersDropdown() {
-  savedSearchFilter.innerHTML = `<option value="">Options</option>`;
-  const filterIDs = Object.keys(localStorage).filter(item => item.startsWith("filterID: ") && item.split(":").length === 4 && item.indexOf(" / ") === 20).sort();
-  // Populate saved search dropdown
-  filterIDs.forEach(item => {
-    const timestamp = item.replace("filterID: ", "");
-    const optionFilter = document.createElement("option");
-    optionFilter.value = item;
-    optionFilter.textContent = timestamp;
-    savedSearchFilter.appendChild(optionFilter);
-  });
-  // Add event listeners to each dropdown option to display the saved filter
-  savedSearchFilter.addEventListener("change", () => {
-    const selectedOption = savedSearchFilter.value;
-    if (selectedOption) {
-      const savedfilterDataJSON = localStorage.getItem(selectedOption);
-      const savedfilterData = JSON.parse(savedfilterDataJSON)
-      checkResults(savedfilterData);
-      addMarkersToMap(savedfilterData);    
+// Function to display local storage list of filters
+function listSavedFilters() {
+  savedSearchDiv.innerHTML = "";
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const timestamp = localStorage.key(i);
+    if (
+      timestamp.length === 31 &&
+      timestamp.indexOf(" / ") === 20 &&
+      timestamp.split(":").length === 4
+    ) {
+      const filterDataJSON = localStorage.getItem(timestamp);
+      const filterData = JSON.parse(filterDataJSON);
+
+      const listItem = document.createElement("li");
+      savedSearchDiv.appendChild(listItem);
+      const listItemText = document.createElement("span");
+      listItem.appendChild(listItemText);
+      const deleteBtn = document.createElement("i");
+      deleteBtn.classList.add("fa-solid");
+      deleteBtn.classList.add("fa-trash-can");
+      listItemText.textContent = `${timestamp.slice(10)}`;
+      listItem.appendChild(deleteBtn);
+
+      deleteBtn.addEventListener("click", () => {
+        localStorage.removeItem(timestamp);
+        listSavedFilters();
+      });
+
+      listItemText.addEventListener("click", () => {
+        filterWrapper.classList.add("hidden");
+        summaryWrapper.classList.remove("blur");
+        searchWrapper.classList.remove("blur");
+        checkResults(filterData);
+        addMarkersToMap(filterData);
+      });
     }
-  });
-  // Delete selected item
-  delFilterBtn.addEventListener("click", () => {
-    const selectedOption = savedSearchFilter.value;
-    if (selectedOption && selectedOption) {
-      localStorage.removeItem(selectedOption);
-      populateFiltersDropdown();
-    }
-  })
-};
+  }
+}
 
 // Function to clear all saved filters
 function clearSavedSearches() {
@@ -737,7 +767,7 @@ function clearSavedSearches() {
       item.indexOf(" / ") === 20
   );
   keysToRemove.forEach((key) => localStorage.removeItem(key));
-  populateFiltersDropdown();
+  listSavedFilters();
 }
 
 function resetResults() {
@@ -748,7 +778,6 @@ function resetResults() {
   massMaxFilter.value = "";
   yearMinFilter.value = "";
   yearMaxFilter.value = "";
-  savedSearchFilter.value = "";
   filteredResults = [];
   filteredAdvanceResults = [];
   displayResults();
