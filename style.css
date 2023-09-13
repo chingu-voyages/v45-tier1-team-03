@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@200&family=Roboto:wght@400;700&family=VT323&display=swap");
+
 :root {
   --clr-white: rgba(250, 250, 250, 1);
   --clr-white-opacity: rgba(250, 250, 250, 0.7);
@@ -40,29 +41,7 @@ body {
   position: static;
   overflow-x: hidden;
 }
-/* body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-} */
-/* .animation-container{
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 1;
-}
-@media(max-width:768px){
-  .animation-container{
-    display: none;
-  }
-} */
+
 /******** Header ********/
 header {
   display: flex;
@@ -210,6 +189,7 @@ main {
   background-color: transparent;
   border: none;
 }
+
 /**** Table ****/
 .result-container {
   width: 100vw;
@@ -236,7 +216,6 @@ main {
   height: 70%;
   margin: auto;
   overflow-y: scroll;
-  /* scrollbar-color: var(--clr-orange) var(--clr-white); */
   background-color: var(--clr-white-opacity);
   position: relative;
   border-collapse: collapse;
@@ -406,8 +385,8 @@ main {
   right: 5%;
   top: 5%;
 }
-/**** Filter *****/
 
+/**** Filter *****/
 .filter-container {
   display: flex;
   flex-direction: row;
@@ -608,7 +587,6 @@ canvas {
 }
 
 /************About section**********/
-
 .about-page {
   margin: 4.4rem 3rem;
   color: var(--clr-white);
@@ -667,6 +645,7 @@ canvas {
   text-decoration: none;
   color: var(--clr-white);
 }
+
 /******** Team section ********/
 .team-section {
   width: 100vw;
@@ -693,6 +672,7 @@ canvas {
   color: var(--clr-white);
   font-size: 40px;
 }
+
 /******** About section ********/
 .about-section {
   color: var(--clr-white);
@@ -736,6 +716,7 @@ canvas {
 .video-container video {
   max-width: 100%;
 }
+
 /******** Footer ********/
 footer {
   color: var(--clr-white);
@@ -769,7 +750,9 @@ footer a {
 .closeMenu i {
   color: var(--clr-white);
 }
+
 @media (max-width: 1024px) and (min-width: 850px) {
+  
   /**** Search page ****/
   .result-container .table-container {
     width: 90%;
@@ -788,6 +771,7 @@ footer a {
     min-width: 300px;
     min-height: 150px;
   }
+  
   /**** Explore page ****/
   .filter-container {
     left: 15%;
@@ -818,8 +802,10 @@ footer a {
     height: 373px;
   }
 }
+
 @media (max-width: 850px) {
-  /**** navbar ****/
+  
+  /**** Navbar ****/
   .burger {
     display: block;
   }
@@ -863,6 +849,7 @@ footer a {
     background: none;
     font-size: 22px;
   }
+
   /**** Landing page ****/
   .container h1 {
     font-size: 40px;
@@ -878,6 +865,7 @@ footer a {
   .arrow-right {
     width: 20px;
   }
+
   /**** About page ****/
   .about-section {
     width: 80%;
@@ -891,6 +879,7 @@ footer a {
   .about-text p {
     font-size: 18px;
   }
+
   /**** Search page ****/
   .result-container {
     gap: 0%;
@@ -932,6 +921,7 @@ footer a {
     min-width: 400px;
     min-height: 200px;
   }
+
   /**** Explore page ****/
   #explore {
     width: 100vw;
@@ -970,6 +960,7 @@ footer a {
   .saved-search {
     width: 70vw;
   }
+
   /**** Team page ****/
   .team-card-container {
     flex-wrap: wrap;
@@ -977,7 +968,9 @@ footer a {
     gap: 15px;
   }
 }
+
 @media only screen and (max-width: 600px) {
+  
   /**** Landing page ****/
   .main-wrapper {
     margin-top: 0%;
@@ -1013,6 +1006,7 @@ footer a {
   .about-text p {
     font-size: 16px;
   }
+  
   /**** Search page ****/
   .result-container {
     gap: 0;
@@ -1067,6 +1061,7 @@ footer a {
     min-width: 300px;
     min-height: 150px;
   }
+  
   /**** Explore page ****/
   .filter-container {
     flex-wrap: wrap;
@@ -1159,6 +1154,6 @@ footer a {
   display: none;
 }
 .blur {
-  /* filter: blur(5px); */
+  filter: blur(2px);
   opacity: 0.5;
 }

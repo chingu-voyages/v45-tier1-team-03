@@ -34,6 +34,8 @@
     <title>Meteor Shower</title>
   </head>
   <body>
+
+    <!-- Navigation -->
     <header id="navbar">
       <div class="logo">
         <a href="index.html"><img src="assets/vector.svg" alt="logo" /></a>
@@ -42,9 +44,7 @@
         <ul class="nav-links">
           <li><a data-id="home" class="links">Home</a></li>
           <li><a data-id="about" class="links">About</a></li>
-          <li>
-            <a data-id="explore" id="exploreLink" class="links">Explore</a>
-          </li>
+          <li><a data-id="explore" id="exploreLink" class="links">Explore</a></li>
           <li><a data-id="aboutTeam" class="links">Team</a></li>
         </ul>
         <div class="burger">
@@ -56,6 +56,8 @@
     </header>
 
     <main>
+
+      <!-- Home page -->
       <section id="home" class="main-wrapper panel">
         <div class="home">
           <p id="error-message"></p>
@@ -84,6 +86,7 @@
         </div>
       </section>
 
+      <!-- About page -->
       <section id="about" class="panel hidden about-section">
         <div class="about-text">
           <h1>Meteor Shower App: Your Ultimate Meteor Adventure ☄️</h1>
@@ -146,6 +149,8 @@
           </p>
         </div>
       </section>
+
+      <!-- Explore page -->
       <section id="explore" class="panel hidden">
         <p class="no-results hidden">
           No results match your search criteria. Please refine your search.
@@ -159,7 +164,10 @@
             />
             <button id="clearButton">x</button>
             <button id="searchButton">
-              <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #818181;"></i>
+              <i
+                class="fa-solid fa-magnifying-glass fa-lg"
+                style="color: #818181"
+              ></i>
             </button>
           </div>
           <div id="summaryWrapper" class="result-display">
@@ -167,13 +175,24 @@
               <div class="table-header">
                 <h2>meteorite landings summary</h2>
                 <div class="filters">
-                  <button id="filterBtn"><i class="fa-solid fa-filter fa-xl" style="color: #444040;"></i></button>
+                  <button id="filterBtn">
+                    <i
+                      class="fa-solid fa-filter fa-xl"
+                      style="color: #444040"
+                    ></i>
+                  </button>
                   <div class="switch-buttons">
                     <button id="switchButton">
-                      <i class="fa-solid fa-globe fa-xl" style="color: #444040;"></i>
-                      <i class="hidden fa-solid fa-table fa-xl" style="color: #444040;"></i>
+                      <i
+                        class="fa-solid fa-globe fa-xl"
+                        style="color: #444040"
+                      ></i>
+                      <i
+                        class="hidden fa-solid fa-table fa-xl"
+                        style="color: #444040"
+                      ></i>
                     </button>
-                </div>
+                  </div>
                 </div>
               </div>
               <table id="table">
@@ -193,7 +212,14 @@
               <div id="mapWrapper" class="map hidden">
                 <div
                   id="map"
-                  style="height: 480px; width: 90%; border-radius: 10px; z-index: 1; bottom: 45px; left: 40px;"
+                  style="
+                    height: 480px;
+                    width: 90%;
+                    border-radius: 10px;
+                    z-index: 1;
+                    bottom: 45px;
+                    left: 40px;
+                  "
                 ></div>
               </div>
             </div>
@@ -215,20 +241,18 @@
                 <div class="chart hidden" id="compositionHistogramContainer">
                   <canvas id="compositionHistogram"></canvas>
                 </div>
-                <button id="switchBtn">Switch charts
-                </button>
+                <button id="switchBtn">Switch charts</button>
               </div>
             </div>
           </div>
-          
         </div>
         <div id="filterContainer" class="filter-container hidden">
           <div class="filter">
             <div class="filter-options">
-              <h1 style="color: #444040;">Filter</h1>
+              <h1 style="color: #444040">Filter</h1>
               <div class="dropdown">
                 <div class="filter-select">
-                  <label style="color: #444040;" for="nameFilter">Name:</label>
+                  <label style="color: #444040" for="nameFilter">Name:</label>
                   <div class="custom-select">
                     <div class="sel">
                       <select id="nameFilter">
@@ -236,7 +260,9 @@
                       </select>
                     </div>
                   </div>
-                  <label style="color: #444040;" for="compositionFilter">Composition:</label>
+                  <label style="color: #444040" for="compositionFilter"
+                    >Composition:</label
+                  >
                   <div class="custom-select">
                     <div class="sel">
                       <select id="compositionFilter">
@@ -247,7 +273,9 @@
                 </div>
 
                 <div class="filter-select">
-                  <label style="color: #444040;" for="massFilter">Min Mass:</label>
+                  <label style="color: #444040" for="massFilter"
+                    >Min Mass:</label
+                  >
                   <div class="custom-select">
                     <div class="sel">
                       <select id="massMinFilter">
@@ -255,7 +283,9 @@
                       </select>
                     </div>
                   </div>
-                  <label style="color: #444040;" for="massFilter">Max Mass:</label>
+                  <label style="color: #444040" for="massFilter"
+                    >Max Mass:</label
+                  >
                   <div class="custom-select">
                     <div class="sel">
                       <select id="massMaxFilter">
@@ -266,7 +296,9 @@
                 </div>
 
                 <div class="filter-select">
-                  <label style="color: #444040;" for="yearFilter">Min Year:</label>
+                  <label style="color: #444040" for="yearFilter"
+                    >Min Year:</label
+                  >
                   <div class="custom-select">
                     <div class="sel">
                       <select id="yearMinFilter">
@@ -274,7 +306,9 @@
                       </select>
                     </div>
                   </div>
-                  <label style="color: #444040;" for="massFilter">Max Year:</label>
+                  <label style="color: #444040" for="massFilter"
+                    >Max Year:</label
+                  >
                   <div class="custom-select">
                     <div class="sel">
                       <select id="yearMaxFilter">
@@ -295,7 +329,6 @@
                     
                   </div>
                 </div> -->
-                
               </div>
               <div class="filter-btn">
                 <button id="filterButton">Apply</button>
@@ -310,11 +343,15 @@
               <div class="saved-results" id="savedSearchDiv"></div>
             </div>
             <div class="clear-all">
-              <button style="color: #444040;" id="delAllFiltersBtn">Clear all</button>
+              <button style="color: #444040" id="delAllFiltersBtn">
+                Clear all
+              </button>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- Team page -->
       <section id="aboutTeam" class="panel team-section about-section hidden">
         <h1>Meteor Shower Team</h1>
         <div class="video-container">
@@ -566,6 +603,8 @@
         <!-- </div> -->
       </section>
     </main>
+
+    <!-- Footer -->
     <footer>
       <a
         href="https://github.com/chingu-voyages/v45-tier1-team-03/tree/master"
@@ -575,6 +614,7 @@
       </a>
       | 2023 | Deployed on Netlify
     </footer>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
   </body>
