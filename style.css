@@ -1023,6 +1023,7 @@ footer a {
   }
   .table-header h2 {
     text-align: start;
+    font-size: 18px;
   }
   .table-container table tbody tr td {
     font-size: 12px;
@@ -1070,15 +1071,18 @@ footer a {
   .filter-container {
     flex-wrap: wrap;
     gap: 0px;
+    padding: 0px;
   }
   .filter {
-    height: 30vh;
+    height: 45vh;
   }
   .filter-select {
     padding: 0px;
+    margin-right: 0%;
   }
   .filter-select label {
-    font-weight: 600;
+    font-weight: 200;
+    font-size: 14px;
   }
   .filter-options {
     flex-direction: column;
@@ -1089,6 +1093,9 @@ footer a {
   .filter-options h1 {
     padding: 0px;
   }
+  .sel {
+    margin-bottom: 0px;
+  }
   .dropdown{
     display: flex;
     flex-wrap: wrap;
@@ -1096,6 +1103,7 @@ footer a {
     justify-content: space-evenly;
     height: 35%;
     padding-top: 25px;
+    gap: 5px;
   }
   .custom-select {
     flex-wrap: wrap;
@@ -1110,6 +1118,9 @@ footer a {
     flex-direction: row;
     justify-content: space-around;
     margin-top: 5px;
+  }
+  .filter-btn button {
+    font-size: 14px;
   }
 
   /**** Team page ****/
