@@ -932,6 +932,9 @@ footer a {
     min-width: 400px;
     min-height: 200px;
   }
+  .map {
+    padding: 10px 40px 0px 10px;
+  }
 
   /**** Explore page ****/
   #explore {
@@ -1003,6 +1006,12 @@ footer a {
   .arrow-left,
   .arrow-right {
     width: 15px;
+  }
+  .arrow-left {
+    margin-left: 20px;
+  }
+  .arrow-right {
+    margin-right: 20px;
   }
   .about-section {
     width: 90%;
@@ -1127,6 +1136,9 @@ footer a {
   }
   .filter-btn button {
     font-size: 14px;
+  }
+  .map {
+    padding: 10px 40px 0px 0px;
   }
 
   /**** Team page ****/
