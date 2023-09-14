@@ -1,3 +1,5 @@
+"use strict";
+
 // DOM element references
 const links = document.querySelectorAll(".links");
 const panels = document.querySelectorAll(".panel");
@@ -61,6 +63,7 @@ let rows = 10; // Number of rows per page
 let searchText; // Store input search terms
 let selectedYearRange; // Store year range data
 let markerCluster; // Store marker cluster
+let map; // Define map
 let currentSortParameter = "name"; // Default sorting parameter
 let isAscending = true; // Default sorting order
 

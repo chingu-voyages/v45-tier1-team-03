@@ -902,6 +902,13 @@ footer a {
     width: 500px;
     margin-bottom: 15px;
   }
+  #clearButton {
+    right: 5%;
+    top: 25%;
+  }
+  #searchButton {
+    top: 30%;
+  }
   .table-header {
     padding: 0px 30px;
     font-size: 16px;
@@ -1059,7 +1066,8 @@ footer a {
     top: 25%;
   }
   #searchButton {
-    display: none;
+    top: 30%;
+    left: 5%;
   }
   .histogram button {
     font-size: 14px;
@@ -1138,7 +1146,7 @@ footer a {
     font-size: 14px;
   }
   .map {
-    padding: 10px 40px 0px 0px;
+    padding: 10px 50px 0px 0px;
   }
 
   /**** Team page ****/
