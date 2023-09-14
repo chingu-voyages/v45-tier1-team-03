@@ -594,6 +594,7 @@ function checkResults(data) {
 }
 
 // Initialize the year histogram
+Chart.defaults.color = "white";
 const yearHistogram = new Chart(document.getElementById("yearHistogram"), {
   type: "bar",
   data: {
