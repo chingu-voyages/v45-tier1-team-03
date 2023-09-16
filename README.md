@@ -60,7 +60,7 @@ So that I can clearly see the resulted data
 - There should be a paragraph with the numbers of meteorite strikes
 - There should be a scrollable detailed data display that shows meteorite strike history based on the search criteria
 
-##### …To see more User Stories and all related Documants check our [Trello](https://trello.com/b/SAvvNjHT/fireball)
+##### …To see more User Stories and all related documents check our [Trello](https://trello.com/b/SAvvNjHT/fireball)
 
 
 
