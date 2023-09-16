@@ -107,7 +107,8 @@ Only updated from the development branch Pull Requests. This branch always refle
 
 
 
-## team
+## Meteor Shower Team
+### The Meteor Shower Team initiated this project within the Chingu community with the goal of gaining valuable teamwork experience and enhancing our skill set. Our team comprised 5 Developers and 2 Product Owners.The project spanned 6 weeks, aligning with Chingu's guidelines and Agile methodology.
 
 ### Developers: [Ana Popovic](https://www.linkedin.com/in/franecode/), [Isaac Anim](https://www.linkedin.com/in/yawcoder/), [Eva Langerova](https://www.linkedin.com/in/eva-langerova-61059027a/), [Mustapha Anthonio](https://www.linkedin.com/in/mustapha-anthonio/), [Vruti Shah](https://www.linkedin.com/in/vruti-shah-29a393130/)
 ###  Developers Lead: [Ana Popovic](https://www.linkedin.com/in/franecode/)
